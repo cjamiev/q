@@ -13,13 +13,14 @@ import { SCLayout, SCPageWrapper, SCPage, SCPageContent } from './styles';
 import Navigation from './Navigation';
 
 const NAV_ITEMS = Object.values(ROUTES);
+const ErrorPage = { label: 'Page Not Found' };
 
 const Page = ({ sidePanelContent, isSidePanelWide, children, footerComponent }) => {
   const dispatch = useDispatch();
   const [isTransitioningOut, setIsTransitioningOut] = useState(false);
   const { isSidePanelOpen } = useSelector((state) => state.global);
   const location = useLocation();
-  const currentPage = NAV_ITEMS.find((item) => item.url === location.pathname);
+  const currentPage = NAV_ITEMS.find((item) => item.url === location.pathname) || ErrorPage;
   const hasSidePanelContent = !!sidePanelContent;
 
   const toggleSidePanel = () => {

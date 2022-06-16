@@ -1,4 +1,5 @@
 import React from 'react';
+import Page from 'components/layout';
 import Button from 'components/atoms/Button';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,8 +9,7 @@ const ErrorPage = React.memo(() => {
   const navigate = useNavigate();
 
   return (
-    <div>
-      <h1>404 Page Not Found</h1>
+    <Page>
       <Button
         label="Go back to previous page"
         isPrimary
@@ -17,7 +17,7 @@ const ErrorPage = React.memo(() => {
           navigate(PREVIOUS_INDEX);
         }}
       />
-    </div>
+    </Page>
   );
 });
 

@@ -11,7 +11,7 @@ import {
   copyDir,
   makeDirectory,
   writeToFile
-} from './file';
+} from './io';
 
 const dummyDir = 'tmp/dummy';
 const copyTestDir = 'tmp/copyTest';
@@ -146,7 +146,6 @@ describe('fileHelper: operations should fail for non-existant files/folders', ()
 
 describe('fileHelper: Read directory', () => {
   it('should read directory structure correctly', () => {
-
     const expectedResult = [
       'tmp\\dummy\\dummy1\\testOne.json',
       'tmp\\dummy\\dummy2\\testOne.json',
@@ -169,7 +168,6 @@ describe('fileHelper: Read directory', () => {
 
 describe('fileHelper: Copy directory', () => {
   it('should copy entire directory', () => {
-
     const expectedResult = [
       'tmp\\copyTest\\dummy1\\testOne.json',
       'tmp\\copyTest\\dummy2\\testOne.json',

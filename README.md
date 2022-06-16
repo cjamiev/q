@@ -16,3 +16,8 @@ Used to help with building other projects, as well improving efficiency for arbi
   Stores saved snippets.
 - Quick Access Footer: list of commands to execute, Links, as well as copy/paste values
 - Settings: Sets what appears in Commands, Links, Directories, and Copy/Paste
+
+## Notes
+
+- git history of this project is partly contained in the playground project as this was transferred from there.
+- this project assumes root includes storage/io folder with folders command, db, file, snippets

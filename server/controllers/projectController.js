@@ -1,4 +1,4 @@
-const { writeToFile, loadFile, readDirectory, deleteFile } = require('../utils/file');
+const { writeToFile, loadFile, readDirectory, deleteFile } = require('../utils/io');
 const { gitReadOps, gitWriteOps } = require('../services/gitService');
 const {
   getPackageFile,
@@ -7,7 +7,6 @@ const {
   runNpmScript
 } = require('../services/packageService');
 const { updateFiles } = require('../services/regexService');
-const { createFilesFromTemplates } = require('../services/templateService');
 
 const runGitOperation = (op, root, name) => {
   if (gitWriteOps.hasOwnProperty(op)) {
@@ -90,25 +89,6 @@ const runSnippetOperation = (op, filename, content) => {
   }
 };
 
-const TEMPLATE_DIR = './storage/io/templates';
-const runTemplateOperation = (op, { targetDir, content, name }) => {
-  if (op === 'create') {
-    createFilesFromTemplates({ targetDir, name, filePaths: content });
-
-    return { message: 'Creating templates' };
-  } else if (op === 'read') {
-    const data = name ? loadFile(`${TEMPLATE_DIR}/${name}`) : readDirectory(TEMPLATE_DIR);
-
-    return { data };
-  } else if (op === 'write') {
-    const { message, error } = writeToFile(`${TEMPLATE_DIR}/${name}`, content);
-
-    return { message, error };
-  } else {
-    return { message: 'template operation not found' };
-  }
-};
-
 const projectController = async ({ type, op, root, name, content }, payload) => {
   const data = payload ? payload : content;
 
@@ -116,8 +96,6 @@ const projectController = async ({ type, op, root, name, content }, payload) => 
     return runGitOperation(op, root, name);
   } else if (type === 'package') {
     return await runPackageOperation(op, root, data);
-  } else if (type === 'template') {
-    return runTemplateOperation(op, { targetDir: root, name, content: data });
   } else if (type === 'regex') {
     return runRegexOperation(root, data);
   } else if (type === 'snippet') {

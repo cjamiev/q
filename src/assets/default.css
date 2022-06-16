@@ -1,0 +1,124 @@
+* {
+  box-sizing: border-box
+}
+
+:where(input[type="text"],
+  input[type="date"]) {
+  cursor: text;
+}
+
+:where(input[type="password"],
+  input[type="range"],
+  input[type="color"],
+  select) {
+  cursor: pointer;
+}
+
+:where(input[type="text"],
+  input[type="password"],
+  input[type="range"],
+  input[type="color"]) {
+  border-radius: 5px;
+  height: 30px;
+  border: 1px solid #ccc;
+  padding: 3px;
+  margin: 5px 5px 5px 0px;
+}
+
+:where(button,
+  input[type="button"],
+  input[type="submit"]) {
+  background-color: #fff;
+  border: 1px solid rgb(0, 0, 0);
+}
+
+:where(button:hover,
+  input[type="button"]:hover,
+  input[type="submit"]:hover) {
+  border: 1px solid #888;
+}
+
+:where(button:active,
+  input[type="button"]:active,
+  input[type="submit"]:active) {
+  border: 1px solid #222;
+}
+
+:where(input[type="radio"],
+  input[type="checkbox"]) {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+
+select {
+  min-height: 40px;
+  min-width: 100px;
+  border-radius: 8px;
+  margin: 5px 5px 5px 0px;
+}
+
+:where(a,
+  p,
+  label,
+  span,
+  select,
+  button,
+  input[type="button"],
+  input[type="submit"],
+  input[type="text"],
+  input[type="password"]) {
+  font-size: 20px;
+}
+
+table {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table td,
+table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+table tr:hover {
+  background-color: #ddd;
+}
+
+table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: rgb(40, 44, 52);
+  color: white;
+}
+
+h1 {
+  font-size: 48px;
+  font-weight: 600;
+}
+
+h2 {
+  font-size: 36px;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+[placeholder]:empty:before {
+  content: attr(placeholder);
+  color: #555;
+}
+
+[placeholder]:empty:focus::before {
+  content: "";
+}

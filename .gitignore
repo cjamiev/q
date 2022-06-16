@@ -1,0 +1,8 @@
+/build
+/coverage
+/node_modules
+/storage
+/tmp
+*.log*
+/server/static/bundle.js
+/src/routes/experiment/svg/

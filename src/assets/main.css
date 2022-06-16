@@ -1,0 +1,80 @@
+@import './reset.css';
+@import './default.css';
+@import './link.css';
+@import './tooltip.css';
+@import './scroll.css';
+@import './variables.css';
+@import './keyframes.css';
+@import './form.css';
+
+html {
+  background-color: var(--primary-bg-color);
+}
+
+.root {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.container--center {
+  margin: 0 auto;
+  width: 90%;
+  padding: 10px;
+}
+
+.flex--horizontal {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flex--vertical {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex--center {
+  place-items: center;
+}
+
+.flex--one {
+  flex: 1;
+}
+
+.flex--two {
+  flex: 2;
+}
+
+.flex--three {
+  flex: 3;
+}
+
+.flex--four {
+  flex: 4;
+}
+
+.flex--five {
+  flex: 5;
+}
+
+.horizontal-center {
+  text-align: center;
+  place-items: center;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.invisible {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

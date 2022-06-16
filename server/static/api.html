@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Page Title</title>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li>
+          <a href="./io.html">IO Page</a>
+        </li>
+        <li>
+          <a href="./string.html">String Operations Page</a>
+        </li>
+    </nav>
+  </header>
+  <h1> Test Simple Node App</h1>
+
+  <div id="api-btns"></div>
+  <h2>Output area</h2>
+  <textarea id="output" rows="10" cols="100"></textarea>
+
+  <script src='js/api.js'></script>
+  <script>
+    const setOut = (data) => {
+      document.getElementById('output').value = JSON.stringify(data, undefined, 4);
+    }
+
+    api.get('mockserver/mockRequests').then(response => {
+      const apiBtns = document.getElementById('api-btns');
+      response.data.forEach((entry, index) => {
+        const el = document.createElement('button');
+        el.onclick = () => {
+          if (entry.method === "POST") {
+            api.post(entry.url, {id: 1}).then(res => {
+              setOut(res);
+            });
+          }
+          else if (entry.method === "GET") {
+            api.get(entry.url).then(res => {
+              setOut(res);
+            });
+          }
+        };
+        const path = entry.responsePath.split('/');
+        const name = path[path.length - 1];
+        el.textContent = name;
+
+        apiBtns.appendChild(el);
+      });
+    });
+  </script>
+
+</body>
+
+</html>

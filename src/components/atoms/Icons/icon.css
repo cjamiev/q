@@ -1,0 +1,36 @@
+.icon--stroke-three {
+  stroke-width: 3;
+}
+
+.icon--stroke-six {
+  stroke-width: 6;
+}
+
+.icon--stroke-ten {
+  stroke-width: 10;
+}
+
+.icon--grey {
+  fill: #010202;
+  stroke: var(--primary-bg-color);
+}
+
+.icon--white {
+  fill: #ffffff;
+  stroke: #ffffff;
+}
+
+.icon--black {
+  fill: #000000;
+  stroke: #000000;
+}
+
+.icon--hollow {
+  fill: var(--primary-bg-color);
+  stroke: #000000;
+}
+
+.icon--filled {
+  fill: #000000;
+  stroke: var(--primary-bg-color);
+}

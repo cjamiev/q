@@ -1,0 +1,32 @@
+{
+  "collectCoverageFrom": [
+    "src/**/*.js",
+    "!src/index.js",
+    "!src/store/index.js",
+    "server/**/*.js",
+    "!server/index.js",
+    "!server/static/**",
+    "!src/testHelper/**"
+  ],
+  "moduleDirectories": [
+    "src",
+    "node_modules"
+  ],
+  "testPathIgnorePatterns": [
+    "src/testHelper/*",
+    "experiment/*"
+  ],
+  "testRegex": "(server|src|utils)/.*\\.test.(js)$",
+  "testEnvironment": "node",
+  "transform": {
+    "^.+\\.(js)$": "<rootDir>/node_modules/babel-jest",
+    "^.+\\.css$": "<rootDir>/config/cssTransformer.js",
+    "^(?!.*\\.(js|css|json)$)": "<rootDir>/config/fileTransformer.js"
+  },
+  "setupFilesAfterEnv": [
+    "<rootDir>/config/setupTests.js"
+  ],
+  "watchPathIgnorePatterns": [
+    "tmp/*"
+  ]
+}

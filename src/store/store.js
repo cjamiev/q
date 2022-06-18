@@ -5,7 +5,7 @@ import thunk from 'redux-thunk';
 import alertReducer from 'components/layout/Alert/alertReducer';
 import clipboardReducer from 'components/pages/Clipboard/clipboardReducer';
 import settingsReducer from 'components/pages/Settings/settingsReducer';
-import fileReducer from 'components/pages/File/fileReducer';
+import storageReducer from 'components/pages/Storage/storageReducer';
 import homeReducer from 'components/pages/Home/homeReducer';
 import projectReducer from 'components/pages/Project/projectReducer';
 import globalReducer from 'components/molecules/Global/globalReducer';
@@ -20,7 +20,7 @@ const rootReducer = combineReducers({
   alert: alertReducer,
   clipboard: clipboardReducer,
   settings: settingsReducer,
-  file: fileReducer,
+  storage: storageReducer,
   home: homeReducer,
   global: globalReducer,
   project: projectReducer

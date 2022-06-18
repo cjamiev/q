@@ -11,7 +11,7 @@ import Global from 'components/molecules/Global';
 import { alertInitialState } from 'components/layout/Alert/alertReducer';
 import { clipboardInitialState } from 'components/pages/Clipboard/clipboardReducer';
 import { settingsInitialState } from 'components/pages/Settings/settingsReducer';
-import { fileInitialState } from 'components/pages/File/fileReducer';
+import { storageInitialState } from 'components/pages/Storage/storageReducer';
 import { homeInitialState } from 'components/pages/Home/homeReducer';
 import { projectInitialState } from 'components/pages/Project/projectReducer';
 import { globalInitialState } from 'components/molecules/Global/globalReducer';
@@ -24,7 +24,7 @@ const defaultStore = {
   alert: alertInitialState,
   clipboard: clipboardInitialState,
   settings: settingsInitialState,
-  file: fileInitialState,
+  storage: storageInitialState,
   home: homeInitialState,
   global: globalInitialState,
   project: projectInitialState

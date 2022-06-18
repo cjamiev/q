@@ -10,8 +10,8 @@ export const navigationMap = [
     }
   },
   {
-    label: 'File',
-    url: '/file',
+    label: 'Storage',
+    url: '/storage',
     icon: ArchiveSVG,
     props: {
       transform: 'scale(0.6) translate(6,6)'

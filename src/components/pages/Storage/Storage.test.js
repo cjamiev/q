@@ -1,17 +1,17 @@
 import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { reduxTestWrapper, mockApi, mockGet, mockPost } from 'testHelper';
-import File from './File';
+import Storage from './Storage';
 
 const apiMock = mockApi(mockGet, mockPost);
 
-const pathname = '/file';
+const pathname = '/storage';
 const ZERO = 0;
 const ONE = 1;
 
-describe('File', () => {
+describe('Storage', () => {
   describe(':String ops', () => {
     it('handle sort', () => {
-      reduxTestWrapper(File, {}, {}, pathname);
+      reduxTestWrapper(Storage, {}, {}, pathname);
 
       const contentField = screen.getByLabelText('Content text area');
       const sortAscBtn = screen.getByText('Sort Asc');
@@ -27,7 +27,7 @@ describe('File', () => {
     });
 
     it('handle split/join', () => {
-      reduxTestWrapper(File, {}, {}, pathname);
+      reduxTestWrapper(Storage, {}, {}, pathname);
 
       const contentField = screen.getByLabelText('Content text area');
       const splitBtn = screen.getByText('Split');
@@ -45,7 +45,7 @@ describe('File', () => {
     });
 
     it('handle trim', () => {
-      reduxTestWrapper(File, {}, {}, pathname);
+      reduxTestWrapper(Storage, {}, {}, pathname);
 
       const contentField = screen.getByLabelText('Content text area');
       const trimBtn = screen.getByText('Trim');
@@ -59,7 +59,7 @@ describe('File', () => {
 
   describe(':JSON ops', () => {
     it('handle validate', () => {
-      reduxTestWrapper(File, {}, {}, pathname);
+      reduxTestWrapper(Storage, {}, {}, pathname);
 
       const jsonOp = screen.getByText('JSON');
       fireEvent.click(jsonOp);
@@ -77,7 +77,7 @@ describe('File', () => {
     });
 
     it('handle stringify', () => {
-      reduxTestWrapper(File, {}, {}, pathname);
+      reduxTestWrapper(Storage, {}, {}, pathname);
 
       const jsonOp = screen.getByText('JSON');
       fireEvent.click(jsonOp);
@@ -92,7 +92,7 @@ describe('File', () => {
     });
 
     it('handle parse', () => {
-      reduxTestWrapper(File, {}, {}, pathname);
+      reduxTestWrapper(Storage, {}, {}, pathname);
 
       const jsonOp = screen.getByText('JSON');
       fireEvent.click(jsonOp);
@@ -107,7 +107,7 @@ describe('File', () => {
     });
 
     it('handle objectify', () => {
-      reduxTestWrapper(File, {}, {}, pathname);
+      reduxTestWrapper(Storage, {}, {}, pathname);
 
       const jsonOp = screen.getByText('JSON');
       fireEvent.click(jsonOp);
@@ -124,7 +124,7 @@ describe('File', () => {
 
   describe(':Regex ops', () => {
     it('handle find and replace', () => {
-      reduxTestWrapper(File, {}, {}, pathname);
+      reduxTestWrapper(Storage, {}, {}, pathname);
 
       const regexOp = screen.getByText('Regex');
       fireEvent.click(regexOp);
@@ -148,7 +148,7 @@ describe('File', () => {
     });
 
     it('handle regex with substring', () => {
-      reduxTestWrapper(File, {}, {}, pathname);
+      reduxTestWrapper(Storage, {}, {}, pathname);
 
       const regexOp = screen.getByText('Regex');
       fireEvent.click(regexOp);
@@ -180,7 +180,7 @@ describe('File', () => {
     });
 
     it('handle invalid regex', () => {
-      reduxTestWrapper(File, {}, {}, pathname);
+      reduxTestWrapper(Storage, {}, {}, pathname);
 
       const regexOp = screen.getByText('Regex');
       fireEvent.click(regexOp);
@@ -202,13 +202,13 @@ describe('File', () => {
 
   it('handle copy', () => {
     document.execCommand = jest.fn();
-    reduxTestWrapper(File, {}, {}, pathname);
+    reduxTestWrapper(Storage, {}, {}, pathname);
 
     const contentField = screen.getByLabelText('Content text area');
 
     fireEvent.change(contentField, { target: { value: '1 2 3 4 5' } });
 
-    const copyBtn = screen.getByLabelText('Copy File');
+    const copyBtn = screen.getByLabelText('Copy Storage');
 
     const appendChildSpy = jest.spyOn(document.body, 'appendChild');
     fireEvent.click(copyBtn);
@@ -219,9 +219,9 @@ describe('File', () => {
   });
 
   it('handle save', () => {
-    reduxTestWrapper(File, {}, {}, pathname);
+    reduxTestWrapper(Storage, {}, {}, pathname);
 
-    const nameField = screen.getByPlaceholderText('Enter File Name');
+    const nameField = screen.getByPlaceholderText('Enter Storage Name');
     const contentField = screen.getByLabelText('Content text area');
     const saveBtn = screen.getByLabelText('Save');
 
@@ -229,27 +229,27 @@ describe('File', () => {
     fireEvent.change(contentField, { target: { value: '1 2 3 4 5' } });
     fireEvent.click(saveBtn);
 
-    expect(apiMock.post).toHaveBeenCalledWith('/file', { filename: 'test2.txt', content: '1 2 3 4 5' });
+    expect(apiMock.post).toHaveBeenCalledWith('/storage', { storagename: 'test2.txt', content: '1 2 3 4 5' });
   });
 
-  it('handle loading existing file', async () => {
-    reduxTestWrapper(File, {}, {}, pathname);
+  it('handle loading existing storage', async () => {
+    reduxTestWrapper(Storage, {}, {}, pathname);
 
     await waitFor(() => {
-      expect(screen.queryByText('fileOne')).toBeInTheDocument();
+      expect(screen.queryByText('storageOne')).toBeInTheDocument();
     });
-    const testBtn = screen.getByText('fileOne');
+    const testBtn = screen.getByText('storageOne');
     fireEvent.click(testBtn);
 
     await waitFor(() => {
-      expect(screen.queryByText('fileOne contents')).toBeInTheDocument();
+      expect(screen.queryByText('storageOne contents')).toBeInTheDocument();
     });
 
-    const nameField = screen.getByPlaceholderText('Enter File Name');
+    const nameField = screen.getByPlaceholderText('Enter Storage Name');
 
-    fireEvent.change(nameField, { target: { value: 'fileOne' } });
+    fireEvent.change(nameField, { target: { value: 'storageOne' } });
     await waitFor(() => {
-      expect(screen.queryByText('fileOne contents')).toBeInTheDocument();
+      expect(screen.queryByText('storageOne contents')).toBeInTheDocument();
     });
   });
 });

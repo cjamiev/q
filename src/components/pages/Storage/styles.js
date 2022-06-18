@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const SCFileBtnWrapper = styled.div`
+export const SCStorageBtnWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-right: 10px;
@@ -11,7 +11,7 @@ export const SCFileBtnWrapper = styled.div`
   }
 `;
 
-export const SCFileNameWrapper = styled.div`
+export const SCStorageNameWrapper = styled.div`
   display: flex;
   position: relative;
   cursor: pointer;

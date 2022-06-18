@@ -88,9 +88,9 @@ export const mockStore = {
     ]
   },
   experiment: {},
-  file: {
+  storage: {
     directory: ['fileOne', 'fileTwo'],
-    fileContent: 'fileOne contents'
+    storageContent: 'fileOne contents'
   },
   home: {
     todos: [
@@ -296,7 +296,7 @@ const HTTP_GET = {
   '/file/?name=fileOne': { data: 'fileOne contents' },
   '/file/?name=fileTwo': { data: 'fileTwo contents' },
   '/file/?name=': { data: 'file contents' },
-  '/file': { data: mockStore.file.directory },
+  '/file': { data: mockStore.storage.directory },
   '/command?name=': { message: 'running command' },
   '/mockserver/config': { data: mockStore.mockserver.config },
   'mockserver/mockRequests': { data: mockStore.mockserver.mocks },

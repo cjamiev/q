@@ -3,7 +3,7 @@ import { createAlert } from 'components/layout/Alert/alertActions';
 import { showLoadingModal, hideLoadingModal } from 'components/molecules/Global/globalActions';
 
 const LOAD_DIRECTORY = 'LOAD_DIRECTORY';
-const LOAD_FILE = 'LOAD_FILE';
+const LOAD_STORAGE = 'LOAD_STORAGE';
 
 const THREE_SECOND = 3000;
 
@@ -20,24 +20,24 @@ const loadDirectory = () => {
   };
 };
 
-const loadFile = (filename) => {
+const loadStorage = (filename) => {
   return (dispatch) => {
-    dispatch(showLoadingModal(`File ${filename}`));
+    dispatch(showLoadingModal(`Storage ${filename}`));
     api
       .get(`/file/?name=${filename}`)
       .then((response) => {
-        dispatch({ type: LOAD_FILE, data: response.data.data });
+        dispatch({ type: LOAD_STORAGE, data: response.data.data });
       })
       .catch((error) => {
         dispatch(createAlert({ content: error.message, status: 'error' }));
       })
       .finally(() => {
-        dispatch(hideLoadingModal(`File ${filename}`));
+        dispatch(hideLoadingModal(`Storage ${filename}`));
       });
   };
 };
 
-const writeFile = (filename, content) => {
+const writeStorage = (filename, content) => {
   return (dispatch) => {
     api
       .post('/file', { filename, content })
@@ -51,4 +51,4 @@ const writeFile = (filename, content) => {
   };
 };
 
-export { LOAD_DIRECTORY, loadDirectory, LOAD_FILE, loadFile, writeFile };
+export { LOAD_DIRECTORY, loadDirectory, LOAD_STORAGE, loadStorage, writeStorage };

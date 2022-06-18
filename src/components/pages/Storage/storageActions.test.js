@@ -1,6 +1,13 @@
 import { waitFor } from '@testing-library/react';
 import api from 'api';
-import { LOAD_DIRECTORY, loadDirectory, LOAD_FILE, loadFile, WRITE_FILE, writeFile } from './fileActions';
+import {
+  LOAD_DIRECTORY,
+  loadDirectory,
+  LOAD_STORAGE,
+  loadStorage,
+  WRITE_STORAGE,
+  writeStorage
+} from './storageActions';
 import { CREATE_ALERT } from 'components/layout/Alert/alertActions';
 
 const ONE = 1;
@@ -21,7 +28,7 @@ const successObject = {
   timer: 3000
 };
 
-describe('fileActions', () => {
+describe('storageActions', () => {
   it('loadDirectory', async () => {
     api.get.mockResolvedValueOnce({
       data: {
@@ -44,44 +51,44 @@ describe('fileActions', () => {
     });
   });
 
-  it('loadFile', async () => {
+  it('loadStorage', async () => {
     api.get.mockResolvedValueOnce({
       data: {
-        data: 'test file'
+        data: 'test storage'
       }
     });
-    loadFile()(dispatch);
+    loadStorage()(dispatch);
 
     await waitFor(() => {
-      expect(dispatch).toHaveBeenCalledWith({ type: LOAD_FILE, data: 'test file' });
+      expect(dispatch).toHaveBeenCalledWith({ type: LOAD_STORAGE, data: 'test storage' });
     });
   });
 
-  it('loadFile - error', async () => {
+  it('loadStorage - error', async () => {
     api.get.mockRejectedValueOnce(error);
-    loadFile()(dispatch);
+    loadStorage()(dispatch);
 
     await waitFor(() => {
       expect(dispatch).toHaveBeenCalledWith({ type: CREATE_ALERT, data: errorObject });
     });
   });
 
-  it('writeFile', async () => {
+  it('writeStorage', async () => {
     api.post.mockResolvedValue({
       data: {
         message: 'testing 123'
       }
     });
-    writeFile()(dispatch);
+    writeStorage()(dispatch);
 
     await waitFor(() => {
       expect(dispatch).toHaveBeenCalledWith({ type: CREATE_ALERT, data: successObject });
     });
   });
 
-  it('writeFile - error', async () => {
+  it('writeStorage - error', async () => {
     api.post.mockRejectedValueOnce(new Error('Test Message'));
-    writeFile()(dispatch);
+    writeStorage()(dispatch);
 
     await waitFor(() => {
       expect(dispatch).toHaveBeenCalledWith({ type: CREATE_ALERT, data: errorObject });

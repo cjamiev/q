@@ -14,10 +14,8 @@ const router = async ({ reqUrl, reqMethod, queryParameters, payload }) => {
     return await databaseController(queryParameters.name, payload);
   } else if (reqUrl.includes('project')) {
     return await projectController(queryParameters, payload);
-  } else if (path.extname(reqUrl)) {
-    return await staticController(reqUrl);
   } else {
-    return await mockController(reqUrl, reqMethod, payload);
+    return await staticController(reqUrl);
   }
 };
 

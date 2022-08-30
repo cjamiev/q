@@ -1,7 +1,4 @@
 export const updateDependencyVersions = (packageJson, selectedDeps) => {
-  const dependencies = packageJson.dependencies;
-  const devDependencies = packageJson.devDependencies;
-
   const updatedDependencies = Object.keys(packageJson.dependencies)
     .map(name => {
       const matched = selectedDeps.find(dep => !!dep[name]);

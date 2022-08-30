@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { openGlobalModal } from 'components/molecules/Global/globalActions';
 import { loadProject, clearMessage } from './projectActions';
@@ -23,12 +23,12 @@ const LS_DIR_KEY = 'rootDir';
 const Project = () => {
   const dispatch = useDispatch();
   const [root, setRoot] = useLocalStorage(LS_DIR_KEY, DEFAULT_DIR, false);
-  const { remoteUrl, directories, regexes, packageJson, message } = useSelector((state) => state.project);
+  const { remoteUrl, directories, regexes, message } = useSelector((state) => state.project);
   const TABS = [
+    { title: 'Snippet', component: ComponentWrapper(ProjectSnippet, {}) },
     { title: 'Git', component: ComponentWrapper(ProjectGit, { root }) },
     { title: 'Npm', component: ComponentWrapper(ProjectPackage, { root }) },
-    { title: 'Regex', component: ComponentWrapper(ProjectRegex, { root, directories, regexes }) },
-    { title: 'Snippet', component: ComponentWrapper(ProjectSnippet, {}) }
+    { title: 'Regex', component: ComponentWrapper(ProjectRegex, { root, directories, regexes }) }
   ];
 
   useEffect(() => {

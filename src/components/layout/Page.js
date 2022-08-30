@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { ROUTES } from 'constants/routes';
-import Button from 'components/atoms/Button';
 import PageHeader from './PageHeader';
-import PageContent from './PageContent';
 import QuickAccess from './QuickAccess';
 import SidePanel from './SidePanel';
 import { openSidePanel, closeSidePanel } from 'components/molecules/Global/globalActions';

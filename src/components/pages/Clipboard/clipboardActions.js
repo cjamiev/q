@@ -4,7 +4,6 @@ import { createAlert } from 'components/layout/Alert/alertActions';
 const LOAD_CLIPBOARD = 'LOAD_CLIPBOARD';
 
 const THREE_SECOND = 3000;
-const ZERO = 0;
 
 const loadClipboard = () => {
   return (dispatch) => {

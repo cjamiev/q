@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { dismissAlert } from './alertActions';
 import { SCAlertWrapper, SCAlert, SCAlertHeader, SCAlertContent } from './styles';

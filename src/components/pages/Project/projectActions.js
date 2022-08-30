@@ -5,7 +5,6 @@ import { showLoadingModal, hideLoadingModal } from 'components/molecules/Global/
 const LOAD_PROJECT = 'LOAD_PROJECT';
 const CLEAR_MESSAGE = 'CLEAR_MESSAGE';
 const THREE_SECOND = 3000;
-const DEFAULT_DIR = './';
 
 const loadProject = () => {
   return (dispatch) => {

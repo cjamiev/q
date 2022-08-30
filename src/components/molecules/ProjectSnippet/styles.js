@@ -66,10 +66,6 @@ export const SCLoadButton = styled(Button)`
   }
 `;
 
-export const SCButtonGroup = styled.div`
-  display: inline-flex;
-`;
-
 export const SCSnippetTextWrapper = styled.div`
   width: 800px;
   margin-top: 10px;

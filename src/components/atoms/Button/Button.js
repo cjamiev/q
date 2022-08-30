@@ -1,5 +1,4 @@
 import React from 'react';
-import { getColor, getSize } from './helper';
 import { SCButton } from './styles';
 
 const Button = ({ label, ariaLabel, isPrimary, disabled = false, onClick }) => {

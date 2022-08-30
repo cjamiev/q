@@ -4,7 +4,6 @@ import { openGlobalModal } from 'components/molecules/Global/globalActions';
 import Card from 'components/atoms/Card';
 import useTimer from 'hooks/useTimer';
 import { formattedTimerClock } from 'utils/clock';
-import { decrementElementIndex, incrementElementIndex, swapArrayElementPositions } from 'utils/arrayHelper';
 import { TrashSVG } from 'components/atoms/Icons';
 import { PenSVG } from 'components/atoms/Icons/PenSVG';
 import TimerForm from 'components/atoms/Form/TimerForm';

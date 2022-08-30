@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { openGlobalModal } from 'components/molecules/Global/globalActions';
-import Button, { InfoButton } from 'components/atoms/Button';
+import Button from 'components/atoms/Button';
 import Text from 'components/atoms/Form/Text';
 import Checkbox from 'components/atoms/Form/Checkbox';
 import NumberRange from 'components/atoms/Form/NumberRange';

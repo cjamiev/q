@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
   closeSidePanel,
@@ -14,7 +14,6 @@ import {
   SCWeek,
   SCNavigationContent,
   SCNavigationLinks,
-  SCNavigationBottomLinks,
   SCNavigationIcon,
   SCNavigationLabels
 } from './styles';

@@ -1,8 +1,5 @@
 import React from 'react';
-import { copyToClipboard } from 'utils/copy';
 import { ClipboardDisplayContent } from 'components/atoms/ClipboardDisplayContent';
-import Button from 'components/atoms/Button';
-import { TYPE } from 'constants/type';
 
 const List = React.memo(({ header, data, handleClick }) => {
   const renderContent = data.map((entry, index) => {

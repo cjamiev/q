@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadSnippetDirectory, loadSnippet, createSnippet, deleteSnippet } from './projectSnippetActions';
+import { loadSnippet, createSnippet, deleteSnippet } from './projectSnippetActions';
 import { copyToClipboard } from 'utils/copy';
 import Button from 'components/atoms/Button';
 import Text from 'components/atoms/Form/Text';
@@ -13,7 +13,6 @@ import {
   SCLoadHeader,
   SCLoadBtnWrapper,
   SCLoadButton,
-  SCButtonGroup,
   SCSnippetTextWrapper
 } from './styles';
 

@@ -3,7 +3,6 @@ import { CloseSVG } from 'components/atoms/Icons/CloseSVG';
 import { SCSidepanel, SCSidepanelHeader, SCSidepanelTitle, SCSidepanelBtn } from './styles';
 
 const SidePanel = ({ isTransitioningOut, sidePanelContent, isSidePanelWide, toggleSidePanel, title }) => {
-  const sidePanelHeaderClassName = isSidePanelWide ? 'sidepanel__header--full' : 'sidepanel__header';
 
   return (
     <SCSidepanel isFullSize={isSidePanelWide} isTransitioningOut={isTransitioningOut}>

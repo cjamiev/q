@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Modal from 'components/atoms/Modal';
 import { loadSettings, updateSettings } from 'components/pages/Settings/settingsActions';
 import { createAlert } from 'components/layout/Alert/alertActions';
-import { closeGlobalModal, hideLoadingModal, loadCommand, clearCommand, initializeTimer } from './globalActions';
+import { closeGlobalModal, hideLoadingModal, loadCommand, initializeTimer } from './globalActions';
 import { TIME } from 'constants/time';
 import { SCGlobalModal, SCGlobalModalLoading, SCGlobalModalLoadingName } from './styles';
 

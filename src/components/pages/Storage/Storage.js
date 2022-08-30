@@ -8,7 +8,7 @@ import Text from 'components/atoms/Form/Text';
 import TextArea from 'components/atoms/Form/TextArea';
 import Button from 'components/atoms/Button';
 import { copyToClipboard } from 'utils/copy';
-import { SCStorageBtnWrapper, SCStorageNameWrapper } from './styles';
+import { SCStorageWrapper, SCStorageBtnWrapper, SCStorageNameWrapper, SCStorageTextWrapper, SCStorageOpWrapper } from './styles';
 import { SaveSVG } from 'components/atoms/Icons/SaveSVG';
 import { CopySVG } from 'components/atoms/Icons/CopySVG';
 
@@ -38,7 +38,7 @@ const Storage = () => {
 
   return (
     <Page>
-      <div className="flex--horizontal">
+      <SCStorageWrapper>
         <SCStorageBtnWrapper>
           <SCStorageNameWrapper>
             <Text placeholder="Enter File Name" selected={name} onChange={handleNameChange} />
@@ -75,7 +75,7 @@ const Storage = () => {
             );
           })}
         </SCStorageBtnWrapper>
-        <div className="flex--three">
+        <SCStorageTextWrapper>
           <TextArea
             ariaLabel="Content text area"
             selected={content}
@@ -83,16 +83,16 @@ const Storage = () => {
               setContent(selected);
             }}
           />
-        </div>
-        <div className="flex--three">
+        </SCStorageTextWrapper>
+        <SCStorageOpWrapper>
           <FileOperations
             content={content}
             onChange={(updated) => {
               setContent(updated);
             }}
           />
-        </div>
-      </div>
+        </SCStorageOpWrapper>
+      </SCStorageWrapper>
     </Page>
   );
 };

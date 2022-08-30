@@ -12,6 +12,6 @@ export const SCFileBtnWrapper = styled.div`
   row-gap: 10px;
 
   button {
-    width: 250px;
+    width: 150px;
   }
 `;

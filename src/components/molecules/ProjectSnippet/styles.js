@@ -27,9 +27,9 @@ export const SCLoadHeader = styled.div`
   display: flex;
   margin-bottom: 10px;
 
-  h2 {
-    margin-top: 10px;
-    margin-left: 20px;
+  span {
+    margin: 12px 10px;
+    font-size: 24px;
   }
 
   svg {
@@ -48,6 +48,15 @@ export const SCLoadBtnWrapper = styled.div`
   max-height: 500px;
   row-gap: 5px;
   margin-left: 10px;
+
+  button {
+    width: 150px;
+  }
+`;
+
+export const SCSnippetType = styled.span`
+  font-size: 20px;
+  text-transform: capitalize;
 `;
 
 export const SCLoadButton = styled(Button)`
@@ -68,10 +77,9 @@ export const SCLoadButton = styled(Button)`
 
 export const SCSnippetTextWrapper = styled.div`
   width: 800px;
-  margin-top: 10px;
-  margin-right: 20px;
+  margin: 20px;
 
   textarea {
-    height: 600px;
+    height: 700px;
   }
 `;

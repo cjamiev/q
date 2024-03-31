@@ -3,9 +3,9 @@ import Card from 'components/atoms/Card';
 import Button from 'components/atoms/Button';
 import { SCSectionWrapper, SCNextSongBtnWrapper, SCSongCardWrapper } from './styles';
 import useLocalStorage from 'hooks/useLocalStorage';
+import { copyToClipboard } from 'utils/copy';
 import { youtubesonglist } from 'constants/songlist';
 
-const ZERO = 0;
 const LS_SONG_VISITED = 'songsVisited';
 const DEFAULT_LIST = [];
 
@@ -31,9 +31,10 @@ export const HomeSongs = () => {
           key='next-song'
           label='Next Song'
           onClick={() => {
-            window.open(nextsong, '_blank');
             const updatedList = previouslyVisitedList.concat([nextsong]);
             setPreviouslyVisitedList(updatedList);
+            copyToClipboard(nextsong);
+            window.open(nextsong, '_blank');
           }}
         />
       </SCNextSongBtnWrapper>

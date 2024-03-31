@@ -7,6 +7,7 @@ import Tabs from 'components/atoms/Tabs';
 import ComponentWrapper from 'components/atoms/ComponentWrapper';
 import { HomeTodo } from 'components/molecules/HomeTodo';
 import { HomeTimer } from 'components/molecules/HomeTimer';
+import { HomeSongs } from 'components/molecules/HomeSongs';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -86,6 +87,10 @@ const Home = () => {
         onRemoveTimer: handleRemoveTimer,
         onEditTimer: handleEditTimer
       })
+    },
+    {
+      title: 'Songs',
+      component: ComponentWrapper(HomeSongs)
     }
   ];
 

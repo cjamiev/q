@@ -5,7 +5,7 @@ export const SCSectionWrapper = styled.div`
   flex-wrap: wrap;
 `;
 
-export const SCNextSongBtnWrapper = styled.div`
+export const SCNextLinkBtnWrapper = styled.div`
   display: block;
   margin-bottom: 10px;
 
@@ -14,7 +14,7 @@ export const SCNextSongBtnWrapper = styled.div`
   }
 `;
 
-export const SCSongCardWrapper = styled.div`
+export const SCLinkCardWrapper = styled.div`
 > div {
     background-color: ${(props) => (props.isAlreadyVisited ? 'black' : 'white')};
     height: 40px;

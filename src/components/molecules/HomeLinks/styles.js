@@ -2,11 +2,18 @@ import styled from 'styled-components';
 
 export const SCTabWrapper = styled.div`
   display: flex;
-`;
+  flex-wrap: wrap;
+  `;
 
 export const SCLinkSectionWrapper = styled.div`
   flex: 5;
+  display: flex;
+  flex-wrap: wrap;
   margin: 3px;
+`;
+
+export const SCFlexWrapper = styled.div`
+  display: ${({ shouldFlex }) => (shouldFlex ? 'inline' : 'block')};
 `;
 
 export const SCFavoriteLinkWrapper = styled.div`

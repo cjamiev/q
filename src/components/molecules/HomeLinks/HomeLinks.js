@@ -1,7 +1,18 @@
 import React from 'react';
 import Card from 'components/atoms/Card';
 import Button from 'components/atoms/Button';
-import { SCTabWrapper, SCLinkSectionWrapper, SCFavoriteLinkWrapper, SCSongAndSearchSectionWrapper, SCListWrapper, SCNextLinkBtnWrapper, SCLinkCardWrapper, SCSongAndSearchCardWrapper, SCCountWrapper } from './styles';
+import {
+  SCTabWrapper,
+  SCLinkSectionWrapper,
+  SCFlexWrapper,
+  SCFavoriteLinkWrapper,
+  SCSongAndSearchSectionWrapper,
+  SCListWrapper,
+  SCNextLinkBtnWrapper,
+  SCLinkCardWrapper,
+  SCSongAndSearchCardWrapper,
+  SCCountWrapper
+} from './styles';
 import useLocalStorage from 'hooks/useLocalStorage';
 import { copyToClipboard } from 'utils/copy';
 import { youtubeList, googleSearchList, youtubeSongList } from 'constants/searchlist';
@@ -104,24 +115,45 @@ const YoutubeSongList = () => {
   </SCSongAndSearchSectionWrapper>);
 };
 
-export const FavoriteLinks = () => {
-  return ( <SCLinkSectionWrapper>
-    {youtubeList.map(({ href, name, tag}) => {
+export const LinksByGroup = ({ links, title }) => {
+  return ( <div>
+    <h2>{title}</h2>
+    {links.map(({ href, name, tag}) => {
       return (<SCFavoriteLinkWrapper key="name" onClick={() => {
         window.open(href, '_blank');
       }}>
         <SCLinkCardWrapper isAlreadyVisited={false}><Card body={<span>{tag}: <a href={href} target="_blank">{name}</a></span>} /></SCLinkCardWrapper>
       </SCFavoriteLinkWrapper>);
     })}
-  </SCLinkSectionWrapper>);
+  </div>);
+};
+
+export const FavoriteLinks = ({ links }) => {
+  const artLinks = youtubeList.filter(i => i.type === 'art');
+  const musicLinks = youtubeList.filter(i => i.type === 'music');
+  const writingLinks = youtubeList.filter(i => i.type === 'writing');
+  const gamedevLinks = youtubeList.filter(i => i.type === 'gamedev');
+  const gamingLinks = youtubeList.filter(i => i.type === 'gaming');
+
+  return (<>
+    <LinksByGroup links={artLinks} title='Art' />
+    <LinksByGroup links={musicLinks} title='Music' />
+    <LinksByGroup links={writingLinks} title='Writing' />
+    <LinksByGroup links={gamedevLinks} title='Game Dev' />
+    <LinksByGroup links={gamingLinks} title='Gaming' />
+  </>);
 };
 
 export const HomeLinks = () => {
+  const showGoogleSearchList = googleSearchList.length;
+  const showYoutubeSongList = youtubeSongList.length;
+  const shouldFlex = googleSearchList.length || youtubeSongList.length;
+
   return (
     <SCTabWrapper>
-      <FavoriteLinks />
-      {googleSearchList.length ? <GoogleSearchList /> : <></>}
-      {youtubeSongList.length ? <YoutubeSongList /> : <></>}
+      {shouldFlex ? <SCLinkSectionWrapper><FavoriteLinks /></SCLinkSectionWrapper> :<FavoriteLinks />}
+      {showGoogleSearchList ? <GoogleSearchList /> : <></>}
+      {showYoutubeSongList ? <YoutubeSongList /> : <></>}
     </SCTabWrapper>
   );
 };

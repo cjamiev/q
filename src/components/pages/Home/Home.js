@@ -7,7 +7,7 @@ import Tabs from 'components/atoms/Tabs';
 import ComponentWrapper from 'components/atoms/ComponentWrapper';
 import { HomeTodo } from 'components/molecules/HomeTodo';
 import { HomeTimer } from 'components/molecules/HomeTimer';
-import { HomeSearch } from 'components/molecules/HomeSearch';
+import { HomeLinks } from 'components/molecules/HomeLinks';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -89,8 +89,8 @@ const Home = () => {
       })
     },
     {
-      title: 'Search',
-      component: ComponentWrapper(HomeSearch)
+      title: 'Links',
+      component: ComponentWrapper(HomeLinks)
     }
   ];
 

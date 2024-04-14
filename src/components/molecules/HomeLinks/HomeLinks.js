@@ -4,7 +4,6 @@ import Button from 'components/atoms/Button';
 import {
   SCTabWrapper,
   SCLinkSectionWrapper,
-  SCFlexWrapper,
   SCFavoriteLinkWrapper,
   SCSongAndSearchSectionWrapper,
   SCListWrapper,
@@ -134,6 +133,8 @@ export const FavoriteLinks = ({ links }) => {
   const writingLinks = youtubeList.filter(i => i.type === 'writing');
   const gamedevLinks = youtubeList.filter(i => i.type === 'gamedev');
   const gamingLinks = youtubeList.filter(i => i.type === 'gaming');
+  const infoLinks = youtubeList.filter(i => i.type === 'info');
+  const otherLinks = youtubeList.filter(i => i.type === 'other');
 
   return (<>
     <LinksByGroup links={artLinks} title='Art' />
@@ -141,6 +142,8 @@ export const FavoriteLinks = ({ links }) => {
     <LinksByGroup links={writingLinks} title='Writing' />
     <LinksByGroup links={gamedevLinks} title='Game Dev' />
     <LinksByGroup links={gamingLinks} title='Gaming' />
+    <LinksByGroup links={infoLinks} title='Education' />
+    <LinksByGroup links={otherLinks} title='Other' />
   </>);
 };
 

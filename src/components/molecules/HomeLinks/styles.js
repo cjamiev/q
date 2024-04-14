@@ -12,10 +12,6 @@ export const SCLinkSectionWrapper = styled.div`
   margin: 3px;
 `;
 
-export const SCFlexWrapper = styled.div`
-  display: ${({ shouldFlex }) => (shouldFlex ? 'inline' : 'block')};
-`;
-
 export const SCFavoriteLinkWrapper = styled.div`
   cursor: pointer;
 `;

@@ -118,10 +118,11 @@ export const LinksByGroup = ({ links, title }) => {
   return ( <div>
     <h2>{title}</h2>
     {links.map(({ href, name, tag}) => {
+      const extraInfo = tag ? `${tag}:` : '';
       return (<SCFavoriteLinkWrapper key="name" onClick={() => {
         window.open(href, '_blank');
       }}>
-        <SCLinkCardWrapper isAlreadyVisited={false}><Card body={<span>{tag}: <a href={href} target="_blank">{name}</a></span>} /></SCLinkCardWrapper>
+        <SCLinkCardWrapper isAlreadyVisited={false}><Card body={<span>{extraInfo} <a href={href} target="_blank">{name}</a></span>} /></SCLinkCardWrapper>
       </SCFavoriteLinkWrapper>);
     })}
   </div>);
@@ -134,6 +135,7 @@ export const FavoriteLinks = ({ links }) => {
   const gamedevLinks = youtubeList.filter(i => i.type === 'gamedev');
   const gamingLinks = youtubeList.filter(i => i.type === 'gaming');
   const infoLinks = youtubeList.filter(i => i.type === 'info');
+  const recapLinks = youtubeList.filter(i => i.type === 'recap');
   const otherLinks = youtubeList.filter(i => i.type === 'other');
 
   return (<>
@@ -143,6 +145,7 @@ export const FavoriteLinks = ({ links }) => {
     <LinksByGroup links={gamedevLinks} title='Game Dev' />
     <LinksByGroup links={gamingLinks} title='Gaming' />
     <LinksByGroup links={infoLinks} title='Education' />
+    <LinksByGroup links={recapLinks} title='Recap' />
     <LinksByGroup links={otherLinks} title='Other' />
   </>);
 };

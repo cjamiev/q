@@ -34,5 +34,7 @@
       "args": []
     }
   },
-  "terminal.integrated.defaultProfile.windows": "GitBash"
+  "terminal.integrated.defaultProfile.windows": "GitBash",
+  "typescript.format.enable": true,
+  "terminal.integrated.shellIntegration.enabled": false
 }

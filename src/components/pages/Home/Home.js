@@ -5,6 +5,7 @@ import { loadHome, updateHome } from './homeActions';
 import Page from 'components/layout';
 import Tabs from 'components/atoms/Tabs';
 import ComponentWrapper from 'components/atoms/ComponentWrapper';
+import { HomeTest } from 'components/molecules/HomeTest';
 import { HomeTodo } from 'components/molecules/HomeTodo';
 import { HomeTimer } from 'components/molecules/HomeTimer';
 import { HomeLinks } from 'components/molecules/HomeLinks';
@@ -68,6 +69,16 @@ const Home = () => {
   };
 
   const TABS = [
+    {
+      title: 'Test',
+      component: ComponentWrapper(HomeTest, {
+        tasks,
+        selectedTask,
+        onChange: handleTasksChange,
+        onEditTask: handleEditTask,
+        onChangeItem: handleTaskItemChange
+      })
+    },
     {
       title: 'To do',
       component: ComponentWrapper(HomeTodo, {

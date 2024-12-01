@@ -1,6 +1,6 @@
 import { applyMiddleware, createStore, compose, combineReducers } from 'redux';
 import logger from 'redux-logger';
-import thunk from 'redux-thunk';
+import { thunk } from 'redux-thunk';
 
 import alertReducer from 'components/layout/Alert/alertReducer';
 import clipboardReducer from 'components/pages/Clipboard/clipboardReducer';

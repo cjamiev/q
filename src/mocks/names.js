@@ -3007,3 +3007,14 @@ export const lastNames = [
   'Zuniga',
   'Ávila'
 ];
+
+export const emailhosts = [
+  'gmail.com',
+  'hotmail.com',
+  'yahoo.com',
+  'outlook.com',
+  'aol.com',
+  'msn.com',
+  'comcast.net',
+  'live.com'
+];

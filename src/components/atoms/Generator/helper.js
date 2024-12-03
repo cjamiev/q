@@ -27,12 +27,12 @@ const RANDOM_MAX_HUNDRED = 100;
 const NUMBER_OF_MONTHS = 12;
 const MAX_DAYS_OF_MOST_MONTHS = 31;
 const MAX_DAYS_OF_SOME_MONTHS = 30;
-const MAX_DAYS_OF_FEBRUARY = 30;
-const INDEX_FOR_FEBRUARY = 1;
-const INDEX_FOR_APRIL = 3;
-const INDEX_FOR_JUNE = 5;
-const INDEX_FOR_SEPTEMBER = 8;
-const INDEX_FOR_NOVEMBER = 10;
+const MAX_DAYS_OF_FEBRUARY = 28;
+const INDEX_FOR_FEBRUARY = 2;
+const INDEX_FOR_APRIL = 4;
+const INDEX_FOR_JUNE = 6;
+const INDEX_FOR_SEPTEMBER = 9;
+const INDEX_FOR_NOVEMBER = 11;
 const today = new Date();
 
 const getRandomInt = (max) => {
@@ -49,13 +49,14 @@ const generateRandomNumberOfSizeN = (n) => {
   return randomnumber;
 };
 
-const generateName = (isGirl) => {
-  const randomFirstIndex = isGirl ? getRandomInt(girlNames.length) : getRandomInt(boyNames.length);
-  const randomLastIndex = getRandomInt(lastNames.length);
-  return {
-    firstname: isGirl ? girlNames[randomFirstIndex] : boyNames[randomFirstIndex],
-    lastname: lastNames[randomLastIndex]
-  };
+const generateFirstName = (isGirl) => {
+  const randomNameIndex = isGirl ? getRandomInt(girlNames.length) : getRandomInt(boyNames.length);
+  return isGirl ? girlNames[randomNameIndex] : boyNames[randomNameIndex];
+};
+
+const generateLastName = () => {
+  const randomNameIndex = getRandomInt(lastNames.length);
+  return lastNames[randomNameIndex];
 };
 
 const generateGender = () => {
@@ -96,7 +97,7 @@ const generatePhoneNumber = () => {
 
 const generateEmailAddress = (firstname, lastname) => {
   const emailIndex = getRandomInt(emailhosts.length);
-  const emailEnding = emailhosts(emailIndex);
+  const emailEnding = emailhosts[emailIndex];
 
   return firstname + '.' + lastname + '@' + emailEnding;
 };
@@ -165,8 +166,15 @@ const generateBoolean = () => {
   return randomValue < FIFTY_PERCENT;
 };
 
+const generateCustomState = (states) => {
+  const randomValue = getRandomInt(states.length);
+
+  return states[randomValue];
+};
+
 export {
-  generateName,
+  generateFirstName,
+  generateLastName,
   generateGender,
   generateSSN,
   generatePhoneNumber,
@@ -176,5 +184,6 @@ export {
   generateZipCode,
   generateDate,
   generateBoolean,
-  generateRandomNumberOfSizeN
+  generateRandomNumberOfSizeN,
+  generateCustomState
 };

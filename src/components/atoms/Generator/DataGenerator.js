@@ -1,7 +1,9 @@
+/* eslint-disable complexity */
 /* eslint-disable no-magic-numbers */
 import React, { useState } from 'react';
 import {
-  generateName,
+  generateFirstName,
+  generateLastName,
   generateGender,
   generateSSN,
   generatePhoneNumber,
@@ -11,75 +13,44 @@ import {
   generateZipCode,
   generateDate,
   generateBoolean,
-  generateRandomNumberOfSizeN
+  generateRandomNumberOfSizeN,
+  generateCustomState
 } from './helper';
 import { Temporal } from 'temporal-polyfill';
 
 // input template, export: SQL, CSV, JSON
 // Color Code, Time Stamp
-// Random Unique String, Words, Number with N Digits,
+// Random Unique String, Words
 // Money, Formula (compute from other columns/values), Geometric Distributed Number
 
 const DataType = {
   FIRST_NAME: 'First Name',
   LAST_NAME: 'Last Name',
-  EMAIL: 'Email',
+  // EMAIL: 'Email',
   CITY: 'City',
-  STATE: 'State',
-  ADDRESS: 'Address',
+  STREET: 'Street',
   ZIP_CODE: 'Zip Code',
   SSN: 'Social Security Number',
   PHONE_NUMBER: 'Phone Number',
   GENDER: 'Gender',
-  CREDIT_CARD: 'Credit Card Number',
+  // CREDIT_CARD: 'Credit Card Number',
   DATE: 'Date',
-  BOOLEAN: 'Boolean'
+  BOOLEAN: 'Boolean',
+  CUSTOM_STATE: 'Custom State'
 };
 
 export const DataGenerator = () => {
   const [data, setData] = useState([]);
   const [rowCount, setRowCount] = useState(100);
   const [columns, setColumns] = useState([
-    { name: DataType.FIRST_NAME, type: DataType.FIRST_NAME },
-    { name: DataType.LAST_NAME, type: DataType.LAST_NAME }
+    { name: DataType.FIRST_NAME, type: DataType.FIRST_NAME, options: '' },
+    { name: DataType.LAST_NAME, type: DataType.LAST_NAME, options: '' }
   ]);
 
-  const onHandleGenerateSSN = () => {
-    setData(generateSSN());
-  };
+  const onHandleAddField = (name) => {
+    const updatedData = columns.concat({ name, type: name, options: '' });
 
-  const onHandleGenerateZipCode = () => {
-    setData(generateZipCode(false));
-  };
-
-  const onHandleGenerateNineDigitZipCode = () => {
-    setData(generateZipCode(true));
-  };
-
-  const onHandleGenerateCityAndState = () => {
-    const cityAndState = generateCityAndState();
-    setData(cityAndState.city + ', ' + cityAndState.state);
-  };
-
-  const onHandleGenerateBoyName = () => {
-    const fullname = generateName();
-    setData(fullname.lastname + ', ' + fullname.firstname);
-  };
-
-  const onHandleGenerateGirlName = () => {
-    const fullname = generateName(true);
-    setData(fullname.lastname + ', ' + fullname.firstname);
-  };
-
-  const onHandleGenerateDate = () => {
-    const { year, month, day } = generateDate(36);
-    const date = Temporal.PlainDate.from(year + '-' + month + '-' + day);
-    setData(date.toString());
-  };
-
-  const onHandleGenerateStreet = () => {
-    const street = generateStreetName();
-    setData(street);
+    setColumns(updatedData);
   };
 
   const onHandleRemove = (selectedIndex) => {
@@ -110,14 +81,65 @@ export const DataGenerator = () => {
     for (let i = 0; i < rowCount; i++) {
       const currentRow = columns.map((col) => {
         if (col.type === DataType.FIRST_NAME) {
-          const fullname = generateName();
+          const isGirl = generateBoolean();
+          const firstname = generateFirstName(isGirl);
 
-          return { column: col.name, value: fullname.firstname };
+          return { column: col.name, value: firstname };
         }
         if (col.type === DataType.LAST_NAME) {
-          const fullname = generateName();
+          const lastname = generateLastName();
 
-          return { column: col.name, value: fullname.lastname };
+          return { column: col.name, value: lastname };
+        }
+        if (col.type === DataType.SSN) {
+          const ssn = generateSSN();
+
+          return { column: col.name, value: ssn };
+        }
+        if (col.type === DataType.CITY) {
+          const cityAndState = generateCityAndState();
+
+          return { column: col.name, value: cityAndState.city + ', ' + cityAndState.state };
+        }
+        if (col.type === DataType.ZIP_CODE) {
+          const zipCode = generateZipCode();
+
+          return { column: col.name, value: zipCode };
+        }
+        if (col.type === DataType.GENDER) {
+          const gender = generateGender();
+
+          return { column: col.name, value: gender };
+        }
+        if (col.type === DataType.PHONE_NUMBER) {
+          const phonenumber = generatePhoneNumber();
+
+          return { column: col.name, value: phonenumber };
+        }
+        if (col.type === DataType.DATE) {
+          const { year, month, day } = generateDate(36);
+          const date = Temporal.PlainDate.from(year + '-' + month + '-' + day);
+          return { column: col.name, value: date.toString() };
+        }
+        // if (col.type === DataType.EMAIL) {
+        //   const email = generateEmailAddress(36);
+        //   return { column: col.name, value: email };
+        // }
+        if (col.type === DataType.STREET) {
+          const street = generateStreetName();
+
+          return { column: col.name, value: street };
+        }
+        if (col.type === DataType.BOOLEAN) {
+          const bool = generateBoolean();
+
+          return { column: col.name, value: bool };
+        }
+        if (col.type === DataType.CUSTOM_STATE) {
+          const states = col.options.includes(',') ? col.options.split(',') : col.options.split('');
+          const customStates = generateCustomState(states);
+
+          return { column: col.name, value: customStates };
         } else {
           return { column: col.name, value: 'UNKOWN TYPE' };
         }
@@ -150,7 +172,22 @@ export const DataGenerator = () => {
     }
   };
 
-  console.log('hit', data);
+  const onHandleColumnOptionsChange = (event, selectedIndex) => {
+    const value = event.target.value;
+    if (value) {
+      const updatedColumns = columns.map((item, index) => {
+        if (selectedIndex === index) {
+          return { ...item, options: value };
+        } else {
+          return item;
+        }
+      });
+
+      setColumns(updatedColumns);
+    }
+  };
+
+  console.log(data);
 
   return (
     <div>
@@ -166,7 +203,16 @@ export const DataGenerator = () => {
                 value={item.name}
               />
               <span>{item.type}</span>
-              {data.length > 1 && (
+              {item.type === DataType.CUSTOM_STATE && (
+                <input
+                  type="text"
+                  onChange={(event) => {
+                    onHandleColumnOptionsChange(event, index);
+                  }}
+                  value={item.options}
+                />
+              )}
+              {columns.length > 1 && (
                 <button
                   onClick={() => {
                     onHandleRemove(index);
@@ -178,6 +224,20 @@ export const DataGenerator = () => {
             </div>
           );
         })}
+        <div>
+          {Object.keys(DataType).map((type) => {
+            return (
+              <button
+                key={type}
+                onClick={() => {
+                  onHandleAddField(DataType[type]);
+                }}
+              >
+                Generate {DataType[type]}
+              </button>
+            );
+          })}
+        </div>
       </div>
       <button onClick={onHandleGenerateData}>Generate Data</button>
       <input type="text" onChange={onHandleCountUpdate} value={rowCount} />

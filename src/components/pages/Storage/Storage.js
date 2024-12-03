@@ -8,7 +8,13 @@ import Text from 'components/atoms/Form/Text';
 import TextArea from 'components/atoms/Form/TextArea';
 import Button from 'components/atoms/Button';
 import { copyToClipboard } from 'utils/copy';
-import { SCStorageWrapper, SCStorageBtnWrapper, SCStorageNameWrapper, SCStorageTextWrapper, SCStorageOpWrapper } from './styles';
+import {
+  SCStorageWrapper,
+  SCStorageBtnWrapper,
+  SCStorageNameWrapper,
+  SCStorageTextWrapper,
+  SCStorageOpWrapper
+} from './styles';
 import { SaveSVG } from 'components/atoms/Icons/SaveSVG';
 import { CopySVG } from 'components/atoms/Icons/CopySVG';
 
@@ -63,7 +69,7 @@ const Storage = () => {
           {directory.map((item) => {
             return (
               <Button
-                isPrimary
+                isprimary
                 key={item}
                 label={item}
                 onClick={() => {

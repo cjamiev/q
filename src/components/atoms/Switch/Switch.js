@@ -16,7 +16,7 @@ const Switch = React.memo(({ data, switchIndex, onToggleSwitch = noop }) => {
       <SCSwitchBtn
         isFirst={isFirst}
         isLast={isLast}
-        isActive={isActive}
+        isactive={isActive ? 'true' : undefined}
         key={item.label}
         aria-label={ariaLabel}
         onClick={() => {

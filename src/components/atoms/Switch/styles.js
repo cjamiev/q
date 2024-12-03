@@ -23,7 +23,7 @@ export const SCSwitchBtn = styled.button`
   ${(props) => props.isFirst && 'border-radius: 50px 0px 0px 50px'};
   ${(props) => props.isLast && 'border-radius: 0px 50px 50px 0px'};
   ${(props) => {
-    return props.isActive
+    return props.isactive
       ? `
     background-color: ${Theme.primaryColor};
     outline: 3px solid ${Theme.primaryColor};

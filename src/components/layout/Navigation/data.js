@@ -29,7 +29,6 @@ export const navigationMap = [
     label: 'Project',
     url: '/project',
     icon: DirectorySVG,
-    isAtBottom: true,
     props: {
       transform: 'scale(0.6) translate(6,6)'
     }
@@ -38,7 +37,6 @@ export const navigationMap = [
     label: 'Settings',
     url: '/settings',
     icon: SettingSVG,
-    isAtBottom: true,
     props: {
       transform: 'scale(0.6) translate(6,6)'
     }

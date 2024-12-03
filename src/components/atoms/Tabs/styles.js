@@ -19,7 +19,7 @@ const darkModeWrapper = css`
 
 export const SCTabButtonGroup = styled.div`
   ${(props) => {
-    return props.isLightMode ? lightModeWrapper : darkModeWrapper;
+    return props.islightmode ? lightModeWrapper : darkModeWrapper;
   }};
 `;
 
@@ -34,7 +34,7 @@ const lightModeButton = css`
   z-index: 1;
 
   ${(props) =>
-    props.isActive &&
+    props.isactive &&
     `
       position: relative;
       top: 2px;
@@ -54,12 +54,16 @@ const darkModeButton = css`
   color: ${Theme.white};
   background-color: ${Theme.secondaryBackgroundColor};
   cursor: pointer;
-  transition: color 500ms, box-shadow 500ms;
-  box-shadow: 5px 5px 9px 0 rgba(0, 0, 0, 0.25), inset -5px -5px 7px 0 rgba(0, 0, 0, 0.25),
+  transition:
+    color 500ms,
+    box-shadow 500ms;
+  box-shadow:
+    5px 5px 9px 0 rgba(0, 0, 0, 0.25),
+    inset -5px -5px 7px 0 rgba(0, 0, 0, 0.25),
     inset 5px 5px 9px 0 rgba(255, 255, 255, 0.4);
 
   ${(props) =>
-    props.isActive &&
+    props.isactive &&
     `
       color: ${lightPurple};
       background-color: ${Theme.secondaryBackgroundColorHover};
@@ -70,6 +74,6 @@ const darkModeButton = css`
 
 export const SCTabButton = styled.button`
   ${(props) => {
-    return props.isLightMode ? lightModeButton : darkModeButton;
+    return props.islightmode ? lightModeButton : darkModeButton;
   }};
 `;

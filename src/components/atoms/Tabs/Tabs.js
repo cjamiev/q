@@ -11,9 +11,9 @@ const Tabs = ({ data, onTabSwitch = noop, isLightMode = false }) => {
   const renderTabs = data.map((tItem, tIndex) => {
     return (
       <SCTabButton
-        isLightMode={isLightMode}
+        islightmode={isLightMode ? 'true' : undefined}
         key={tItem.title}
-        isActive={tabIndex === tIndex}
+        isactive={tabIndex === tIndex ? 'true' : undefined}
         onClick={() => {
           setTabIndex(tIndex);
           onTabSwitch();
@@ -26,7 +26,7 @@ const Tabs = ({ data, onTabSwitch = noop, isLightMode = false }) => {
 
   return (
     <>
-      <SCTabButtonGroup isLightMode={isLightMode}>{renderTabs}</SCTabButtonGroup>
+      <SCTabButtonGroup islightmode={isLightMode ? 'true' : undefined}>{renderTabs}</SCTabButtonGroup>
       {<TabComponent />}
     </>
   );

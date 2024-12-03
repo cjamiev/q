@@ -30,7 +30,7 @@ export const SCWeek = styled.span`
     border-radius: 50%;
     display: inline-block;
     position: relative;
-    right: ${(props) => (props.isTwoDigit ? '30px' : '23px')};
+    right: ${(props) => (props.istwodigit ? '30px' : '23px')};
     top: 8px;
   }
 `;
@@ -54,8 +54,8 @@ export const SCNavigationLinks = styled.div`
     background-color: ${Theme.secondaryBackgroundColorHover};
   }
 
-  ${({ isActive }) =>
-    isActive &&
+  ${({ isactive }) =>
+    isactive &&
     `
     background-color: ${Theme.secondaryBackgroundColorHover};
   `}
@@ -66,8 +66,8 @@ export const SCNavigationIcon = styled.div`
   position: absolute;
   left: 5px;
 
-  ${({ isActive }) =>
-    isActive &&
+  ${({ isactive }) =>
+    isactive &&
     `
     &::before {
       content: "";

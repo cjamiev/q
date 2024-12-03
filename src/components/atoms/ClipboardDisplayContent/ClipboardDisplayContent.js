@@ -65,7 +65,7 @@ export const ClipboardDisplayContent = ({ type, label, value }) => {
   } else if (type === TYPE.COPY) {
     return (
       <Button
-        isPrimary
+        isprimary
         label={label}
         onClick={() => {
           copyToClipboard(value);

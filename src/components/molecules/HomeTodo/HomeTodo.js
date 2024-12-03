@@ -69,7 +69,7 @@ export const HomeTodo = ({ tasks, selectedTask, onChangeItem, onChange, onEditTa
         buttonList: [
           {
             label: 'Confirm',
-            isPrimary: true,
+            isprimary: true,
             action: () => {
               removeItem(taskId);
             }
@@ -94,7 +94,7 @@ export const HomeTodo = ({ tasks, selectedTask, onChangeItem, onChange, onEditTa
           <ItemCreator placeholder="Url" data={taskUrls} onChange={handleUrlsChange} />
           <Button
             data-testid="todo-add-btn"
-            isPrimary
+            isprimary
             label="Submit"
             onClick={(e) => {
               e.preventDefault();

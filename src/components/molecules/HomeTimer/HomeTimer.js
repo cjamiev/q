@@ -39,7 +39,7 @@ const TimerCard = ({ item, onRemoveTimer, onEditTimer }) => {
         buttonList: [
           {
             label: 'Confirm',
-            isPrimary: true,
+            isprimary: true,
             action: () => {
               onRemoveTimer(timerName);
             }

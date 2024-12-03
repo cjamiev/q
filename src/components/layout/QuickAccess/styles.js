@@ -25,7 +25,7 @@ export const SCQuickAccessBtn = styled.button`
   cursor: pointer;
   background-color: ${Theme.secondaryBackgroundColor};
   flex: 1;
-  ${(props) => props.isActive && `background-color: ${Theme.secondaryBackgroundColorHover};`};
+  ${(props) => props.isactive && `background-color: ${Theme.secondaryBackgroundColorHover};`};
 
   &:hover {
     background-color: ${Theme.secondaryBackgroundColorHover};
@@ -36,7 +36,7 @@ export const SCQuickAccessBtn = styled.button`
 export const SCQuickAccessList = styled.div`
   display: flex;
   flex-direction: column;
-  height: ${(props) => (props.isVisible ? '500px' : '0px')};
+  height: ${(props) => (props.isvisible ? '500px' : '0px')};
   background-color: ${Theme.secondaryBackgroundColor};
   margin-top: 20px;
   transition: height 500ms;

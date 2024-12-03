@@ -17,7 +17,7 @@ export const SCButton = styled.button`
   }
 
   ${(props) => {
-    return props.isPrimary
+    return props.isprimary
       ? `
         background-color: ${Theme.primaryColor};
         

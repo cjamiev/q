@@ -117,7 +117,7 @@ export const SettingsTab = ({ settingsData, labels, isHidden = false, onChange }
               }}
             />
             <Button
-              isPrimary
+              isprimary
               label="Submit"
               onClick={(e) => {
                 e.preventDefault();

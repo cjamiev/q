@@ -35,7 +35,7 @@ const ProjectGit = ({ root }) => {
           {branches.map((item) => {
             return (
               <Button
-                isPrimary
+                isprimary
                 key={item}
                 label={item}
                 onClick={() => {
@@ -50,7 +50,7 @@ const ProjectGit = ({ root }) => {
           {stashes.map((item) => {
             return (
               <Button
-                isPrimary
+                isprimary
                 key={item}
                 label={item}
                 onClick={() => {

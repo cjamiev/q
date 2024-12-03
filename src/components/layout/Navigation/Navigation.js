@@ -42,8 +42,8 @@ const Navigation = React.memo(() => {
     };
 
     return (
-      <SCNavigationLinks key={item.url} onClick={handleClick} isActive={isActive} isAtBottom={item.isAtBottom}>
-        <SCNavigationIcon isActive={isActive}>
+      <SCNavigationLinks key={item.url} onClick={handleClick} isactive={isActive ? 'true' : undefined}>
+        <SCNavigationIcon isactive={isActive ? 'true' : undefined}>
           <IconSVG ariaLabel={`${item.label} Page`} width="45" {...item.props} />
         </SCNavigationIcon>
         <SCNavigationLabels>{item.label}</SCNavigationLabels>
@@ -54,7 +54,9 @@ const Navigation = React.memo(() => {
   return (
     <SCNavigation>
       <SCNavigationContent>
-        <SCWeek isTwoDigit={getFormattedDate().week > SINGLE_DIGIT}>{getFormattedDate().week}</SCWeek>
+        <SCWeek istwodigit={getFormattedDate().week > SINGLE_DIGIT ? 'true' : undefined}>
+          {getFormattedDate().week}
+        </SCWeek>
         {renderNavItems}
       </SCNavigationContent>
     </SCNavigation>

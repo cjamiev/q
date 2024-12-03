@@ -22,16 +22,16 @@ const TYPE_POSITION = 0;
 const NAME_POSITION = 1;
 
 const mapSnippets = (snippets) => {
-  const snippetsWithNameAndType = snippets.map(label => {
+  const snippetsWithNameAndType = snippets.map((label) => {
     const nameAndType = label.split('__');
 
-    return { name: nameAndType[NAME_POSITION], type: nameAndType[TYPE_POSITION], filename: label};
+    return { name: nameAndType[NAME_POSITION], type: nameAndType[TYPE_POSITION], filename: label };
   });
 
-  const types = unique(snippetsWithNameAndType.map(item => item.type));
+  const types = unique(snippetsWithNameAndType.map((item) => item.type));
 
-  return types.map(type => {
-    return snippetsWithNameAndType.filter(item => item.type === type);
+  return types.map((type) => {
+    return snippetsWithNameAndType.filter((item) => item.type === type);
   });
 };
 
@@ -43,7 +43,7 @@ const Snippet = () => {
   const { snippets, snippetFile } = useSelector((state) => state.project);
 
   useEffect(() => {
-    if(snippetFile.name) {
+    if (snippetFile.name) {
       const nameAndType = snippetFile.name.split('__');
       setContent(snippetFile.content);
       setType(nameAndType[TYPE_POSITION]);
@@ -89,7 +89,7 @@ const Snippet = () => {
             />
             <Button
               label="Submit"
-              isPrimary
+              isprimary
               onClick={(e) => {
                 e.preventDefault();
                 if (name && content) {

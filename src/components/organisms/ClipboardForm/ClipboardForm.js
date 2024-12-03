@@ -238,7 +238,7 @@ const ClipboardForm = ({ records }) => {
         <h2>Entry #{currentIndex + ONE}</h2>
         <Button
           label={addLabel}
-          isPrimary
+          isprimary
           onClick={() => {
             const updatedData = getUpdatedData(data, currentIndex, entry);
             setEntry([]);
@@ -248,7 +248,7 @@ const ClipboardForm = ({ records }) => {
         />
         <Button
           label="Remove"
-          isPrimary
+          isprimary
           onClick={() => {
             setEntry([]);
             setData(data.filter((item, indx) => indx !== currentIndex));
@@ -271,7 +271,7 @@ const ClipboardForm = ({ records }) => {
         {key && title && (
           <Button
             label="Submit"
-            isPrimary
+            isprimary
             onClick={() => {
               const section = records[key] || [];
               const filteredSection = section.filter((item) => item.title !== title);
@@ -286,7 +286,7 @@ const ClipboardForm = ({ records }) => {
         {records.hasOwnProperty(key) && title && (
           <Button
             label="Delete"
-            isPrimary
+            isprimary
             onClick={() => {
               const updatedSection = records[key].filter((item) => item.title !== title);
 

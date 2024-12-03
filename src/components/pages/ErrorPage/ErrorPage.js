@@ -12,7 +12,7 @@ const ErrorPage = React.memo(() => {
     <Page>
       <Button
         label="Go back to previous page"
-        isPrimary
+        isprimary
         onClick={() => {
           navigate(PREVIOUS_INDEX);
         }}

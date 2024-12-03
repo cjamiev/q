@@ -85,7 +85,7 @@ export const FileRegexOperations = ({ content, onChange }) => {
       />
       <SCFileBtnWrapper>
         <Button
-          isPrimary
+          isprimary
           label="Convert"
           onClick={() => {
             onChange(parsedContent({ content, replace, range: { start, end }, searchExp }));

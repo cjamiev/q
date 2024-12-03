@@ -167,7 +167,7 @@ const ProjectRegex = ({ root, directories, regexes }) => {
       />
       <SCBtnGroup>
         <Button
-          isPrimary
+          isprimary
           label="Submit"
           onClick={() => {
             if (fileRegExp.isValid && lineRegExp.isValid && !rangeError) {

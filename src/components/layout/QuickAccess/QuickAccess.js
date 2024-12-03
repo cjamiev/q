@@ -88,17 +88,17 @@ const PageQuickAccess = () => {
   return (
     <SCQuickAccess ref={ref}>
       <SCQuickAccessBtnGroup>
-        <SCQuickAccessBtn isActive={mode === 'e'} onClick={showCommands}>
+        <SCQuickAccessBtn isActive={mode === 'e' ? 'true' : undefined} onClick={showCommands}>
           <PlaySVG ariaLabel="Commands" transform="scale(0.7) translate(10,10)" />
         </SCQuickAccessBtn>
-        <SCQuickAccessBtn isActive={mode === 'l'} onClick={showLinks}>
+        <SCQuickAccessBtn isActive={mode === 'l' ? 'true' : undefined} onClick={showLinks}>
           <StarSVG ariaLabel="Favorite Links" transform="scale(0.7) translate(10,10)" />
         </SCQuickAccessBtn>
-        <SCQuickAccessBtn isActive={mode === 'c'} onClick={showPaste}>
+        <SCQuickAccessBtn isActive={mode === 'c' ? 'true' : undefined} onClick={showPaste}>
           <CopySVG transform="scale(0.7) translate(10,10)" />
         </SCQuickAccessBtn>
       </SCQuickAccessBtnGroup>
-      <SCQuickAccessList isVisible={mode !== ''}>
+      <SCQuickAccessList isvisible={mode !== '' ? 'true' : undefined}>
         <QuickAccessList mode={mode} />
       </SCQuickAccessList>
     </SCQuickAccess>

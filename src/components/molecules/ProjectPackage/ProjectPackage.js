@@ -80,7 +80,12 @@ const Package = ({ root }) => {
           <SCTableCell isSmall>
             <span>{entry[key]}</span>
           </SCTableCell>
-          <SCTableCell isSmall isClickable isActive={isActive} onClick={hasUpdate ? handleClick : noop}>
+          <SCTableCell
+            isSmall
+            isClickable
+            isactive={isActive ? 'true' : undefined}
+            onClick={hasUpdate ? handleClick : noop}
+          >
             <span>{latestVersion}</span>
           </SCTableCell>
         </tr>
@@ -107,20 +112,20 @@ const Package = ({ root }) => {
         <SCFlexWrapper>
           <SCNpmBtnWrapper>
             <Button
-              isPrimary
+              isprimary
               label="Load Versions"
               onClick={() => {
                 dispatch(getDependencyVersions(root));
               }}
             />
             <Button
-              isPrimary
+              isprimary
               label="Update Versions"
               onClick={() => {
                 dispatch(updatePackage(root, updateDependencyVersions(packageJson, selectedDeps)));
               }}
             />
-            <Button isPrimary label="Select All" onClick={handleSelectAll} />
+            <Button isprimary label="Select All" onClick={handleSelectAll} />
           </SCNpmBtnWrapper>
           <SCNpmBtnWrapper>{packageCommands}</SCNpmBtnWrapper>
         </SCFlexWrapper>

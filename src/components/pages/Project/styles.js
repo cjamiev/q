@@ -43,7 +43,7 @@ export const SCDirectoryBtn = styled(Button)`
   font-size: 16px;
   cursor: pointer;
 
-  :hover {
+  &:hover {
     background-color: hsl(204, 100%, 35%);
   }
 `;

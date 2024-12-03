@@ -12,7 +12,7 @@ export const SCCard = styled.div`
   display: flex;
   flex-direction: column;
 
-  :hover {
+  &:hover {
     transform: scaleX(1.05) scaleY(1.05);
     box-shadow: 1px 1px 15px 3px #ababab;
   }

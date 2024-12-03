@@ -70,7 +70,7 @@ export const SCLoadButton = styled(Button)`
   width: 220px;
   cursor: pointer;
 
-  :hover {
+  &:hover {
     background-color: hsl(204, 100%, 35%);
   }
 `;

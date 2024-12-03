@@ -10,7 +10,7 @@ export const SCNavigation = styled.nav`
   transition: width 500ms;
   z-index: 1;
 
-  :hover {
+  &:hover {
     width: 250px;
   }
 `;
@@ -22,7 +22,7 @@ export const SCWeek = styled.span`
   font-size: 24px;
   font-weight: bold;
 
-  ::after {
+  &::after {
     content: '';
     height: 30px;
     width: 30px;
@@ -50,7 +50,7 @@ export const SCNavigationLinks = styled.div`
   cursor: pointer;
   top: 10px;
 
-  :hover {
+  &:hover {
     background-color: ${Theme.secondaryBackgroundColorHover};
   }
 
@@ -69,7 +69,7 @@ export const SCNavigationIcon = styled.div`
   ${({ isActive }) =>
     isActive &&
     `
-    ::before {
+    &::before {
       content: "";
       position: absolute;
       height: 45px;

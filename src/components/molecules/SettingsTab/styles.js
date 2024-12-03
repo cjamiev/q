@@ -41,7 +41,7 @@ export const SCTableCell = styled.td`
 
   ${(props) =>
     props.isFirstCell &&
-    `::before {
+    `&::before {
       position: absolute;
       content: '';
       top: 7px;
@@ -50,7 +50,7 @@ export const SCTableCell = styled.td`
       background-color: hsl(0, 0%, 87%);
     }`};
 
-  ::after {
+  &::after {
     position: absolute;
     content: '';
     top: 7px;

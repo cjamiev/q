@@ -27,7 +27,7 @@ export const SCQuickAccessBtn = styled.button`
   flex: 1;
   ${(props) => props.isActive && `background-color: ${Theme.secondaryBackgroundColorHover};`};
 
-  :hover {
+  &:hover {
     background-color: ${Theme.secondaryBackgroundColorHover};
     outline: none;
   }
@@ -49,7 +49,7 @@ export const SCQuickAccessListBtn = styled.button`
   background-color: ${Theme.secondaryBackgroundColor};
   cursor: pointer;
 
-  :hover {
+  &:hover {
     background-color: ${Theme.secondaryBackgroundColorHover};
     outline: none;
   }

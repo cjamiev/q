@@ -1,6 +1,7 @@
 /* eslint-disable complexity */
 /* eslint-disable no-magic-numbers */
 import React, { useState } from 'react';
+import { Temporal } from 'temporal-polyfill';
 import {
   generateFirstName,
   generateLastName,
@@ -18,7 +19,7 @@ import {
   credit_card_format,
   uuid_format
 } from './helper';
-import { Temporal } from 'temporal-polyfill';
+import { copyToClipboard } from 'utils/copy';
 import {
   SCNewFieldSection,
   SCAddedFieldsWrapper,
@@ -60,6 +61,24 @@ const getTableData = (data) => {
   });
 
   return { headers, rows };
+};
+
+const getJSONData = (data) => {
+  if (!data.length) {
+    return [];
+  }
+
+  const result = data.map((entry) => {
+    return entry
+      .map((item) => {
+        return { [item.column]: item.value };
+      })
+      .reduce((accumulator, current) => {
+        return { ...accumulator, ...current };
+      }, {});
+  });
+
+  return JSON.stringify(result);
 };
 
 export const DataGenerator = () => {
@@ -283,6 +302,17 @@ export const DataGenerator = () => {
       </SCNewFieldSection>
       <button onClick={onHandleGenerateData}>Generate Data</button>
       <input type="text" onChange={onHandleCountUpdate} value={rowCount} />
+      {data.length ? (
+        <button
+          onClick={() => {
+            copyToClipboard(getJSONData(data));
+          }}
+        >
+          Copy as JSON
+        </button>
+      ) : (
+        <span />
+      )}
       <div>
         <SCHeaderWrapper>
           {headers.map((item) => {
@@ -291,7 +321,7 @@ export const DataGenerator = () => {
         </SCHeaderWrapper>
         {rows.map((entry) => {
           return (
-            <SCRowWrapper>
+            <SCRowWrapper key={JSON.stringify(entry)}>
               {entry.map((item) => {
                 return <SCTableRow key={item}>{item}</SCTableRow>;
               })}

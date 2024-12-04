@@ -5,23 +5,20 @@ import {
   generateFirstName,
   generateLastName,
   generateGender,
-  generateSSN,
-  generatePhoneNumber,
   generateEmailAddress,
   generateStreetName,
   generateCityAndState,
-  generateZipCode,
   generateDate,
   generateBoolean,
-  generateRandomNumberOfSizeN,
-  generateCustomState
+  generateCustomState,
+  customStringGenerator,
+  ssn_format,
+  phonenumber_format,
+  zipcode_format,
+  credit_card_format,
+  uuid_format
 } from './helper';
 import { Temporal } from 'temporal-polyfill';
-
-// input template, export: SQL, CSV, JSON
-// Color Code, Time Stamp
-// Random Unique String, Words
-// Money, Formula (compute from other columns/values), Geometric Distributed Number
 
 const DataType = {
   FIRST_NAME: 'First Name',
@@ -33,10 +30,12 @@ const DataType = {
   SSN: 'Social Security Number',
   PHONE_NUMBER: 'Phone Number',
   GENDER: 'Gender',
-  // CREDIT_CARD: 'Credit Card Number',
+  CREDIT_CARD: 'Credit Card Number',
+  UUID: 'uuid',
   DATE: 'Date',
   BOOLEAN: 'Boolean',
-  CUSTOM_STATE: 'Custom State'
+  CUSTOM_STATE: 'Custom State',
+  CUSTOM_STRING: 'Custom String'
 };
 
 export const DataGenerator = () => {
@@ -92,7 +91,7 @@ export const DataGenerator = () => {
           return { column: col.name, value: lastname };
         }
         if (col.type === DataType.SSN) {
-          const ssn = generateSSN();
+          const ssn = customStringGenerator(ssn_format);
 
           return { column: col.name, value: ssn };
         }
@@ -102,9 +101,19 @@ export const DataGenerator = () => {
           return { column: col.name, value: cityAndState.city + ', ' + cityAndState.state };
         }
         if (col.type === DataType.ZIP_CODE) {
-          const zipCode = generateZipCode();
+          const zipCode = customStringGenerator(zipcode_format);
 
           return { column: col.name, value: zipCode };
+        }
+        if (col.type === DataType.CREDIT_CARD) {
+          const ccnumber = customStringGenerator(credit_card_format);
+
+          return { column: col.name, value: ccnumber };
+        }
+        if (col.type === DataType.UUID) {
+          const uuid = customStringGenerator(uuid_format);
+
+          return { column: col.name, value: uuid };
         }
         if (col.type === DataType.GENDER) {
           const gender = generateGender();
@@ -112,7 +121,7 @@ export const DataGenerator = () => {
           return { column: col.name, value: gender };
         }
         if (col.type === DataType.PHONE_NUMBER) {
-          const phonenumber = generatePhoneNumber();
+          const phonenumber = customStringGenerator(phonenumber_format);
 
           return { column: col.name, value: phonenumber };
         }
@@ -140,6 +149,11 @@ export const DataGenerator = () => {
           const customStates = generateCustomState(states);
 
           return { column: col.name, value: customStates };
+        }
+        if (col.type === DataType.CUSTOM_STRING) {
+          const customString = customStringGenerator(col.options, i);
+
+          return { column: col.name, value: customString };
         } else {
           return { column: col.name, value: 'UNKOWN TYPE' };
         }
@@ -203,7 +217,7 @@ export const DataGenerator = () => {
                 value={item.name}
               />
               <span>{item.type}</span>
-              {item.type === DataType.CUSTOM_STATE && (
+              {(item.type === DataType.CUSTOM_STATE || item.type === DataType.CUSTOM_STRING) && (
                 <input
                   type="text"
                   onChange={(event) => {

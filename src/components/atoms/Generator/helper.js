@@ -1,20 +1,23 @@
 import { streets, citiesAndStates } from '../../../mocks/address';
 import { boyNames, girlNames, lastNames, emailhosts } from '../../../mocks/names';
 
+// input template, export: SQL, CSV, JSON
+// Color Code, Time Stamp
+// Random Unique String, Words
+// Money, Formula (compute from other columns/values), Geometric Distributed Number
+
+const letters = 'abcdefghijklmnopqrstuvwxyz';
+const ssn_format = '###-##-####';
+const phonenumber_format = '###-###-####';
+const zipcode_format = '######';
+const credit_card_format = '####-####-####-####';
+const uuid_format = '&&&&&&&&-&&&&-&&&&-&&&&-&&&&&&&&&&&&';
+
 const START_ZERO = 0;
 const ADD_ONE = 1;
 
 const FIFTY_PERCENT = 50;
 const LESS_THAN_FIFTY_PERCENT = 49;
-
-const INDEX_THREE = 3;
-const INDEX_FIVE = 5;
-const INDEX_SIX = 6;
-const INDEX_NINE = 9;
-const INDEX_TEN = 10;
-const FIVE_DIGITS = 5;
-const NINE_DIGITS = 9;
-const TEN_DIGITS = 10;
 
 const SINGLE_DIGIT = 9;
 const DOUBLE_DIGIT = 99;
@@ -39,14 +42,35 @@ const getRandomInt = (max) => {
   return Math.floor(Math.random() * max);
 };
 
-const generateRandomNumberOfSizeN = (n) => {
-  let randomnumber = '';
-  for (let i = START_ZERO; i < n; i++) {
-    const newDigit = getRandomInt(RANDOM_MAX_TEN);
-    randomnumber += newDigit;
-  }
+const generateRange = (min, max) => {
+  return getRandomInt(max - min) + min;
+};
 
-  return randomnumber;
+const customStringGenerator = (input, index) => {
+  const content = input.split('');
+  const result = content.map((item) => {
+    if (item === '#') {
+      return getRandomInt(RANDOM_MAX_TEN);
+    }
+    if (item === '@') {
+      return letters.charAt(getRandomInt(letters.length));
+    }
+    if (item === '&') {
+      const randomIndex = getRandomInt(letters.length);
+      return randomIndex < RANDOM_MAX_TEN ? randomIndex : letters.charAt(getRandomInt(randomIndex - RANDOM_MAX_TEN));
+    }
+    if (item === ':') {
+      const now = new Date();
+      return now.getMonth() + ADD_ONE + '-' + now.getDate() + '-' + now.getFullYear();
+    }
+    if (item === '^') {
+      return index + ADD_ONE;
+    } else {
+      return item;
+    }
+  });
+
+  return result.join('');
 };
 
 const generateFirstName = (isGirl) => {
@@ -69,30 +93,6 @@ const generateGender = () => {
   } else {
     return 'Other';
   }
-};
-
-const generateSSN = () => {
-  const ssn = generateRandomNumberOfSizeN(NINE_DIGITS);
-
-  return (
-    ssn.substring(START_ZERO, INDEX_THREE) +
-    '-' +
-    ssn.substring(INDEX_THREE, INDEX_FIVE) +
-    '-' +
-    ssn.substring(INDEX_FIVE, INDEX_NINE)
-  );
-};
-
-const generatePhoneNumber = () => {
-  const phone = generateRandomNumberOfSizeN(TEN_DIGITS);
-
-  return (
-    phone.substring(START_ZERO, INDEX_THREE) +
-    '-' +
-    phone.substring(INDEX_THREE, INDEX_SIX) +
-    '-' +
-    phone.substring(INDEX_SIX, INDEX_TEN)
-  );
 };
 
 const generateEmailAddress = (firstname, lastname) => {
@@ -122,15 +122,6 @@ const generateCityAndState = () => {
   const cityAndState = { state: stateObj.state, city: stateObj.cities[randomCityNumber] };
 
   return cityAndState;
-};
-
-const generateZipCode = (isNineDigit) => {
-  const length = isNineDigit ? NINE_DIGITS : FIVE_DIGITS;
-  const zipcode = generateRandomNumberOfSizeN(length);
-
-  return isNineDigit
-    ? zipcode.substring(START_ZERO, INDEX_FIVE) + '-' + zipcode.substring(INDEX_FIVE, INDEX_NINE)
-    : zipcode;
 };
 
 const getNumberofDays = (numberOfMonth) => {
@@ -176,14 +167,17 @@ export {
   generateFirstName,
   generateLastName,
   generateGender,
-  generateSSN,
-  generatePhoneNumber,
   generateEmailAddress,
   generateStreetName,
   generateCityAndState,
-  generateZipCode,
   generateDate,
   generateBoolean,
-  generateRandomNumberOfSizeN,
-  generateCustomState
+  generateCustomState,
+  generateRange,
+  customStringGenerator,
+  ssn_format,
+  phonenumber_format,
+  zipcode_format,
+  credit_card_format,
+  uuid_format
 };

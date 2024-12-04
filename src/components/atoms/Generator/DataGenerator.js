@@ -81,6 +81,21 @@ const getJSONData = (data) => {
   return JSON.stringify(result);
 };
 
+const getCSVData = (header, rows) => {
+  const lineOne = header.join(',');
+  const remainingLines = rows.map((entry) => entry.join(','));
+
+  return [lineOne, ...remainingLines].join('\n');
+};
+
+const getJSONRow = (header, row) => {
+  const result = header.reduce((accumulator, current, index) => {
+    return { ...accumulator, [current]: row[index] };
+  }, {});
+
+  return JSON.stringify(result);
+};
+
 export const DataGenerator = () => {
   const [data, setData] = useState([]);
   const [rowCount, setRowCount] = useState(10);
@@ -244,6 +259,12 @@ export const DataGenerator = () => {
     }
   };
 
+  const deleteRow = (rowIndex) => {
+    const updatedData = data.filter((_, index) => index !== rowIndex);
+
+    setData(updatedData);
+  };
+
   const { headers, rows } = getTableData(data);
 
   return (
@@ -303,13 +324,22 @@ export const DataGenerator = () => {
       <button onClick={onHandleGenerateData}>Generate Data</button>
       <input type="text" onChange={onHandleCountUpdate} value={rowCount} />
       {data.length ? (
-        <button
-          onClick={() => {
-            copyToClipboard(getJSONData(data));
-          }}
-        >
-          Copy as JSON
-        </button>
+        <div>
+          <button
+            onClick={() => {
+              copyToClipboard(getJSONData(data));
+            }}
+          >
+            Copy as JSON
+          </button>
+          <button
+            onClick={() => {
+              copyToClipboard(getCSVData(headers, rows));
+            }}
+          >
+            Copy as CSV
+          </button>
+        </div>
       ) : (
         <span />
       )}
@@ -319,12 +349,26 @@ export const DataGenerator = () => {
             return <SCTableHeader key={item}>{item}</SCTableHeader>;
           })}
         </SCHeaderWrapper>
-        {rows.map((entry) => {
+        {rows.map((entry, index) => {
           return (
             <SCRowWrapper key={JSON.stringify(entry)}>
               {entry.map((item) => {
                 return <SCTableRow key={item}>{item}</SCTableRow>;
               })}
+              <button
+                onClick={() => {
+                  deleteRow(index);
+                }}
+              >
+                Delete
+              </button>
+              <button
+                onClick={() => {
+                  copyToClipboard(getJSONRow(headers, entry));
+                }}
+              >
+                Copy
+              </button>
             </SCRowWrapper>
           );
         })}

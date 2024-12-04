@@ -1,10 +1,12 @@
 import { streets, citiesAndStates } from '../../../mocks/address';
 import { boyNames, girlNames, lastNames, emailhosts } from '../../../mocks/names';
+import { everything } from 'mocks/words';
 
-// input template, export: SQL, CSV, JSON
 // Color Code, Time Stamp
-// Random Unique String, Words
+// Words, Fake Words, Password, Sentence
 // Money, Formula (compute from other columns/values), Geometric Distributed Number
+// improve email generator
+// imporve Custom format string generator
 
 const letters = 'abcdefghijklmnopqrstuvwxyz';
 const ssn_format = '###-##-####';
@@ -95,11 +97,15 @@ const generateGender = () => {
   }
 };
 
-const generateEmailAddress = (firstname, lastname) => {
+const generateEmailAddress = () => {
   const emailIndex = getRandomInt(emailhosts.length);
+  const wordIndex = getRandomInt(everything.length);
+  const wordIndex2 = getRandomInt(everything.length);
   const emailEnding = emailhosts[emailIndex];
 
-  return firstname + '.' + lastname + '@' + emailEnding;
+  return (
+    everything[wordIndex].toLocaleLowerCase() + '.' + everything[wordIndex2].toLocaleLowerCase() + '@' + emailEnding
+  );
 };
 
 const generateStreetName = () => {

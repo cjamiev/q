@@ -427,3 +427,5 @@ export const plants = [
   'Grass',
   'Zebra Plant'
 ];
+
+export const everything = [...fruits, ...vegetables, ...animals, ...plants];

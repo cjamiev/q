@@ -19,11 +19,22 @@ import {
   uuid_format
 } from './helper';
 import { Temporal } from 'temporal-polyfill';
+import {
+  SCNewFieldSection,
+  SCAddedFieldsWrapper,
+  SCNewFieldBtnWrapper,
+  SCHeaderWrapper,
+  SCTableHeader,
+  SCRowWrapper,
+  SCTableRow
+} from './styles';
+
+// input template, export: SQL, CSV, JSON
 
 const DataType = {
   FIRST_NAME: 'First Name',
   LAST_NAME: 'Last Name',
-  // EMAIL: 'Email',
+  EMAIL: 'Email',
   CITY: 'City',
   STREET: 'Street',
   ZIP_CODE: 'Zip Code',
@@ -38,9 +49,22 @@ const DataType = {
   CUSTOM_STRING: 'Custom String'
 };
 
+const getTableData = (data) => {
+  if (!data.length) {
+    return { headers: [], rows: [] };
+  }
+
+  const headers = data[0].map((i) => i.column);
+  const rows = data.map((item) => {
+    return item.map((i) => i.value);
+  });
+
+  return { headers, rows };
+};
+
 export const DataGenerator = () => {
   const [data, setData] = useState([]);
-  const [rowCount, setRowCount] = useState(100);
+  const [rowCount, setRowCount] = useState(10);
   const [columns, setColumns] = useState([
     { name: DataType.FIRST_NAME, type: DataType.FIRST_NAME, options: '' },
     { name: DataType.LAST_NAME, type: DataType.LAST_NAME, options: '' }
@@ -130,10 +154,10 @@ export const DataGenerator = () => {
           const date = Temporal.PlainDate.from(year + '-' + month + '-' + day);
           return { column: col.name, value: date.toString() };
         }
-        // if (col.type === DataType.EMAIL) {
-        //   const email = generateEmailAddress(36);
-        //   return { column: col.name, value: email };
-        // }
+        if (col.type === DataType.EMAIL) {
+          const email = generateEmailAddress(36);
+          return { column: col.name, value: email };
+        }
         if (col.type === DataType.STREET) {
           const street = generateStreetName();
 
@@ -201,65 +225,80 @@ export const DataGenerator = () => {
     }
   };
 
-  console.log(data);
+  const { headers, rows } = getTableData(data);
 
   return (
     <div>
-      <div>
-        {columns.map((item, index) => {
-          return (
-            <div key={item.type}>
-              <input
-                type="text"
-                onChange={(event) => {
-                  onHandleColumnNameChange(event, index);
-                }}
-                value={item.name}
-              />
-              <span>{item.type}</span>
-              {(item.type === DataType.CUSTOM_STATE || item.type === DataType.CUSTOM_STRING) && (
+      <SCNewFieldSection>
+        <SCAddedFieldsWrapper>
+          {columns.map((item, index) => {
+            return (
+              <div key={item.type}>
                 <input
                   type="text"
                   onChange={(event) => {
-                    onHandleColumnOptionsChange(event, index);
+                    onHandleColumnNameChange(event, index);
                   }}
-                  value={item.options}
+                  value={item.name}
                 />
-              )}
-              {columns.length > 1 && (
-                <button
-                  onClick={() => {
-                    onHandleRemove(index);
-                  }}
-                >
-                  Delete
-                </button>
-              )}
-            </div>
-          );
-        })}
-        <div>
-          {Object.keys(DataType).map((type) => {
-            return (
-              <button
-                key={type}
-                onClick={() => {
-                  onHandleAddField(DataType[type]);
-                }}
-              >
-                Generate {DataType[type]}
-              </button>
+                <span>{item.type}</span>
+                {(item.type === DataType.CUSTOM_STATE || item.type === DataType.CUSTOM_STRING) && (
+                  <input
+                    type="text"
+                    onChange={(event) => {
+                      onHandleColumnOptionsChange(event, index);
+                    }}
+                    value={item.options}
+                  />
+                )}
+                {columns.length > 1 && (
+                  <button
+                    onClick={() => {
+                      onHandleRemove(index);
+                    }}
+                  >
+                    Delete
+                  </button>
+                )}
+              </div>
             );
           })}
-        </div>
-      </div>
+        </SCAddedFieldsWrapper>
+        <SCNewFieldBtnWrapper>
+          {Object.keys(DataType)
+            .filter((item) => !columns.some((element) => element.type === DataType[item]))
+            .map((type) => {
+              return (
+                <button
+                  key={type}
+                  onClick={() => {
+                    onHandleAddField(DataType[type]);
+                  }}
+                >
+                  {DataType[type]}
+                </button>
+              );
+            })}
+        </SCNewFieldBtnWrapper>
+      </SCNewFieldSection>
       <button onClick={onHandleGenerateData}>Generate Data</button>
       <input type="text" onChange={onHandleCountUpdate} value={rowCount} />
-      {/* <div>
-        {data.map((item) => {
-          return <span key={item}>{item}</span>;
+      <div>
+        <SCHeaderWrapper>
+          {headers.map((item) => {
+            return <SCTableHeader key={item}>{item}</SCTableHeader>;
+          })}
+        </SCHeaderWrapper>
+        {rows.map((entry) => {
+          return (
+            <SCRowWrapper>
+              {entry.map((item) => {
+                return <SCTableRow key={item}>{item}</SCTableRow>;
+              })}
+            </SCRowWrapper>
+          );
         })}
-      </div> */}
+      </div>
     </div>
   );
 };

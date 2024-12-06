@@ -29,6 +29,8 @@ import {
   SCRowWrapper,
   SCTableRow
 } from './styles';
+import { lowerCaseFirstLetter, capitalizeFirstLetter, toCamelCaseFromDashCase } from 'utils/stringHelper';
+import { pipe } from 'utils/compose';
 
 /*
 // insert sql template, json, csv switch between formats, preview mode
@@ -134,6 +136,65 @@ const getSQLReadData = (header) => {
 // table name, add where clause
 const getSQLDeleteData = (header) => {
   return 'DELETE FROM <table_name> WHERE condition;';
+};
+
+const getReactCode = (column) => {
+  const { name, type } = column;
+  const formatVariable = pipe([lowerCaseFirstLetter, toCamelCaseFromDashCase]);
+  const lowerCasedName = formatVariable(name.replace(' ', '-'));
+  const upperCasedName = capitalizeFirstLetter(lowerCasedName);
+
+  return `
+      const [${lowerCasedName}, set${upperCasedName}] = useState('${type}');
+
+      const onHandle${upperCasedName}Change = (event) => {
+        const value = event.target.value;
+        set${upperCasedName}(value);
+      };
+
+      return (
+        <div>
+          <label>${name}</label>
+          <input type="text" onChange={onHandle${upperCasedName}Change} placeholder={'Enter ${name}'} value={${lowerCasedName}}></input>
+        </div>
+      );
+      `;
+};
+
+const getAggregatedReactCode = (columns) => {
+  const pieces = columns.map((item) => {
+    const formatVariable = pipe([lowerCaseFirstLetter, toCamelCaseFromDashCase]);
+    const name = formatVariable(item.name.replace(' ', '-'));
+    const upperCasedName = capitalizeFirstLetter(name);
+
+    const stateSection = `const [${name}, set${upperCasedName}] = useState('${item.type}');`;
+    const onChangeSection = `
+      const onHandle${upperCasedName}Change = (event) => {
+        const value = event.target.value;
+        set${upperCasedName}(value);
+      };
+    `;
+    const JSXSection = `
+      <label>${item.name}</label>
+      <input type="text" onChange={onHandle${upperCasedName}Change} placeholder={'Enter ${item.name}'} value={${name}}></input>
+    `;
+
+    return { stateSection, onChangeSection, JSXSection };
+  });
+
+  const aggregateStateSection = pieces.map((item) => item.stateSection).join('\n');
+  const aggregateOnChangeSection = pieces.map((item) => item.onChangeSection).join('');
+  const aggregateJSXSection = pieces.map((item) => item.JSXSection).join('');
+
+  const completedJSXSection = `
+        return (
+        <div>
+          ${aggregateJSXSection}
+        </div>
+      );
+  `;
+
+  return aggregateStateSection + `\n${aggregateOnChangeSection}\n` + completedJSXSection;
 };
 
 export const DataGenerator = () => {
@@ -341,6 +402,7 @@ export const DataGenerator = () => {
                     Delete
                   </button>
                 )}
+                <button onClick={() => copyToClipboard(getReactCode(item))}>Get React Code</button>
               </div>
             );
           })}
@@ -362,6 +424,7 @@ export const DataGenerator = () => {
             })}
         </SCNewFieldBtnWrapper>
       </SCNewFieldSection>
+      <button onClick={() => copyToClipboard(getAggregatedReactCode(columns))}>Get React Code</button>
       <button onClick={() => copyToClipboard(getSQLReadData(columnNames))}>Read SQL</button>
       <button onClick={() => copyToClipboard(getSQLCreateData(columnNames))}>Create SQL</button>
       <button onClick={onHandleGenerateData}>Generate Data</button>

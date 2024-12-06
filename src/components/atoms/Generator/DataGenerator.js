@@ -30,7 +30,15 @@ import {
   SCTableRow
 } from './styles';
 
-// input template, export: SQL, CSV, JSON
+/*
+// insert sql template, json, csv switch between formats, preview mode
+// customizable date format
+// Color Code, Time Stamp
+// Words, Fake Words, Password, Sentence
+// Money, Formula (compute from other columns/values), Geometric Distributed Number
+// improve email generator, with the name
+// improve Custom format string generator
+*/
 
 const DataType = {
   FIRST_NAME: 'First Name',
@@ -94,6 +102,38 @@ const getJSONRow = (header, row) => {
   }, {});
 
   return JSON.stringify(result);
+};
+
+const getSQLInsertData = (header, rows) => {
+  const lineOne = `INSERT INTO Table (${header.map((i) => `'${i.replace(' ', '_')}'`).join(',')})`;
+  const remainingLines = rows.map((entry) => `(${entry.map((i) => `'${i}'`).join(',')})`);
+
+  return [lineOne, 'VALUES', ...remainingLines, ';'].join('\n');
+};
+
+const getSQLUpdateData = (header, row) => {
+  const lineOne = 'UPDATE <table_name>';
+  const remainingLines = row.map((data, index) => `${header[index]}='${data}'`).join(',');
+
+  return [lineOne, 'SET ' + remainingLines, 'WHERE condition;'].join('\n');
+};
+
+// table name, customize format of column names
+const getSQLCreateData = (header) => {
+  const lineOne = 'CREATE TABLE <table-name> (';
+  const remainingLines = header.map((i) => `${i} varchar(255)`);
+
+  return [lineOne, ...remainingLines, ');'].join('\n');
+};
+
+// table name, add where clause
+const getSQLReadData = (header) => {
+  return 'Select ' + header.join(', ') + ' From <table-name>';
+};
+
+// table name, add where clause
+const getSQLDeleteData = (header) => {
+  return 'DELETE FROM <table_name> WHERE condition;';
 };
 
 export const DataGenerator = () => {
@@ -266,6 +306,7 @@ export const DataGenerator = () => {
   };
 
   const { headers, rows } = getTableData(data);
+  const columnNames = columns.map((i) => i.type.replace(' ', '_'));
 
   return (
     <div>
@@ -321,6 +362,8 @@ export const DataGenerator = () => {
             })}
         </SCNewFieldBtnWrapper>
       </SCNewFieldSection>
+      <button onClick={() => copyToClipboard(getSQLReadData(columnNames))}>Read SQL</button>
+      <button onClick={() => copyToClipboard(getSQLCreateData(columnNames))}>Create SQL</button>
       <button onClick={onHandleGenerateData}>Generate Data</button>
       <input type="text" onChange={onHandleCountUpdate} value={rowCount} />
       {data.length ? (
@@ -338,6 +381,20 @@ export const DataGenerator = () => {
             }}
           >
             Copy as CSV
+          </button>
+          <button
+            onClick={() => {
+              copyToClipboard(getSQLInsertData(headers, rows));
+            }}
+          >
+            Copy as SQL Insert
+          </button>
+          <button
+            onClick={() => {
+              copyToClipboard(getSQLUpdateData(columnNames, rows[0]));
+            }}
+          >
+            SQL Update
           </button>
         </div>
       ) : (

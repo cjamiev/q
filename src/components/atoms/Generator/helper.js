@@ -2,12 +2,6 @@ import { streets, citiesAndStates } from '../../../mocks/address';
 import { boyNames, girlNames, lastNames, emailhosts } from '../../../mocks/names';
 import { everything } from 'mocks/words';
 
-// Color Code, Time Stamp
-// Words, Fake Words, Password, Sentence
-// Money, Formula (compute from other columns/values), Geometric Distributed Number
-// improve email generator
-// imporve Custom format string generator
-
 const letters = 'abcdefghijklmnopqrstuvwxyz';
 const ssn_format = '###-##-####';
 const phonenumber_format = '###-###-####';

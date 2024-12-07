@@ -108,9 +108,16 @@ const getOtherGeneratedValue = (col) => {
 
 const getCorrectGeneratedValue = (col) => {
   const piValue = getPIGeneratedValue(col);
-  const addressValue = piValue ? piValue : getAddressGeneratedValue(col);
-  const otherValue = addressValue ? addressValue : getOtherGeneratedValue(col);
+  if (piValue) {
+    return piValue;
+  }
 
+  const addressValue = getAddressGeneratedValue(col);
+  if (addressValue) {
+    return addressValue;
+  }
+
+  const otherValue = getOtherGeneratedValue(col);
   if (otherValue) {
     return otherValue;
   } else {

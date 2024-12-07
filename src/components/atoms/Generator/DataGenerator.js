@@ -9,7 +9,6 @@ import { getCorrectGeneratedValue } from './helper';
 /*
  * TODO:
  * insert sql template, json, csv switch between formats, preview mode
- * customizable date format
  * Color Code, Time Stamp
  * Words, Fake Words, Password, Sentence
  * Money, Formula (compute from other columns/values), Geometric/Weighted Distributed Number
@@ -20,6 +19,8 @@ import { getCorrectGeneratedValue } from './helper';
 const INDEX_ZERO = 0;
 const ZERO = 0;
 const DEFAULT_ROW_COUNT = 10;
+const MIN_ROW_COUNT = 1;
+const MAX_ROW_COUNT = 1000;
 
 export const DataGenerator = () => {
   const [data, setData] = useState([]);
@@ -65,7 +66,13 @@ export const DataGenerator = () => {
 
   const onHandleCountUpdate = (event) => {
     const value = event.target.value;
-    if (!isNaN(value)) {
+    if (isNaN(value)) {
+      return;
+    } else if (value < MIN_ROW_COUNT) {
+      setRowCount(MIN_ROW_COUNT);
+    } else if (value > MAX_ROW_COUNT) {
+      setRowCount(MAX_ROW_COUNT);
+    } else {
       setRowCount(value);
     }
   };

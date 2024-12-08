@@ -36,6 +36,36 @@ const generateRange = (min, max) => {
   return getRandomInt(max - min) + min;
 };
 
+// Work in progress
+const generateWeightedRange = (min, max) => {
+  const minAsString = String(min);
+  const minLength = minAsString.length;
+  const maxAsString = String(max);
+  const maxLength = maxAsString.length;
+
+  const randomLength = getRandomInt(maxLength - minLength + 1) + minLength;
+  let randomNum = '';
+  if (randomLength === minLength) {
+    for (let i = 0; i < randomLength; i++) {
+      console.log('hit min', minAsString.charAt(i));
+      randomNum += getRandomInt(Number(minAsString.charAt(i)));
+    }
+  } else if (randomLength === maxLength) {
+    for (let i = 0; i < randomLength; i++) {
+      console.log('hit max', maxAsString.charAt(i));
+      randomNum += getRandomInt(Number(maxAsString.charAt(i)));
+    }
+  } else {
+    console.log('hit here');
+    randomNum += '*';
+    // for (let i = 0; i < randomLength; i++) {
+    //   randomNum += getRandomInt(10);
+    // }
+  }
+
+  return randomNum;
+};
+
 const customStringGenerator = (input, index) => {
   const content = input.split('');
   const result = content.map((item) => {

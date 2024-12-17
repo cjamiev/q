@@ -1,21 +1,13 @@
 /* eslint-disable no-magic-numbers */
-import React from 'react';
-import { DataGenerator } from 'components/atoms/Generator';
+import React, { useState } from 'react';
 
-const stripData = (data) => {
-  return data.split('').map((i) => {
-    if (!isNaN(Number(i))) {
-      return '';
-    }
-
-    return i;
-  });
+const TestComponent = () => {
+  return <div></div>;
 };
-
 export const HomeTest = () => {
   return (
     <div>
-      <DataGenerator />
+      <TestComponent />
     </div>
   );
 };

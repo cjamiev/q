@@ -1,5 +1,5 @@
-import api from 'api';
-import { createAlert } from 'components/layout/Alert/alertActions';
+import api from '../../../api';
+import { createAlert } from '../../../components/layout/Alert/alertActions';
 
 const LOAD_SETTINGS = 'LOAD_SETTINGS';
 const THREE_SECOND = 3000;

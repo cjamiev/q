@@ -1,6 +1,6 @@
-import api from 'api';
-import { createAlert } from 'components/layout/Alert/alertActions';
-import { showLoadingModal, hideLoadingModal } from 'components/molecules/Global/globalActions';
+import api from '../../../api';
+import { createAlert } from '../../../components/layout/Alert/alertActions';
+import { showLoadingModal, hideLoadingModal } from '../../../components/molecules/Global/globalActions';
 
 const LOAD_REMOTE_URL = 'LOAD_REMOTE_URL';
 const DELETE_BRANCH = 'DELETE_BRANCH';

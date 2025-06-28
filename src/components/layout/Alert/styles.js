@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { Theme } from 'theme';
+import { Theme } from '../../../theme';
 
 const bgColorInfo = 'hsl(211, 100%, 86%)';
 const bgColorSuccess = 'hsl(134, 41%, 83%)';

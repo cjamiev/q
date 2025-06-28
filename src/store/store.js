@@ -2,13 +2,13 @@ import { applyMiddleware, createStore, compose, combineReducers } from 'redux';
 import logger from 'redux-logger';
 import { thunk } from 'redux-thunk';
 
-import alertReducer from 'components/layout/Alert/alertReducer';
-import clipboardReducer from 'components/pages/Clipboard/clipboardReducer';
-import settingsReducer from 'components/pages/Settings/settingsReducer';
-import storageReducer from 'components/pages/Storage/storageReducer';
-import homeReducer from 'components/pages/Home/homeReducer';
-import projectReducer from 'components/pages/Project/projectReducer';
-import globalReducer from 'components/molecules/Global/globalReducer';
+import alertReducer from '../components/layout/Alert/alertReducer';
+import clipboardReducer from '../components/pages/Clipboard/clipboardReducer';
+import settingsReducer from '../components/pages/Settings/settingsReducer';
+import storageReducer from '../components/pages/Storage/storageReducer';
+import homeReducer from '../components/pages/Home/homeReducer';
+import projectReducer from '../components/pages/Project/projectReducer';
+import globalReducer from '../components/molecules/Global/globalReducer';
 
 const middlewares = [thunk];
 if (process.env.NODE_ENV === 'development') {

@@ -11,15 +11,15 @@ import {
   SELECT_STASH,
   LOAD_VIEW_STASH,
   RESET_BRANCH
-} from 'components/molecules/ProjectGit/projectGitActions';
+} from '../../../components/molecules/ProjectGit/projectGitActions';
 import {
   LOAD_PACKAGE,
   LOAD_VERSIONS,
   RUN_SCRIPT,
   UPDATE_PACKAGE
-} from 'components/molecules/ProjectPackage/projectPackageActions';
-import { UPDATE_FILES_BY_REGEX } from 'components/molecules/ProjectRegex/projectRegexActions';
-import { LOAD_SNIPPET_DIRECTORY, LOAD_SNIPPET } from 'components/molecules/ProjectSnippet/projectSnippetActions';
+} from '../../../components/molecules/ProjectPackage/projectPackageActions';
+import { UPDATE_FILES_BY_REGEX } from '../../../components/molecules/ProjectRegex/projectRegexActions';
+import { LOAD_SNIPPET_DIRECTORY, LOAD_SNIPPET } from '../../../components/molecules/ProjectSnippet/projectSnippetActions';
 
 export const projectInitialState = {
   directories: [],

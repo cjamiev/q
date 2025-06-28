@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Theme } from 'theme';
+import { Theme } from '../../../theme';
 
 export const SCSettingsWrapper = styled.div`
   display: flex;
@@ -25,7 +25,7 @@ export const SCTableCell = styled.td`
   border: none;
   border-bottom: 1px solid hsl(0, 0%, 87%);
   height: 40px;
-  width: ${(props) => (props.isIcon ? '40px' : '400px')};
+  width: ${(props) => (props.$isicon ? '40px' : '400px')};
   padding: 0;
 
   svg {
@@ -40,7 +40,7 @@ export const SCTableCell = styled.td`
   ${(props) => props.isClickable && 'cursor: pointer'};
 
   ${(props) =>
-    props.isFirstCell &&
+    props.$isfirstcell &&
     `&::before {
       position: absolute;
       content: '';

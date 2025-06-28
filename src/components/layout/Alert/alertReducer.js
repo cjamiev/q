@@ -1,5 +1,5 @@
 import { CREATE_ALERT, DISMISS_ALERT } from './alertActions';
-import { isNumber } from 'utils/type-check';
+import { isNumber } from '../../../utils/type-check';
 
 export const alertInitialState = {
   queue: []

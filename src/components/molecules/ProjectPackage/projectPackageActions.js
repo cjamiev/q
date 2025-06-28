@@ -1,6 +1,6 @@
-import api from 'api';
-import { createAlert } from 'components/layout/Alert/alertActions';
-import { showLoadingModal, hideLoadingModal } from 'components/molecules/Global/globalActions';
+import api from '../../../api';
+import { createAlert } from '../../../components/layout/Alert/alertActions';
+import { showLoadingModal, hideLoadingModal } from '../../../components/molecules/Global/globalActions';
 
 const LOAD_PACKAGE = 'LOAD_PACKAGE';
 const LOAD_VERSIONS = 'LOAD_VERSIONS';

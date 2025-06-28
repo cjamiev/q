@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Theme } from 'theme';
+import { Theme } from '../../../theme';
 
 export const SCTableHeaderCell = styled.th`
   text-align: center;
@@ -12,7 +12,7 @@ export const SCTableCell = styled.td`
   border: none;
   border-bottom: 1px solid hsl(0, 0%, 87%);
   height: 60px;
-  width: ${(props) => (props.isIcon ? '40px' : '400px')};
+  width: ${(props) => (props.$isicon ? '40px' : '400px')};
   padding: 0;
 
   span,
@@ -33,7 +33,7 @@ export const SCTableCell = styled.td`
   ${(props) => props.isClickable && 'cursor: pointer'};
 
   ${(props) =>
-    props.isFirstCell &&
+    props.$isfirstcell &&
     `&::before {
       position: absolute;
       content: '';

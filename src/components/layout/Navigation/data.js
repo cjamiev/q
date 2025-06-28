@@ -1,4 +1,4 @@
-import { ArchiveSVG, ClipboardSVG, DirectorySVG, FlaskSVG, HomeSVG, SettingSVG } from 'components/atoms/Icons';
+import { ArchiveSVG, ClipboardSVG, DirectorySVG, FlaskSVG, HomeSVG, SettingSVG } from '../../../components/atoms/Icons';
 
 export const navigationMap = [
   {

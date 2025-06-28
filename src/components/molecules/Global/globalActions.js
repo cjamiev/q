@@ -1,5 +1,5 @@
-import api from 'api';
-import { createAlert } from 'components/layout/Alert/alertActions';
+import api from '../../../api';
+import { createAlert } from '../../../components/layout/Alert/alertActions';
 
 const UPDATE_GLOBAL_TIMER = 'UPDATE_GLOBAL_TIMER';
 const INITIALIZE_TIMER = 'INITIALIZE_TIMER';

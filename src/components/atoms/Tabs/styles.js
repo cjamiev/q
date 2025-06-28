@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { Theme } from 'theme';
+import { Theme } from '../../../theme';
 
 const lightPurple = 'hsl(252deg 67% 66%)';
 

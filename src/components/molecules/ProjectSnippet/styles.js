@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Button from 'components/atoms/Button';
+import Button from '../../../components/atoms/Button';
 
 export const SCFlexWrapper = styled.div`
   display: flex;

@@ -12,7 +12,7 @@ import {
   ERROR_COMMAND_RESULT,
   CLEAR_COMMAND_RESULT
 } from './globalActions';
-import { isNumber } from 'utils/type-check';
+import { isNumber } from '../../../utils/type-check';
 
 export const globalInitialState = {
   timers: [],

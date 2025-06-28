@@ -1,8 +1,10 @@
 /build
+/dist
 /coverage
 /node_modules
 /storage
 /tmp
 *.log*
 /server/static/bundle.js
+/server/static/bundle.css
 /src/routes/experiment/svg/

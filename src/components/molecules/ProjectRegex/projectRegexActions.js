@@ -1,5 +1,5 @@
-import api from 'api';
-import { createAlert } from 'components/layout/Alert/alertActions';
+import api from '../../../api';
+import { createAlert } from '../../../components/layout/Alert/alertActions';
 
 const UPDATE_FILES_BY_REGEX = 'UPDATE_FILES_BY_REGEX';
 

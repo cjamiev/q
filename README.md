@@ -20,4 +20,4 @@ Used to help with building other projects, as well improving efficiency for arbi
 ## Notes
 
 - git history of this project is partly contained in the playground project as this was transferred from there.
-- this project assumes root includes storage/io folder with folders command, db, file, snippets
+- server for this application is stored in the project node-server

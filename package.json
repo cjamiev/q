@@ -2,8 +2,8 @@
   "name": "q",
   "version": "1.1.0",
   "description": "Project to help with daily tasks and other projects",
+  "type": "module",
   "scripts": {
-    "server": "nodemon server/index.js",
     "lint": "eslint --fix --ext .js ./src",
     "eslint": "eslint --ext .js src/ -f html -o coverage/eslint-report.html",
     "dev": "vite",
@@ -22,7 +22,6 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^16.2.0",
-    "nodemon": "3.1.10",
     "prettier": "3.6.2",
     "prettier-eslint": "^16.4.2",
     "react-test-renderer": "19.1.0",

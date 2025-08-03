@@ -27,5 +27,13 @@ export default defineConfig({
         changeOrigin: true,
       }
     }
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        entryFileNames: 'assets/q.js',
+        assetFileNames: 'assets/q.[ext]'
+      }
+    }
   }
-})
+});

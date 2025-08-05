@@ -1,13 +1,28 @@
 import styled from 'styled-components';
 
+export const SCTitle = styled.span`
+  font-size: 24px;
+`;
+
+export const SCMusicCardSection = styled.div`
+  display: flex; 
+  flex-wrap: wrap; 
+  gap: 20px;
+`;
+
 export const SCMusicCardWrapper = styled.form`
   display: flex;
   flex-direction: column;
   padding: 16px;
   width: 300px;
-  height: 250px;
+  height: 280px;
   border: 1px solid black;
   border-radius: 10px;
+  transition: transform 250ms;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
 
 export const SCMusicCardLabel = styled.label`
@@ -19,13 +34,12 @@ export const SCMusicCardLink = styled.a`
   right: 15px;
   bottom: 15px;
   padding: 10px;
-  background: white;
   font-weight: 600;
-  text-align: center;
+  margin: 0 auto;
   place-content: center;
   border-radius: 5px;
   color: black;
-  background: white;
+  width: fit-content;
 
   &:hover {
     outline: 1px solid black;
@@ -33,6 +47,7 @@ export const SCMusicCardLink = styled.a`
     color: black;
   }
 `;
+
 export const SCMusicCardInput = styled.input`
   width: 90%;
   padding: 10px;
@@ -48,8 +63,10 @@ export const SCMusicCardInput = styled.input`
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
   }
 `;
+
 export const SCMusicCardSubmit = styled.button`
-  padding: 10px 0;
+  margin: 10px auto;
+  padding: 10px;
   border-radius: 6px;
   border: none;
   background: black;
@@ -59,9 +76,31 @@ export const SCMusicCardSubmit = styled.button`
   cursor: pointer;
   box-shadow: 0 1px 4px rgba(79, 70, 229, 0.08);
   transition: background-color 0.2s;
+  width: fit-content;
 
   &:hover {
     border: 1px solid black;
+    background: white;
+    color: black;
+  }
+`;
+
+export const SCDataBtn = styled.button`
+  margin: 10px auto;
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  background: black;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(79, 70, 229, 0.08);
+  transition: background-color 0.2s;
+  width: fit-content;
+
+  &:hover {
+    outline: 1px solid black;
     background: white;
     color: black;
   }

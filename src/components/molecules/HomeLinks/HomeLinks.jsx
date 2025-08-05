@@ -1,20 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import {
+  SCTitle,
+  SCMusicCardSection,
   SCMusicCardWrapper,
   SCMusicCardLabel,
   SCMusicCardInput,
   SCMusicCardLink,
-  SCMusicCardSubmit
+  SCMusicCardSubmit,
+  SCDataBtn
 } from './styles';
 import { musiclist } from '../../../../tmp/musiclist';
+import { createAlert } from '../../layout/Alert/alertActions';
 
-const MusicCard = ({ index, link, name, band }) => {
+const THREE_SECOND = 3000;
+
+const MusicCard = ({ index, link, name, band, rank }) => {
+  const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
     const updatedName = document.getElementById(index + 'name').getAttribute('data-value') ?? name;
     const updatedBand = document.getElementById(index + 'band').getAttribute('data-value') ?? band;
     if (updatedName && updatedBand) {
-      localStorage.setItem(index, JSON.stringify({ index, link, name: updatedName, band: updatedBand, rank: 3, isCompleted: true }));
+      localStorage.setItem(index, JSON.stringify({ index, link, name: updatedName, band: updatedBand, rank, isCompleted: true }));
+      dispatch(createAlert({ content: `Submitted ${updatedName}`, timer: THREE_SECOND, status: 'success' }));
     }
   }
 
@@ -24,19 +33,19 @@ const MusicCard = ({ index, link, name, band }) => {
 
   return (<SCMusicCardWrapper onSubmit={handleSubmit}>
     <SCMusicCardLink
-      className="music-card-link"
       href={link}
       target="_blank"
       rel="noopener noreferrer"
     >
-      Youtube Song {index}
+      Song {index}
     </SCMusicCardLink>
     <SCMusicCardLabel>
-      Name: <SCMusicCardInput id={index + 'name'} className="music-card-input" type="text" name="name" defaultValue={name} onChange={(e) => { onChange(e, 'name') }} />
+      Name: <SCMusicCardInput id={index + 'name'} type="text" name="name" defaultValue={name} onChange={(e) => { onChange(e, 'name') }} />
     </SCMusicCardLabel>
     <SCMusicCardLabel>
-      Band: <SCMusicCardInput id={index + 'band'} className="music-card-input" type="text" name="band" defaultValue={band} onChange={(e) => { onChange(e, 'band') }} />
+      Band: <SCMusicCardInput id={index + 'band'} type="text" name="band" defaultValue={band} onChange={(e) => { onChange(e, 'band') }} />
     </SCMusicCardLabel>
+    <SCMusicCardLabel>Rank: {rank}</SCMusicCardLabel>
     <SCMusicCardSubmit type="submit">
       Submit
     </SCMusicCardSubmit>
@@ -66,18 +75,30 @@ export const HomeLinks = () => {
   }, [isLoading]);
 
   const handleFinishedSongs = () => {
-    console.log(finishedSongs);
+    console.log(finishedSongs.map(song => {
+      return {
+        id: song.name + song.band,
+        name: song.name,
+        album: '',
+        band: song.band,
+        rank: Number(song.rank),
+        link: song.link,
+        tags: '',
+      }
+    }));
   }
 
   return (
-    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
+    <div>
       <div>
-        <div>Number of songs left: {unfinishedSongs.length}</div>
-        <button onClick={handleFinishedSongs}>Get Finished Data</button>
+        <SCDataBtn onClick={handleFinishedSongs}>Get Finished Data</SCDataBtn>
+        <SCTitle> Remaining {unfinishedSongs.length} items </SCTitle>
       </div>
-      {unfinishedSongs.map(musicitem => {
-        return <MusicCard key={musicitem.index} {...musicitem} />
-      })}
+      <SCMusicCardSection>
+        {unfinishedSongs.map(musicitem => {
+          return <MusicCard key={musicitem.index} {...musicitem} />
+        })}
+      </SCMusicCardSection>
     </div>
   );
 };

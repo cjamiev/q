@@ -19,8 +19,8 @@ const MusicCard = ({ index, link, name, band, rank }) => {
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
-    const updatedName = document.getElementById(index + 'name').getAttribute('data-value') ?? name;
-    const updatedBand = document.getElementById(index + 'band').getAttribute('data-value') ?? band;
+    const updatedName = document.getElementById(index + 'name').getAttribute('data-value').trim() ?? name;
+    const updatedBand = document.getElementById(index + 'band').getAttribute('data-value').trim() ?? band;
     if (updatedName && updatedBand) {
       localStorage.setItem(index, JSON.stringify({ index, link, name: updatedName, band: updatedBand, rank, isCompleted: true }));
       dispatch(createAlert({ content: `Submitted ${updatedName}`, timer: THREE_SECOND, status: 'success' }));

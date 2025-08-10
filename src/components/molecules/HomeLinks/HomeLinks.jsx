@@ -10,10 +10,10 @@ import {
   SCMusicCardSubmit,
   SCDataBtn
 } from './styles';
-import { musiclist } from '../../../../tmp/musiclist';
 import { createAlert } from '../../layout/Alert/alertActions';
 
 const THREE_SECOND = 3000;
+const musiclist = [];
 
 const MusicCard = ({ index, link, name, band, rank }) => {
   const dispatch = useDispatch();

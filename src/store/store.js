@@ -3,7 +3,6 @@ import logger from 'redux-logger';
 import { thunk } from 'redux-thunk';
 
 import alertReducer from '../components/layout/Alert/alertReducer';
-import clipboardReducer from '../components/pages/Clipboard/clipboardReducer';
 import settingsReducer from '../components/pages/Settings/settingsReducer';
 import storageReducer from '../components/pages/Storage/storageReducer';
 import homeReducer from '../components/pages/Home/homeReducer';
@@ -18,7 +17,6 @@ const appliedMiddlewares = applyMiddleware(...middlewares);
 
 const rootReducer = combineReducers({
   alert: alertReducer,
-  clipboard: clipboardReducer,
   settings: settingsReducer,
   storage: storageReducer,
   home: homeReducer,

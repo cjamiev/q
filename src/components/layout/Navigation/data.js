@@ -18,14 +18,6 @@ export const navigationMap = [
     }
   },
   {
-    label: 'Clipboard',
-    url: '/clipboard',
-    icon: ClipboardSVG,
-    props: {
-      transform: 'scale(0.6) translate(6,6)'
-    }
-  },
-  {
     label: 'Project',
     url: '/project',
     icon: DirectorySVG,

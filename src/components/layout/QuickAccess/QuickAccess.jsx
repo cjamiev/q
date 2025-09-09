@@ -16,7 +16,7 @@ import { PlaySVG } from '../../../components/atoms/Icons/PlaySVG';
 
 const QuickAccessList = ({ mode }) => {
   const dispatch = useDispatch();
-  const { commands, links, copy } = useSelector((state) => state.settings);
+  const { commands, copy } = useSelector((state) => state.settings);
 
   if (mode === 'e') {
     return (
@@ -27,24 +27,6 @@ const QuickAccessList = ({ mode }) => {
               key={item.label}
               onClick={() => {
                 dispatch(executeCommand(item.value));
-              }}
-            >
-              {item.label}
-            </SCQuickAccessListBtn>
-          );
-        })}
-      </>
-    );
-  }
-  if (mode === 'l') {
-    return (
-      <>
-        {links.map((item, index) => {
-          return (
-            <SCQuickAccessListBtn
-              key={item.label}
-              onClick={() => {
-                window.open(item.value, '_blank');
               }}
             >
               {item.label}

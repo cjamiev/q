@@ -2,7 +2,6 @@ import { LOAD_SETTINGS } from './settingsActions';
 
 export const settingsInitialState = {
   commands: [],
-  links: [],
   copy: []
 };
 
@@ -12,7 +11,6 @@ const settingsReducer = (state = settingsInitialState, action) => {
       return {
         ...state,
         commands: action.data.commands,
-        links: action.data.links,
         copy: action.data.copy
       };
     }

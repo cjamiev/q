@@ -38,6 +38,25 @@ attributes: fill/stroke, opacity, 
     </svg>
 */
 
+import { useRef } from 'react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+
+function MyAnimatedComponent() {
+  const containerRef = useRef();
+
+  useGSAP(() => {
+    // Your GSAP animation code here
+    gsap.to('.my-box', { rotation: 360, duration: 1 });
+  }, { scope: containerRef }); // Optional: scope animations to elements within the ref
+
+  return (
+    <div ref={containerRef}>
+      <div className="my-box">Animate Me!</div>
+    </div>
+  );
+}
+
 
 const TestComponent = () => {
   const [timers] = useLocalStorage(LS_TIMERS_KEY, [], true);
@@ -61,6 +80,7 @@ export const HomeTest = () => {
   return (
     <div>
       <TestComponent />
+      <MyAnimatedComponent />
     </div>
   );
 };

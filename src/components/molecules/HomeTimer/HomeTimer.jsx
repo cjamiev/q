@@ -1,112 +1,79 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { openGlobalModal } from '../../../components/molecules/Global/globalActions';
-import Card from '../../../components/atoms/Card';
-import useTimer from '../../../hooks/useTimer';
-import { formattedTimerClock } from '../../../utils/clock';
-import { TrashSVG } from '../../../components/atoms/Icons';
-import { PenSVG } from '../../../components/atoms/Icons/PenSVG';
-import TimerForm from '../../../components/atoms/Form/TimerForm';
-import { noop } from '../../../utils/noop';
-import { SCTimerTab, SCTimers, SCHomeCardWrapper } from './styles';
+import { useState } from 'react';
+import { copyToClipboard } from '../../../utils/copy';
+import { useCountdown } from '../../../hooks/useDisplayCountdown';
+import useLocalStorage from '../../../hooks/useLocalStorage';
 
-const ZERO = 0;
-const ONE = 1;
+const now = new Date();
+const nowValue = now.toISOString().slice(0, 10);
+const LS_TIMERS_KEY = 'q-timers';
 
-const getFormattedTime = ({ weeks, days, hours, minutes, seconds }, label) => {
-  if (weeks > ZERO) {
-    return <p>{weeks} Weeks</p>;
-  }
+const Countdown = ({ description, endDate }) => {
+  const timeLeft = useCountdown({ endDate });
 
-  if (days > ZERO) {
-    return <p>{days} Days</p>;
-  }
+  return <div>{description + ': ' + timeLeft}</div>;
+}
 
-  return <p>{formattedTimerClock(hours, minutes, seconds)}</p>;
-};
+const getCountdownDate = (endDateValue, selectedTime) => {
+  const selecteDate = new Date(endDateValue);
+  const [hours, minutes] = selectedTime.split(':');
+  selecteDate.setUTCHours(hours, minutes, 0, 0)
+  const time = selecteDate.getTime() + selecteDate.getTimezoneOffset() * 1000 * 60;
 
-const TimerCard = ({ item, onRemoveTimer, onEditTimer }) => {
-  const dispatch = useDispatch();
-  const { year, month, day, hour, minute, second } = item.value;
-  const newDate = new Date(year, month - ONE, day, hour, minute, second);
-  const time = useTimer(newDate);
+  return new Date(time);
+}
 
-  const confirmDeleteTimer = (timerName) => {
-    dispatch(
-      openGlobalModal({
-        title: 'Confirmation Modal',
-        message: `Are you sure you want to delete '${timerName}'`,
-        buttonList: [
-          {
-            label: 'Confirm',
-            isprimary: true,
-            action: () => {
-              onRemoveTimer(timerName);
-            }
-          },
-          {
-            label: 'Cancel',
-            isSecondary: true,
-            action: noop
-          }
-        ]
-      })
-    );
+export const HomeTimer = () => {
+  const [description, setDescription] = useState('');
+  const [endDateValue, setEndDateValue] = useState(nowValue);
+  const [selectedTime, setSelectedTime] = useState(now.getHours() + ':' + now.getMinutes());
+  const [timers, setTimers] = useLocalStorage(LS_TIMERS_KEY, [], true);
+
+  const handleEndDateChange = ({ target: { value } }) => {
+    setEndDateValue(value);
   };
 
-  return (
-    <SCHomeCardWrapper>
-      <Card
-        title={item.name}
-        body={getFormattedTime(time, item.name)}
-        footer={
-          <>
-            <PenSVG
-              transform="translate(0,4)"
-              ariaLabel="Edit"
-              width="45"
-              height="53"
-              onClick={() => {
-                onEditTimer(item.name, newDate);
-              }}
-            />
-            <TrashSVG
-              transform="translate(0,4)"
-              width="45"
-              onClick={() => {
-                confirmDeleteTimer(item.name);
-              }}
-            />
-          </>
-        }
-      />
-    </SCHomeCardWrapper>
-  );
-};
+  const handleTimeChange = ({ target: { value } }) => {
+    setSelectedTime(value);
+  };
 
-export const HomeTimer = ({ timers, selectedTimer, onChangeTimer, onRemoveTimer, onEditTimer }) => {
-  const renderTimers =
-    timers.length > ZERO ? (
-      timers.map((item) => (
-        <TimerCard key={item.name} item={item} onRemoveTimer={onRemoveTimer} onEditTimer={onEditTimer} />
-      ))
-    ) : (
-      <p> No timers to display </p>
-    );
+  const handleDescriptionChange = ({ target: { value } }) => {
+    setDescription(value);
+  };
+
+  const handleCopy = () => {
+    copyToClipboard(JSON.stringify(timers));
+  }
+
+  const addNewTimer = () => {
+    setTimers(timers.concat({
+      description,
+      targetDate: endDateValue,
+      time: selectedTime
+    }));
+  }
+
+  const removeTimer = (d) => {
+    setTimers(timers.filter(t => t.description !== d));
+  }
 
   return (
-    <SCTimerTab>
-      <div>
-        <TimerForm
-          onChange={({ name, content }) => {
-            const newTimer = { name, value: content, type: 'timer' };
-
-            onChangeTimer(newTimer);
-          }}
-          value={selectedTimer}
-        />
+    <div>
+      <div style={{ display: 'flex', flexDirection: 'column', width: '200px' }}>
+        <input type="text" id="description" name="description" value={description} onChange={handleDescriptionChange}></input>
+        <input type="date" id="end-date" name="end_date" value={endDateValue} onChange={handleEndDateChange}></input>
+        <input type="time" name="selected-time" value={selectedTime} onChange={handleTimeChange}></input>
+        <button style={{ background: 'black', color: 'white', borderRadius: '20px', cursor: 'pointer' }} onClick={addNewTimer}>Add</button>
       </div>
-      <SCTimers>{renderTimers}</SCTimers>
-    </SCTimerTab>
+
+      {timers.map(t => {
+        return (
+          <div key={t.description}>
+            <Countdown description={t.description} endDate={getCountdownDate(t.targetDate, t.time)} />
+            <button onClick={() => removeTimer(t.description)}>Remove</button>
+          </div>
+        )
+      })}
+      <button style={{ position: 'absolute', bottom: '10px', cursor: 'pointer' }} onClick={handleCopy}>COPY</button>
+    </div>
   );
 };

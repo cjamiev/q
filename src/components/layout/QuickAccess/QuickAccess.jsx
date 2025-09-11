@@ -10,13 +10,16 @@ import {
 } from './styles';
 import { copyToClipboard } from '../../../utils/copy';
 import useOnClickOutside from '../../../hooks/useOnClickOutside';
-import { StarSVG } from '../../../components/atoms/Icons/StarSVG';
 import { CopySVG } from '../../../components/atoms/Icons/CopySVG';
 import { PlaySVG } from '../../../components/atoms/Icons/PlaySVG';
+import useLocalStorage from '../../../hooks/useLocalStorage';
+
+const LS_CLIPBOARD_KEY = 'q-clipboard';
 
 const QuickAccessList = ({ mode }) => {
   const dispatch = useDispatch();
   const { commands, copy } = useSelector((state) => state.settings);
+  const [clipboard] = useLocalStorage(LS_CLIPBOARD_KEY, [], true);
 
   if (mode === 'e') {
     return (
@@ -39,7 +42,7 @@ const QuickAccessList = ({ mode }) => {
   if (mode === 'c') {
     return (
       <>
-        {copy.map((item, index) => {
+        {clipboard.map((item, index) => {
           return (
             <SCQuickAccessListBtn
               key={item.label}
@@ -64,7 +67,6 @@ const PageQuickAccess = () => {
   useOnClickOutside(ref, () => setMode(''));
 
   const showCommands = () => setMode('e');
-  const showLinks = () => setMode('l');
   const showPaste = () => setMode('c');
 
   return (
@@ -72,9 +74,6 @@ const PageQuickAccess = () => {
       <SCQuickAccessBtnGroup>
         <SCQuickAccessBtn isActive={mode === 'e' ? 'true' : undefined} onClick={showCommands}>
           <PlaySVG ariaLabel="Commands" transform="scale(0.7) translate(10,10)" />
-        </SCQuickAccessBtn>
-        <SCQuickAccessBtn isActive={mode === 'l' ? 'true' : undefined} onClick={showLinks}>
-          <StarSVG ariaLabel="Favorite Links" transform="scale(0.7) translate(10,10)" />
         </SCQuickAccessBtn>
         <SCQuickAccessBtn isActive={mode === 'c' ? 'true' : undefined} onClick={showPaste}>
           <CopySVG transform="scale(0.7) translate(10,10)" />

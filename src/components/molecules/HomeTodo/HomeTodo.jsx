@@ -1,176 +1,77 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { openGlobalModal } from '../../../components/molecules/Global/globalActions';
-import { decrementElementIndex, incrementElementIndex } from '../../../utils/arrayHelper';
-import { getEllipsisForLongText } from '../../../utils/stringHelper';
-import { ArrowSVG } from '../../../components/atoms/Icons/ArrowSVG';
-import { TrashSVG } from '../../../components/atoms/Icons';
-import { PenSVG } from '../../../components/atoms/Icons/PenSVG';
-import Button from '../../../components/atoms/Button';
-import Text from '../../../components/atoms/Form/Text';
-import ItemCreator from '../../../components/atoms/Form/ItemCreator';
-import { noop } from '../../../utils/noop';
-import { SCTodoTab, SCCreateFormFieldSet, SCTodoWrapper, SCTodoTitleWrapper, SCTodoList } from './styles';
+import React, { useState } from 'react';
+import useLocalStorage from '../../../hooks/useLocalStorage';
+import { copyToClipboard } from '../../../utils/copy';
 
-const ZERO = 0;
-const MAX_LENGTH = 18;
+const LS_NOTES_KEY = 'q-notes';
 
-export const HomeTodo = ({ tasks, selectedTask, onChangeItem, onChange, onEditTask }) => {
-  const dispatch = useDispatch();
-  const [taskText, setTaskText] = useState('');
-  const [taskNotes, setTaskNotes] = useState([]);
-  const [taskUrls, setTaskUrls] = useState([]);
+export const HomeTodo = () => {
+  const [newNote, setNewNote] = useState('');
+  const [notes, setNotes] = useLocalStorage(LS_NOTES_KEY, [], true);
+  const [expanded, setExpanded] = useState(-1);
 
-  useEffect(() => {
-    if (selectedTask.text) {
-      setTaskText(selectedTask.text);
-      setTaskNotes(selectedTask.notes);
-      setTaskUrls(selectedTask.urls);
+  const handleTextChange = (id, content) => {
+    const updatednotes = notes.map((t, idx) => {
+      if (idx === id) {
+        return content;
+      }
+      return t;
+    }).filter(Boolean);
+    setNotes(updatednotes);
+  };
+
+  const addNewNote = () => {
+    setNotes(notes.concat(newNote));
+    setNewNote('');
+  }
+
+  const handleCopy = () => {
+    copyToClipboard(notes.join('\n\n'));
+  }
+
+  const handleExpand = (idx) => {
+    if (expanded !== idx) {
+      setExpanded(idx);
     }
-  }, [selectedTask]);
-
-  const handleTextChange = ({ selected }) => {
-    setTaskText(selected);
-  };
-
-  const handleNotesChange = (updatedNotes) => {
-    setTaskNotes(updatedNotes);
-  };
-
-  const handleUrlsChange = (updatedUrls) => {
-    setTaskUrls(updatedUrls);
-  };
-
-  const removeItem = (id) => {
-    const updatedItems = tasks.filter((item) => item.id !== id);
-
-    onChange(updatedItems);
-  };
-
-  const moveItemUp = (id) => {
-    const index = tasks.findIndex((item) => item.id === id);
-    const updatedItems = decrementElementIndex(tasks, index);
-
-    onChange(updatedItems);
-  };
-
-  const moveItemDown = (id) => {
-    const index = tasks.findIndex((item) => item.id === id);
-    const updatedItems = incrementElementIndex(tasks, index);
-
-    onChange(updatedItems);
-  };
-
-  const confirmDeleteTask = (taskName, taskId) => {
-    dispatch(
-      openGlobalModal({
-        title: 'Confirmation Modal',
-        message: `Are you sure you want to delete '${taskName}'`,
-        buttonList: [
-          {
-            label: 'Confirm',
-            isprimary: true,
-            action: () => {
-              removeItem(taskId);
-            }
-          },
-          {
-            label: 'Cancel',
-            isSecondary: true,
-            action: noop
-          }
-        ]
-      })
-    );
-  };
+    else {
+      setExpanded(-1);
+    }
+  }
 
   return (
-    <SCTodoTab>
-      <form>
-        <SCCreateFormFieldSet>
-          <legend> Add Tasks </legend>
-          <Text data-testid="todo-task" placeholder="Task" selected={taskText} onChange={handleTextChange} />
-          <ItemCreator placeholder="Note" data={taskNotes} onChange={handleNotesChange} />
-          <ItemCreator placeholder="Url" data={taskUrls} onChange={handleUrlsChange} />
-          <Button
-            data-testid="todo-add-btn"
-            isprimary
-            label="Submit"
-            onClick={(e) => {
-              e.preventDefault();
-              if (!taskText.length) {
-                return;
-              }
-
-              const newItem = {
-                text: taskText,
-                notes: taskNotes,
-                urls: taskUrls,
-                id: Date.now()
-              };
-              setTaskText('');
-              setTaskNotes([]);
-              setTaskUrls([]);
-
-              onChangeItem(newItem);
+    <div>
+      <div style={{ display: 'flex' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', width: '300px', marginRight: '30px' }}>
+          <textarea
+            style={{ background: 'black', color: 'white', borderRadius: '20px 20px 0 0', padding: '10px' }}
+            rows={20}
+            cols={60}
+            value={newNote}
+            onChange={({ target: { value } }) => {
+              setNewNote(value);
             }}
           />
-        </SCCreateFormFieldSet>
-      </form>
-      {tasks.length > ZERO ? (
-        tasks.map(({ id, text, notes, urls }) => (
-          <SCTodoWrapper key={id}>
-            <SCTodoTitleWrapper>
-              <h2>{text}</h2>
-              <TrashSVG
-                width="27"
-                height="27"
-                onClick={() => {
-                  confirmDeleteTask(text, id);
-                }}
-              />
-              <ArrowSVG
-                conditions={{ orientation: 'LEFT' }}
-                ariaLabel="Move Up"
-                width="27"
-                height="27"
-                onClick={() => {
-                  moveItemUp(id);
-                }}
-              />
-              <ArrowSVG
-                conditions={{ orientation: 'RIGHT' }}
-                ariaLabel="Move Down"
-                width="27"
-                height="27"
-                onClick={() => {
-                  moveItemDown(id);
-                }}
-              />
-              <PenSVG
-                ariaLabel="Edit"
-                width="27"
-                height="27"
-                onClick={() => {
-                  onEditTask({ id, text, notes, urls });
-                }}
-              />
-            </SCTodoTitleWrapper>
-            <SCTodoList>
-              {notes.map((note) => (
-                <li key={note}>{note}</li>
-              ))}
-              {urls.map((url) => (
-                <a key={url} href={url} target="_blank">
-                  <label>{getEllipsisForLongText(url, MAX_LENGTH)}</label>
-                </a>
-              ))}
-            </SCTodoList>
-          </SCTodoWrapper>
-        ))
-      ) : (
-        <p> No tasks to display </p>
-      )}
-    </SCTodoTab>
+          <button style={{ background: 'black', color: 'white', borderRadius: '0 0 20px 20px', cursor: 'pointer' }} onClick={addNewNote}>ADD</button>
+        </div>
+        <div style={{ display: 'flex', gap: '5px' }}>
+          {notes.map((t, idx) => {
+            return (
+              <div key={idx} style={{ display: 'flex', flexDirection: 'column', width: idx === expanded ? '75vw' : '300px', maxHeight: '90vh', position: idx === expanded ? 'absolute' : 'initial', top: '5%', left: '12%' }}>
+                <textarea
+                  style={{ background: 'black', color: 'white', borderRadius: '20px 20px 0 0', padding: '10px' }}
+                  rows={expanded === idx ? 80 : 20}
+                  cols={expanded === idx ? 240 : 60}
+                  value={t}
+                  onChange={({ target: { value } }) => {
+                    handleTextChange(idx, value);
+                  }}
+                />
+                <button style={{ background: 'black', color: 'white', borderRadius: '0 0 20px 20px', cursor: 'pointer' }} onClick={() => handleExpand(idx)}>{idx === expanded ? 'Collapse' : 'Expand'}</button>
+              </div>
+            )
+          })}
+        </div>
+      </div >
+      <button style={{ position: 'absolute', bottom: '10px', cursor: 'pointer' }} onClick={handleCopy}>COPY</button>
+    </div >
   );
 };

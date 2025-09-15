@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Dropdown from '../../../components/atoms/Form/Dropdown';
 import Button from '../../../components/atoms/Button';
 import {
   alphaAscendingSort,
@@ -8,77 +7,68 @@ import {
   numericDescendingSort,
 } from '../../../utils/sort';
 import { unique } from '../../../utils/arrayHelper';
-import { DELIMITER_TYPES, MODIFIER_TYPES } from './helper';
 import { SCFileBtnWrapper } from './styles';
 
 export const FileStringOperations = ({ content, onChange }) => {
-  const [delimiters, setDelimiters] = useState(DELIMITER_TYPES);
-  const [modifier, setModifier] = useState(MODIFIER_TYPES);
-
-  const selectedDelimiter = delimiters.find((item) => item.selected);
-  const selectedModifiers = modifier
-    .filter((item) => item.selected)
-    .map((item) => item.value)
-    .join('');
+  const [selectedDelimiter, setSelectedDelimiter] = useState('\n');
 
   return (
     <div className="flex--vertical">
       <h3> String </h3>
-      <Dropdown
-        label="Delimiter"
-        values={delimiters}
-        onChange={({ values }) => {
-          setDelimiters(values);
-        }}
-      />
+      <div style={{ display: 'flex' }}>
+        <label>Delimiter:</label>
+        <button style={{ background: selectedDelimiter === ',' ? 'red' : 'white', cursor: 'pointer' }} onClick={() => setSelectedDelimiter(',')}>comma</button>
+        <button style={{ background: selectedDelimiter === '\n' ? 'red' : 'white', cursor: 'pointer' }} onClick={() => setSelectedDelimiter('\n')}>newline</button>
+        <button style={{ background: selectedDelimiter === ' ' ? 'red' : 'white', cursor: 'pointer' }} onClick={() => setSelectedDelimiter(' ')}>space</button>
+      </div>
       <SCFileBtnWrapper>
         <Button
           isSecondary
           label="Remove Duplicates"
           onClick={() => {
-            onChange(unique(content.split(selectedDelimiter.value)).join(selectedDelimiter.value));
+            onChange(unique(content.split(selectedDelimiter)).join(selectedDelimiter));
           }}
         />
         <Button
           isSecondary
           label="Sort Asc"
           onClick={() => {
-            onChange(alphaAscendingSort(content.split(selectedDelimiter.value)).join(selectedDelimiter.value));
+            onChange(alphaAscendingSort(content.split(selectedDelimiter)).join(selectedDelimiter));
           }}
         />
         <Button
           isSecondary
           label="Sort Desc"
           onClick={() => {
-            onChange(alphaDescendingSort(content.split(selectedDelimiter.value)).join(selectedDelimiter.value));
+            onChange(alphaDescendingSort(content.split(selectedDelimiter)).join(selectedDelimiter));
           }}
         />
         <Button
           isSecondary
           label="Sort Number Asc"
           onClick={() => {
-            onChange(numericAscendingSort(content.split(selectedDelimiter.value)).join(selectedDelimiter.value));
+            onChange(numericAscendingSort(content.split(selectedDelimiter)).join(selectedDelimiter));
           }}
         />
         <Button
           isSecondary
           label="Sort Number Desc"
           onClick={() => {
-            onChange(numericDescendingSort(content.split(selectedDelimiter.value)).join(selectedDelimiter.value));
+            onChange(numericDescendingSort(content.split(selectedDelimiter)).join(selectedDelimiter));
           }}
         />
         <Button
           isSecondary
           label="Split"
           onClick={() => {
-            onChange(content.split(selectedDelimiter.value).join('\n'));
+            onChange(content.split(selectedDelimiter).join('\n'));
           }}
         />
         <Button
           isSecondary
           label="Join"
           onClick={() => {
-            onChange(content.split('\n').join(selectedDelimiter.value));
+            onChange(content.split('\n').join(selectedDelimiter));
           }}
         />
         <Button

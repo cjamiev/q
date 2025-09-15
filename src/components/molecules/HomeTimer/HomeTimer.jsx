@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { copyToClipboard } from '../../../utils/copy';
 import { useCountdown } from '../../../hooks/useDisplayCountdown';
 import useLocalStorage from '../../../hooks/useLocalStorage';
+import { LS_TIMERS_KEY } from '../../../constants/localstorage';
 
 const now = new Date();
 const nowValue = now.toISOString().slice(0, 10);
-const LS_TIMERS_KEY = 'q-timers';
 
 const Countdown = ({ description, endDate }) => {
   const timeLeft = useCountdown({ endDate });

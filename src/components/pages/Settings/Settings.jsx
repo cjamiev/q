@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Page from '../../../components/layout';
 import useLocalStorage from '../../../hooks/useLocalStorage';
-
-const LS_CLIPBOARD_KEY = 'q-clipboard';
+import { LS_CLIPBOARD_KEY } from '../../../constants/localstorage';
 
 const Settings = () => {
   const [clipboard, setClipboard] = useLocalStorage(LS_CLIPBOARD_KEY, [], true);
@@ -30,14 +29,15 @@ const Settings = () => {
   return (
     <Page>
       <div style={{ display: 'flex', flexDirection: 'column', width: '200px' }}>
-        <input type="text" id="description" name="description" value={description} onChange={handleDescriptionChange}></input>
-        <input type="text" id="copy-value" name="copy-value" value={copyValue} onChange={handleCopyValueChange}></input>
+        <label>Add Clipboard Items</label>
+        <input type="text" id="description" name="description" placeholder='label' value={description} onChange={handleDescriptionChange}></input>
+        <input type="text" id="copy-value" name="copy-value" placeholder='value' value={copyValue} onChange={handleCopyValueChange}></input>
         <button style={{ background: 'black', color: 'white', borderRadius: '20px', cursor: 'pointer' }} onClick={addNewCopyItem}>Add</button>
       </div>
       <div>
         {clipboard.map(c => {
-          return (<div key={c.label}>
-            <span>Label: {c.label}</span>
+          return (<div key={c.label} style={{ display: 'flex', flexDirection: 'column', width: '200px' }}>
+            <span>Label: {c.label} </span>
             <span>Value: {c.value}</span>
             <button style={{ background: 'black', color: 'white', borderRadius: '20px', cursor: 'pointer' }} onClick={() => deleteCopyItem(c.label)}>Remove</button>
           </div>)

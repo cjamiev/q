@@ -1,7 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { loadDirectory, loadStorage, writeStorage } from './storageActions';
-import { dismissAlert } from '../../../components/layout/Alert/alertActions';
+import { useState } from 'react';
 import { FileOperations } from '../../../components/organisms/FileOperations';
 import Page from '../../../components/layout';
 import Text from '../../../components/atoms/Form/Text';
@@ -9,6 +6,7 @@ import TextArea from '../../../components/atoms/Form/TextArea';
 import Button from '../../../components/atoms/Button';
 import { copyToClipboard } from '../../../utils/copy';
 import {
+  SCStorageDropdown,
   SCStorageWrapper,
   SCStorageBtnWrapper,
   SCStorageNameWrapper,
@@ -17,35 +15,23 @@ import {
 } from './styles';
 import { SaveSVG } from '../../../components/atoms/Icons/SaveSVG';
 import { CopySVG } from '../../../components/atoms/Icons/CopySVG';
+import useLocalStorage from '../../../hooks/useLocalStorage';
+import { LS_FILES_KEY } from '../../../constants/localstorage';
 
 const Storage = () => {
+  const [showFileNames, setShowFileNames] = useState(false);
   const [name, setName] = useState('');
   const [content, setContent] = useState('');
-  const dispatch = useDispatch();
-  const { directory, storageContent } = useSelector((state) => state.storage);
-
-  useEffect(() => {
-    dispatch(loadDirectory());
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (name) {
-      setContent(storageContent);
-    }
-  }, [name, storageContent]);
+  const [files, setFiles] = useLocalStorage(LS_FILES_KEY, [], true);
 
   const handleNameChange = ({ selected }) => {
-    const selectedStorage = directory.find((item) => item === selected);
-    if (selectedStorage) {
-      dispatch(loadStorage(selected));
-    }
     setName(selected);
   };
 
   return (
     <Page>
       <SCStorageWrapper>
-        <SCStorageBtnWrapper>
+        <SCStorageTextWrapper>
           <SCStorageNameWrapper>
             <Text placeholder="Enter File Name" selected={name} onChange={handleNameChange} />
             <SaveSVG
@@ -53,7 +39,7 @@ const Storage = () => {
               width="45"
               onClick={() => {
                 if (name && content) {
-                  dispatch(writeStorage(name, content));
+                  setFiles(files.concat([{ name, content }]));
                 }
               }}
             />
@@ -65,23 +51,25 @@ const Storage = () => {
                 copyToClipboard(content);
               }}
             />
+            <SCStorageDropdown onClick={() => setShowFileNames(!showFileNames)}>
+              Show File Names
+              <SCStorageBtnWrapper isvisible={showFileNames}>
+                {files.map((item) => {
+                  return (
+                    <Button
+                      isprimary
+                      key={item.name}
+                      label={item.name}
+                      onClick={() => {
+                        setName(item.name);
+                        setContent(item.content);
+                      }}
+                    />
+                  );
+                })}
+              </SCStorageBtnWrapper>
+            </SCStorageDropdown>
           </SCStorageNameWrapper>
-          {directory.map((item) => {
-            return (
-              <Button
-                isprimary
-                key={item}
-                label={item}
-                onClick={() => {
-                  setName(item);
-                  dispatch(loadStorage(item));
-                  dispatch(dismissAlert());
-                }}
-              />
-            );
-          })}
-        </SCStorageBtnWrapper>
-        <SCStorageTextWrapper>
           <TextArea
             ariaLabel="Content text area"
             selected={content}

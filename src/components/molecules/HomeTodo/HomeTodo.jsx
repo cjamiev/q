@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import useLocalStorage from '../../../hooks/useLocalStorage';
 import { copyToClipboard } from '../../../utils/copy';
-
-const LS_NOTES_KEY = 'q-notes';
+import { LS_NOTES_KEY } from '../../../constants/localstorage';
 
 export const HomeTodo = () => {
   const [newNote, setNewNote] = useState('');

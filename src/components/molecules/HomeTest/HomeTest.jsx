@@ -3,8 +3,14 @@ import React, { useState } from 'react';
 import { SCWrapper, SCContents } from './styles';
 import useLocalStorage from '../../../hooks/useLocalStorage';
 import { useCountdown } from '../../../hooks/useDisplayCountdown';
-
-const LS_TIMERS_KEY = 'q-timers';
+// import {
+//   LS_NOTES_KEY,
+//   LS_TIMERS_KEY,
+//   LS_FILES_KEY,
+//   LS_CLIPBOARD_KEY,
+//   LS_SNIPPETS_KEY
+// } from '../../../constants/localstorage';
+import * as LS_KEYS from '../../../constants/localstorage';
 
 const getCountdownDate = (endDateValue, selectedTime) => {
   const selecteDate = new Date(endDateValue);
@@ -41,6 +47,7 @@ attributes: fill/stroke, opacity, 
 import { useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import { copyToClipboard } from '../../../utils/copy';
 
 function MyAnimatedComponent() {
   const containerRef = useRef();
@@ -57,30 +64,44 @@ function MyAnimatedComponent() {
   );
 }
 
+// const TestComponent = () => {
+//   const [timers] = useLocalStorage(LS_TIMERS_KEY, [], true);
 
-const TestComponent = () => {
-  const [timers] = useLocalStorage(LS_TIMERS_KEY, [], true);
-
-  return <div>
-    <SCWrapper>
-      I
-      <SCContents>
-        {timers.map(t => {
-          return (
-            <div key={t.description}>
-              <Countdown description={t.description} endDate={getCountdownDate(t.targetDate, t.time)} />
-            </div>
-          )
-        })}
-      </SCContents>
-    </SCWrapper>
-  </div>;
-};
+//   return <div>
+//     <SCWrapper>
+//       I
+//       <SCContents>
+//         {timers.map(t => {
+//           return (
+//             <div key={t.description}>
+//               <Countdown description={t.description} endDate={getCountdownDate(t.targetDate, t.time)} />
+//             </div>
+//           )
+//         })}
+//       </SCContents>
+//     </SCWrapper>
+//   </div>;
+// };
 export const HomeTest = () => {
+  const handleCopyLocalStorage = () => {
+    // const item1 = localStorage.getItem(LS_NOTES_KEY);
+    // const item2 = localStorage.getItem(LS_TIMERS_KEY);
+    // const item3 = localStorage.getItem(LS_FILES_KEY);
+    // const item4 = localStorage.getItem(LS_CLIPBOARD_KEY);
+    // const item5 = localStorage.getItem(LS_SNIPPETS_KEY);
+    // const toCopy = [item1, item2, item3, item4, item5];
+
+    const toCopy = Object.values(LS_KEYS).map(key => {
+      return { key, value: localStorage.getItem(key) }
+    });
+    copyToClipboard(JSON.stringify(toCopy));
+  };
+
   return (
     <div>
-      <TestComponent />
+      {/* <TestComponent /> */}
       <MyAnimatedComponent />
+      <button onClick={handleCopyLocalStorage}>Copy LocalStorage</button>
     </div>
   );
 };

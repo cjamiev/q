@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Modal from '../../../components/atoms/Modal';
-import { loadSettings, updateSettings } from '../../../components/pages/Settings/settingsActions';
 import { createAlert } from '../../../components/layout/Alert/alertActions';
 import { closeGlobalModal, hideLoadingModal, loadCommand, initializeTimer } from './globalActions';
 import { TIME } from '../../../constants/time';
@@ -19,7 +18,6 @@ const Global = () => {
     if (!initialized) {
       dispatch(initializeTimer());
       dispatch(loadCommand());
-      dispatch(loadSettings());
     }
   }, [dispatch, initialized]);
 

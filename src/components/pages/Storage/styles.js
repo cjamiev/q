@@ -5,7 +5,13 @@ export const SCStorageWrapper = styled.div`
   flex-wrap: wrap;
 `;
 
+export const SCStorageDropdown = styled.div`
+  position: relative;
+`;
+
 export const SCStorageBtnWrapper = styled.div`
+  visibility: ${(props) => (props.isvisible ? 'visible' : 'hidden')};
+  position: absolute;
   display: flex;
   flex-direction: column;
   margin-right: 10px;
@@ -33,7 +39,7 @@ export const SCStorageNameWrapper = styled.div`
 
 export const SCStorageTextWrapper = styled.div`
   margin-top: 10px;
-  width: 60%;
+  width: 40vw;
 `;
 
 export const SCStorageOpWrapper = styled.div``;

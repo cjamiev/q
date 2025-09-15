@@ -53,3 +53,12 @@ export const SCNpmBtnWrapper = styled.div`
     height: 60px;
   }
 `;
+
+export const SCPackageTextWrapper = styled.div`
+  width: 800px;
+  margin: 20px;
+
+  textarea {
+    height: 700px;
+  }
+`;

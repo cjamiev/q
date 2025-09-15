@@ -13,12 +13,11 @@ import useOnClickOutside from '../../../hooks/useOnClickOutside';
 import { CopySVG } from '../../../components/atoms/Icons/CopySVG';
 import { PlaySVG } from '../../../components/atoms/Icons/PlaySVG';
 import useLocalStorage from '../../../hooks/useLocalStorage';
-
-const LS_CLIPBOARD_KEY = 'q-clipboard';
+import { LS_CLIPBOARD_KEY } from '../../../constants/localstorage';
 
 const QuickAccessList = ({ mode }) => {
   const dispatch = useDispatch();
-  const { commands, copy } = useSelector((state) => state.settings);
+  const { commands } = useSelector((state) => state.settings);
   const [clipboard] = useLocalStorage(LS_CLIPBOARD_KEY, [], true);
 
   if (mode === 'e') {

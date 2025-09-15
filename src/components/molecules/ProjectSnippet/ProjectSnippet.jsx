@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { loadSnippet, createSnippet, deleteSnippet } from './projectSnippetActions';
+import React, { useState } from 'react';
 import { copyToClipboard } from '../../../utils/copy';
 import Button from '../../../components/atoms/Button';
 import Text from '../../../components/atoms/Form/Text';
 import TextArea from '../../../components/atoms/Form/TextArea';
 import { CopySVG } from '../../../components/atoms/Icons/CopySVG';
 import { TrashSVG } from '../../../components/atoms/Icons';
-import { unique } from '../../../utils/arrayHelper';
+import useLocalStorage from '../../../hooks/useLocalStorage';
 import {
   SCFlexWrapper,
   SCCreateFormFieldSet,
@@ -17,54 +15,26 @@ import {
   SCLoadButton,
   SCSnippetTextWrapper
 } from './styles';
-
-const TYPE_POSITION = 0;
-const NAME_POSITION = 1;
-
-const mapSnippets = (snippets) => {
-  const snippetsWithNameAndType = snippets.map((label) => {
-    const nameAndType = label.split('__');
-
-    return { name: nameAndType[NAME_POSITION], type: nameAndType[TYPE_POSITION], filename: label };
-  });
-
-  const types = unique(snippetsWithNameAndType.map((item) => item.type));
-
-  return types.map((type) => {
-    return snippetsWithNameAndType.filter((item) => item.type === type);
-  });
-};
+import { LS_SNIPPETS_KEY } from '../../../constants/localstorage';
 
 const Snippet = () => {
-  const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [type, setType] = useState('');
   const [content, setContent] = useState('');
-  const { snippets, snippetFile } = useSelector((state) => state.project);
+  const [snippets, setSnippets] = useLocalStorage(LS_SNIPPETS_KEY, [], true);
 
-  useEffect(() => {
-    if (snippetFile.name) {
-      const nameAndType = snippetFile.name.split('__');
-      setContent(snippetFile.content);
-      setType(nameAndType[TYPE_POSITION]);
-      setName(nameAndType[NAME_POSITION]);
-    }
-  }, [snippetFile]);
-
-  const fileButtons = mapSnippets(snippets).map((sections) => {
-    return sections.map((item, index) => {
-      return (
-        <React.Fragment key={item.filename}>
-          {index === TYPE_POSITION && <SCSnippetType>{item.type}</SCSnippetType>}
-          <SCLoadButton
-            label={item.name}
-            onClick={() => {
-              dispatch(loadSnippet(item.filename));
-            }}
-          />
-        </React.Fragment>
-      );
-    });
+  const fileButtons = snippets.sort((a, b) => b.type - a.type).map((snippet) => {
+    return (
+      <React.Fragment key={snippet.name}>
+        <SCSnippetType>{snippet.type}</SCSnippetType>
+        <SCLoadButton
+          label={snippet.name}
+          onClick={() => {
+            setContent(snippet.content);
+          }}
+        />
+      </React.Fragment>
+    );
   });
 
   return (
@@ -93,8 +63,7 @@ const Snippet = () => {
               onClick={(e) => {
                 e.preventDefault();
                 if (name && content) {
-                  const filename = `${type}__${name}`;
-                  dispatch(createSnippet(filename, content));
+                  setSnippets(snippets.concat([{ name, type, content }]))
                 }
               }}
             />
@@ -105,7 +74,7 @@ const Snippet = () => {
           <CopySVG
             width="45"
             onClick={() => {
-              copyToClipboard(snippetFile.content);
+              copyToClipboard(content);
             }}
             transform="translate(0,4)"
           />
@@ -113,7 +82,7 @@ const Snippet = () => {
             transform="translate(0,4)"
             width="45"
             onClick={() => {
-              dispatch(deleteSnippet(snippetFile.name));
+              setSnippets(snippets.filter(snippet => snippet.name !== name));
             }}
           />
         </SCLoadHeader>

@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import { FileOperations } from '../../../components/organisms/FileOperations';
 import Page from '../../../components/layout';
-import Text from '../../../components/atoms/Form/Text';
-import TextArea from '../../../components/atoms/Form/TextArea';
 import Button from '../../../components/atoms/Button';
 import { copyToClipboard } from '../../../utils/copy';
 import {
@@ -24,8 +22,12 @@ const Storage = () => {
   const [content, setContent] = useState('');
   const [files, setFiles] = useLocalStorage(LS_FILES_KEY, [], true);
 
-  const handleNameChange = ({ selected }) => {
-    setName(selected);
+  const handleNameChange = ({ target: { value } }) => {
+    setName(value);
+  };
+
+  const handleContentChange = ({ target: { value } }) => {
+    setContent(value);
   };
 
   return (
@@ -33,13 +35,24 @@ const Storage = () => {
       <SCStorageWrapper>
         <SCStorageTextWrapper>
           <SCStorageNameWrapper>
-            <Text placeholder="Enter File Name" selected={name} onChange={handleNameChange} />
+            <input type="text" id="name" name="name" placeholder="Enter File Name" value={name} onChange={handleNameChange}></input>
             <SaveSVG
               transform="scale(0.7) translate(0,-5)"
               width="45"
               onClick={() => {
                 if (name && content) {
-                  setFiles(files.concat([{ name, content }]));
+                  const isExistingFile = files.some(f => f.name === name);
+                  const updatedFiles = isExistingFile ? files.map(f => {
+                    if (f.name === name) {
+                      return {
+                        name,
+                        content
+                      };
+                    }
+                    return f;
+                  }) : files.concat([{ name, content }]);
+
+                  setFiles(updatedFiles);
                 }
               }}
             />
@@ -70,13 +83,11 @@ const Storage = () => {
               </SCStorageBtnWrapper>
             </SCStorageDropdown>
           </SCStorageNameWrapper>
-          <TextArea
-            ariaLabel="Content text area"
-            selected={content}
-            onChange={({ selected }) => {
-              setContent(selected);
-            }}
-          />
+          <textarea
+            style={{ width: '500px', height: '500px', border: '1px solid #aaaaaa', padding: '5px' }}
+            value={content}
+            onChange={handleContentChange}
+          ></textarea>
         </SCStorageTextWrapper>
         <SCStorageOpWrapper>
           <FileOperations

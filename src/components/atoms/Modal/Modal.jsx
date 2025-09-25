@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import TextArea from '../../../components/atoms/Form/TextArea';
 import Button from '../../../components/atoms/Button';
 import { CloseSVG } from '../../../components/atoms/Icons/CloseSVG';
 import { noop } from '../../../utils/noop';
@@ -51,14 +50,14 @@ const Modal = (props) => {
     );
   }
 
-  const handleChange = ({ selected, error }) => {
-    setContent(selected);
-    setErr(error);
+  const handleContentChange = ({ target: { value } }) => {
+    setContent(value);
   };
+
 
   const renderBody = editable ? (
     <SCModalBody className="scrollbar">
-      <TextArea ariaLabel="Modal text area" selected={content} jsonType={true} onChange={handleChange} />
+      <textarea ariaLabel="Modal text area" value={content} jsonType={true} onChange={handleContentChange} />
     </SCModalBody>
   ) : (
     <SCModalBody className="scrollbar">{content}</SCModalBody>

@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import Button from '../../../components/atoms/Button';
 import { runNpmScript, getDependencyVersions, updatePackage } from './projectPackageActions';
 import { parseObject, isJSONString } from '../../../utils/type-check';
-import TextArea from '../../../components/atoms/Form/TextArea';
 import { SCPackageTextWrapper } from './styles';
 import { copyToClipboard } from '../../../utils/copy';
 
@@ -53,16 +52,18 @@ const Package = () => {
     }
   })
 
+  const handleContentChange = ({ target: { value } }) => {
+    setContent(value);
+  };
+
   return (
     <div>
       <SCPackageTextWrapper>
-        <TextArea
-          ariaLabel="Enter Content"
-          selected={content}
-          onChange={({ selected }) => {
-            setContent(selected);
-          }}
-        />
+        <textarea
+          style={{ width: '500px', height: '500px', border: '1px solid #aaaaaa', padding: '5px' }}
+          value={content}
+          onChange={handleContentChange}
+        ></textarea>
       </SCPackageTextWrapper>
       <PackageCommands scripts={packageJson?.scripts} />
     </div>

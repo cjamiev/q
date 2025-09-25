@@ -1,1 +1,1 @@
-export { default } from './QuickAccess';
+export { QuickAccess } from './QuickAccess';

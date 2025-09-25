@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { ROUTES } from '../../constants/routes';
 import PageHeader from './PageHeader';
-import QuickAccess from './QuickAccess';
+import { QuickAccess } from './QuickAccess';
 import SidePanel from './SidePanel';
 import { openSidePanel, closeSidePanel } from '../../components/molecules/Global/globalActions';
 import { TIME } from '../../constants/time';

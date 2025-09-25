@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { copyToClipboard } from '../../../utils/copy';
 import Button from '../../../components/atoms/Button';
-import Text from '../../../components/atoms/Form/Text';
-import TextArea from '../../../components/atoms/Form/TextArea';
 import { CopySVG } from '../../../components/atoms/Icons/CopySVG';
 import { TrashSVG } from '../../../components/atoms/Icons';
 import useLocalStorage from '../../../hooks/useLocalStorage';
@@ -22,6 +20,18 @@ const Snippet = () => {
   const [type, setType] = useState('');
   const [content, setContent] = useState('');
   const [snippets, setSnippets] = useLocalStorage(LS_SNIPPETS_KEY, [], true);
+
+  const handleContentChange = ({ target: { value } }) => {
+    setContent(value);
+  };
+
+  const handleNameChange = ({ target: { value } }) => {
+    setName(value);
+  };
+
+  const handleTypeChange = ({ target: { value } }) => {
+    setType(value);
+  };
 
   const fileButtons = snippets.sort((a, b) => b.type - a.type).map((snippet) => {
     return (
@@ -43,20 +53,8 @@ const Snippet = () => {
         <form>
           <SCCreateFormFieldSet>
             <legend> Create Snippet </legend>
-            <Text
-              placeholder="Name"
-              selected={name}
-              onChange={({ selected }) => {
-                setName(selected);
-              }}
-            />
-            <Text
-              placeholder="Type"
-              selected={type}
-              onChange={({ selected }) => {
-                setType(selected);
-              }}
-            />
+            <input type="text" id="name" name="name" placeholder="Name" value={name} onChange={handleNameChange}></input>
+            <input type="text" id="type" name="type" placeholder="Type" value={name} onChange={handleTypeChange}></input>
             <Button
               label="Submit"
               isprimary
@@ -90,13 +88,11 @@ const Snippet = () => {
       </div>
       <div>
         <SCSnippetTextWrapper>
-          <TextArea
-            ariaLabel="Enter Content"
-            selected={content}
-            onChange={({ selected }) => {
-              setContent(selected);
-            }}
-          />
+          <textarea
+            style={{ width: '500px', height: '500px', border: '1px solid #aaaaaa', padding: '5px' }}
+            value={content}
+            onChange={handleContentChange}
+          ></textarea>
         </SCSnippetTextWrapper>
       </div>
     </SCFlexWrapper>

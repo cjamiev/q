@@ -1,88 +1,35 @@
 import React, { useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { executeCommand } from '../../../components/molecules/Global/globalActions';
-import {
-  SCQuickAccess,
-  SCQuickAccessBtnGroup,
-  SCQuickAccessBtn,
-  SCQuickAccessList,
-  SCQuickAccessListBtn
-} from './styles';
 import { copyToClipboard } from '../../../utils/copy';
-import useOnClickOutside from '../../../hooks/useOnClickOutside';
-import { CopySVG } from '../../../components/atoms/Icons/CopySVG';
-import { PlaySVG } from '../../../components/atoms/Icons/PlaySVG';
 import useLocalStorage from '../../../hooks/useLocalStorage';
 import { LS_CLIPBOARD_KEY } from '../../../constants/localstorage';
+import useOnClickOutside from '../../../hooks/useOnClickOutside';
+import './quick-access.css';
 
-const QuickAccessList = ({ mode }) => {
-  const dispatch = useDispatch();
-  const { commands } = useSelector((state) => state.settings);
-  const [clipboard] = useLocalStorage(LS_CLIPBOARD_KEY, [], true);
+export const QuickAccess = () => {
+    const [isActive, setIsActive] = useState(false);
+    const quickAccessRef = useRef();
+    useOnClickOutside(quickAccessRef, () => setIsActive(false));
+    const [clipboard] = useLocalStorage(LS_CLIPBOARD_KEY, [], true);
 
-  if (mode === 'e') {
     return (
-      <>
-        {commands.map((item, index) => {
-          return (
-            <SCQuickAccessListBtn
-              key={item.label}
-              onClick={() => {
-                dispatch(executeCommand(item.value));
-              }}
-            >
-              {item.label}
-            </SCQuickAccessListBtn>
-          );
-        })}
-      </>
+        <div ref={quickAccessRef} className={`quick-access-container ${isActive ? 'quick-access-container__active' : ''}`} onClick={() => setIsActive(!isActive)}>
+            {isActive ? <div className='quick-access-body'>
+                <div className='quick-access-copy-list'>
+                    {clipboard.map((item) => {
+                        return (
+                            <button
+                                key={item.label}
+                                className='quick-access-copy-btn'
+                                onClick={() => {
+                                    copyToClipboard(item.value);
+                                }}
+                            >
+                                {item.label}
+                            </button>
+                        );
+                    })}
+                </div>
+            </div> : null}
+        </div>
     );
-  }
-  if (mode === 'c') {
-    return (
-      <>
-        {clipboard.map((item, index) => {
-          return (
-            <SCQuickAccessListBtn
-              key={item.label}
-              onClick={() => {
-                copyToClipboard(item.value);
-              }}
-            >
-              {item.label}
-            </SCQuickAccessListBtn>
-          );
-        })}
-      </>
-    );
-  } else {
-    return null;
-  }
 };
-
-const PageQuickAccess = () => {
-  const ref = useRef();
-  const [mode, setMode] = useState('');
-  useOnClickOutside(ref, () => setMode(''));
-
-  const showCommands = () => setMode('e');
-  const showPaste = () => setMode('c');
-
-  return (
-    <SCQuickAccess ref={ref}>
-      <SCQuickAccessBtnGroup>
-        <SCQuickAccessBtn isActive={mode === 'e' ? 'true' : undefined} onClick={showCommands}>
-          <PlaySVG ariaLabel="Commands" transform="scale(0.7) translate(10,10)" />
-        </SCQuickAccessBtn>
-        <SCQuickAccessBtn isActive={mode === 'c' ? 'true' : undefined} onClick={showPaste}>
-          <CopySVG transform="scale(0.7) translate(10,10)" />
-        </SCQuickAccessBtn>
-      </SCQuickAccessBtnGroup>
-      <SCQuickAccessList isvisible={mode !== '' ? 'true' : undefined}>
-        <QuickAccessList mode={mode} />
-      </SCQuickAccessList>
-    </SCQuickAccess>
-  );
-};
-
-export default PageQuickAccess;

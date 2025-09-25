@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Page from '../../../components/layout';
 import useLocalStorage from '../../../hooks/useLocalStorage';
-import { LS_CLIPBOARD_KEY } from '../../../constants/localstorage';
+import * as LS_KEYS from '../../../constants/localstorage';
+import { copyToClipboard } from '../../../utils/copy';
 
 const Settings = () => {
-  const [clipboard, setClipboard] = useLocalStorage(LS_CLIPBOARD_KEY, [], true);
+  const [clipboard, setClipboard] = useLocalStorage(LS_KEYS.LS_CLIPBOARD_KEY, [], true);
   const [description, setDescription] = useState('');
   const [copyValue, setCopyValue] = useState('');
 
@@ -26,6 +27,13 @@ const Settings = () => {
     setClipboard(clipboard.filter(c => c.label !== d));
   }
 
+  const handleCopyLocalStorage = () => {
+    const toCopy = Object.values(LS_KEYS).map(key => {
+      return { key, value: localStorage.getItem(key) }
+    });
+    copyToClipboard(JSON.stringify(toCopy));
+  };
+
   return (
     <Page>
       <div style={{ display: 'flex', flexDirection: 'column', width: '200px' }}>
@@ -43,6 +51,7 @@ const Settings = () => {
           </div>)
         })}
       </div>
+      <button onClick={handleCopyLocalStorage}>Copy LocalStorage</button>
     </Page>
   );
 };

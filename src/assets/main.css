@@ -5,7 +5,6 @@
 @import './scroll.css';
 @import './variables.css';
 @import './keyframes.css';
-@import './form.css';
 
 html {
   background-color: var(--primary-bg-color);

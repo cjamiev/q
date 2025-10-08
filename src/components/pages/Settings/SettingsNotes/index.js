@@ -1,0 +1,1 @@
+export { SettingsNotes } from './SettingsNotes';

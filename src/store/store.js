@@ -3,7 +3,6 @@ import logger from 'redux-logger';
 import { thunk } from 'redux-thunk';
 
 import alertReducer from '../components/layout/Alert/alertReducer';
-import settingsReducer from '../components/pages/Settings/settingsReducer';
 import projectReducer from '../components/pages/Project/projectReducer';
 import globalReducer from '../components/molecules/Global/globalReducer';
 
@@ -15,7 +14,6 @@ const appliedMiddlewares = applyMiddleware(...middlewares);
 
 const rootReducer = combineReducers({
   alert: alertReducer,
-  settings: settingsReducer,
   global: globalReducer,
   project: projectReducer
 });

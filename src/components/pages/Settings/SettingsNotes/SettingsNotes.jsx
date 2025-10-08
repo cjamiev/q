@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import useLocalStorage from '../../../hooks/useLocalStorage';
-import { copyToClipboard } from '../../../utils/copy';
-import { LS_NOTES_KEY } from '../../../constants/localstorage';
+import useLocalStorage from '../../../../hooks/useLocalStorage';
+import { copyToClipboard } from '../../../../utils/copy';
+import { LS_NOTES_KEY } from '../../../../constants/localstorage';
 
-export const HomeTodo = () => {
+export const SettingsNotes = () => {
   const [newNote, setNewNote] = useState('');
   const [notes, setNotes] = useLocalStorage(LS_NOTES_KEY, [], true);
   const [expanded, setExpanded] = useState(-1);

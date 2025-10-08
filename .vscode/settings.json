@@ -3,9 +3,8 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
-  "eslint.alwaysShowStatus": true,
   "eslint.options": {
-    "extensions": [".html", ".js"]
+    "extensions": [".html", ".js", ".jsx"]
   },
   "eslint.validate": ["javascript"],
   "files.exclude": {

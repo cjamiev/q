@@ -17,6 +17,12 @@
     clip-path: none;
 }
 
+.quick-access-title {
+    color: white;
+    font-size: 24px;
+    text-align: center;
+}
+
 .quick-access-body {
     display: flex;
     color: white;
@@ -32,6 +38,8 @@
     cursor: pointer;
     background-color: var(--primary-color);
     color: white;
+    font-size: 18px;
+    
 }
 
 .quick-access-copy-btn:hover {

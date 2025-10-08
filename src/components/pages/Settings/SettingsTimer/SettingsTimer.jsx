@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { copyToClipboard } from '../../../utils/copy';
-import { useCountdown } from '../../../hooks/useDisplayCountdown';
-import useLocalStorage from '../../../hooks/useLocalStorage';
-import { LS_TIMERS_KEY } from '../../../constants/localstorage';
+import { copyToClipboard } from '../../../../utils/copy';
+import { useCountdown } from '../../../../hooks/useDisplayCountdown';
+import useLocalStorage from '../../../../hooks/useLocalStorage';
+import { LS_TIMERS_KEY } from '../../../../constants/localstorage';
 
 const now = new Date();
 const nowValue = now.toISOString().slice(0, 10);
@@ -22,7 +22,7 @@ const getCountdownDate = (endDateValue, selectedTime) => {
   return new Date(time);
 }
 
-export const HomeTimer = () => {
+export const SettingsTimer = () => {
   const [description, setDescription] = useState('');
   const [endDateValue, setEndDateValue] = useState(nowValue);
   const [selectedTime, setSelectedTime] = useState(now.getHours() + ':' + now.getMinutes());

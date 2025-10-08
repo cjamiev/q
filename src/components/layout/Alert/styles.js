@@ -34,7 +34,7 @@ export const SCAlertWrapper = styled.div`
   display: flex;
   flex-direction: column;
   position: fixed;
-  left: calc(100% - 325px);
+  left: calc(100% - 400px);
   top: 0px;
   min-height: 150px;
   width: 300px;

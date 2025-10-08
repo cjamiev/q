@@ -9,6 +9,7 @@ import { openSidePanel, closeSidePanel } from '../../components/molecules/Global
 import { TIME } from '../../constants/time';
 import { SCLayout, SCPageWrapper, SCPage } from './styles';
 import Navigation from './Navigation';
+import { QuickTimer } from './QuickTimer';
 
 const NAV_ITEMS = Object.values(ROUTES);
 const ErrorPage = { label: 'Page Not Found' };
@@ -52,6 +53,7 @@ const Page = ({ sidePanelContent, isSidePanelWide, children, footerComponent }) 
             hasSidePanelContent={hasSidePanelContent}
             title={currentPage.label}
           />
+          <QuickTimer />
           <div>{children}</div>
           <QuickAccess />
         </SCPage>

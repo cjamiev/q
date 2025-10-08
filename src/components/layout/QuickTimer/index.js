@@ -1,0 +1,1 @@
+export { QuickTimer } from './QuickTimer';

@@ -15,26 +15,6 @@ export const SCNavigation = styled.nav`
   }
 `;
 
-export const SCWeek = styled.span`
-  position: relative;
-  left: 20px;
-  bottom: 3px;
-  font-size: 24px;
-  font-weight: bold;
-
-  &::after {
-    content: '';
-    height: 30px;
-    width: 30px;
-    border: 2px solid white;
-    border-radius: 50%;
-    display: inline-block;
-    position: relative;
-    right: ${(props) => (props.istwodigit ? '30px' : '23px')};
-    top: 8px;
-  }
-`;
-
 export const SCNavigationContent = styled.nav`
   width: inherit;
   position: fixed;

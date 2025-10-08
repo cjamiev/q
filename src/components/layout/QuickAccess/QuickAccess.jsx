@@ -13,23 +13,27 @@ export const QuickAccess = () => {
 
     return (
         <div ref={quickAccessRef} className={`quick-access-container ${isActive ? 'quick-access-container__active' : ''}`} onClick={() => setIsActive(!isActive)}>
-            {isActive ? <div className='quick-access-body'>
-                <div className='quick-access-copy-list'>
-                    {clipboard.map((item) => {
-                        return (
-                            <button
-                                key={item.label}
-                                className='quick-access-copy-btn'
-                                onClick={() => {
-                                    copyToClipboard(item.value);
-                                }}
-                            >
-                                {item.label}
-                            </button>
-                        );
-                    })}
-                </div>
-            </div> : null}
+            {isActive ?
+                <div>
+                    <div className='quick-access-title'>Clipboard</div>
+                    <div className='quick-access-body'>
+                        <div className='quick-access-copy-list'>
+                            {clipboard.map((item) => {
+                                return (
+                                    <button
+                                        key={item.label}
+                                        className='quick-access-copy-btn'
+                                        onClick={() => {
+                                            copyToClipboard(item.value);
+                                        }}
+                                    >
+                                        {item.label}
+                                    </button>
+                                );
+                            })}
+                        </div>
+                    </div>
+                </div> : null}
         </div>
     );
 };

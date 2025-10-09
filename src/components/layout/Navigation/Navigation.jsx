@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { navigationMap } from './data';
+import { ROUTES } from '../../../constants/routes';
 import './navigation.css';
+const routeList = Object.keys(ROUTES);
 
 const Navigation = React.memo(() => {
   const [isActive, setIsActive] = useState(false);
@@ -9,18 +10,18 @@ const Navigation = React.memo(() => {
   const navigate = useNavigate();
   const [currentUrl, setCurrentUrl] = useState(location.pathname);
 
-  const renderNavItems = navigationMap.map((item) => {
-    const isLinkActive = currentUrl === item.url;
+  const renderNavItems = routeList.map((route) => {
+    const isLinkActive = currentUrl === ROUTES[route].url;
     const handleClick = () => {
-      if (currentUrl !== item.url) {
-        navigate(item.url);
-        setCurrentUrl(item.url);
+      if (currentUrl !== ROUTES[route].url) {
+        navigate(ROUTES[route].url);
+        setCurrentUrl(ROUTES[route].url);
       }
     };
 
     return (
-      <div key={item.url} className={isLinkActive ? 'navigation-link__active navigation-link' : 'navigation-link'} onClick={handleClick}>
-        <div className='navigation-label'>{item.label}</div>
+      <div key={ROUTES[route].url} className={isLinkActive ? 'navigation-link__active navigation-link' : 'navigation-link'} onClick={handleClick}>
+        <div className='navigation-label'>{ROUTES[route].label}</div>
       </div>
     );
   });

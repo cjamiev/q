@@ -1,0 +1,54 @@
+.navigation-container {
+  position: absolute;
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  bottom: 0px;
+  z-index: 1;
+
+  width: 50px;
+  height: 50px;
+  background-color: var(--primary-color);
+  transition: height 200ms, width 200ms;
+  cursor: pointer;
+  border-radius: 0 0 0 5px;
+}
+
+.navigation-container__active {
+  padding: 5px;
+  width: fit-content;
+  height: fit-content;
+  cursor: unset;
+  clip-path: none;
+}
+
+.navigation-content {
+  width: inherit;
+  position: fixed;
+  overflow: hidden;
+  padding: 5px;
+  background-color: var(--primary-color);
+  color: white;
+  height: 30px;
+}
+
+.navigation-link {
+  position: relative;
+  height: 50px;
+  cursor: pointer;
+}
+
+.navigation-link:hover {
+  background-color: hsl(252deg 64% 43%);
+}
+
+.navigation-link__active {
+  background-color: hsl(220, 33%, 7%);
+}
+
+.navigation-label {
+  padding: 10px;
+  font-size: 24px;
+  white-space: nowrap;
+  color: white;
+}

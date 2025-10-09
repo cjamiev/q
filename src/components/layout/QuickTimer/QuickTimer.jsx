@@ -31,23 +31,21 @@ export const QuickTimer = () => {
 
     return (
         <div ref={quicktimerRef} className={`quick-timer-container ${isActive ? 'quick-timer-container__active' : ''}`} onClick={() => setIsActive(!isActive)}>
-            <div>
-                {isActive ?
-                    <div className='quick-timer-body'>
-                        <div className='quick-timer-copy-list'>
-                            {timers.map(t => {
-                                return (
-                                    <div key={t.description}>
-                                        <Countdown description={t.description} endDate={getCountdownDate(t.targetDate, t.time)} />
-                                    </div>
-                                )
-                            })}
-                        </div>
-                    </div> :
-                    <div className={getFormattedDate().week > SINGLE_DIGIT ? 'quick-timer-week' : 'quick-timer-week quick-timer-week__single'}>
-                        {getFormattedDate().week}
-                    </div>}
-            </div>
+            {isActive ?
+                <div className='quick-timer-body'>
+                    <div className='quick-timer-copy-list'>
+                        {timers.map(t => {
+                            return (
+                                <div key={t.description}>
+                                    <Countdown description={t.description} endDate={getCountdownDate(t.targetDate, t.time)} />
+                                </div>
+                            )
+                        })}
+                    </div>
+                </div> :
+                <div className={getFormattedDate().week > SINGLE_DIGIT ? 'quick-timer-week' : 'quick-timer-week quick-timer-week__single'}>
+                    {getFormattedDate().week}
+                </div>}
         </div>
     );
 };

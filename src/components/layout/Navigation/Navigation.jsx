@@ -1,58 +1,36 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
-import {
-  closeSidePanel,
-  closeGlobalModal,
-  hideLoadingModal,
-  executeCommand
-} from '../../../components/molecules/Global/globalActions';
-import { dismissAlert } from '../../../components/layout/Alert/alertActions';
-import {
-  SCNavigation,
-  SCNavigationContent,
-  SCNavigationLinks,
-  SCNavigationIcon,
-  SCNavigationLabels
-} from './styles';
 import { navigationMap } from './data';
+import './navigation.css';
 
 const Navigation = React.memo(() => {
-  const dispatch = useDispatch();
+  const [isActive, setIsActive] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const [currentUrl, setCurrentUrl] = useState(location.pathname);
 
   const renderNavItems = navigationMap.map((item) => {
-    const isActive = currentUrl === item.url;
-    const IconSVG = item.icon;
+    const isLinkActive = currentUrl === item.url;
     const handleClick = () => {
       if (currentUrl !== item.url) {
         navigate(item.url);
         setCurrentUrl(item.url);
-        dispatch(closeGlobalModal());
-        dispatch(hideLoadingModal());
-        dispatch(dismissAlert());
-        dispatch(closeSidePanel());
       }
     };
 
     return (
-      <SCNavigationLinks key={item.url} onClick={handleClick} isactive={isActive ? 'true' : undefined}>
-        <SCNavigationIcon isactive={isActive ? 'true' : undefined}>
-          <IconSVG ariaLabel={`${item.label} Page`} width="45" {...item.props} />
-        </SCNavigationIcon>
-        <SCNavigationLabels>{item.label}</SCNavigationLabels>
-      </SCNavigationLinks>
+      <div key={item.url} className={isLinkActive ? 'navigation-link__active navigation-link' : 'navigation-link'} onClick={handleClick}>
+        <div className='navigation-label'>{item.label}</div>
+      </div>
     );
   });
 
   return (
-    <SCNavigation>
-      <SCNavigationContent>
+    <div className={`navigation-container ${isActive ? 'navigation-container__active' : ''}`} onMouseEnter={() => setIsActive(true)} onMouseLeave={() => setIsActive(false)}>
+      {isActive && <nav className='navigation'>
         {renderNavItems}
-      </SCNavigationContent>
-    </SCNavigation>
+      </nav>}
+    </div>
   );
 });
 

@@ -17,7 +17,6 @@ const Global = () => {
   useEffect(() => {
     if (!initialized) {
       dispatch(initializeTimer());
-      dispatch(loadCommand());
     }
   }, [dispatch, initialized]);
 

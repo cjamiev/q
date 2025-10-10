@@ -39,7 +39,6 @@ export const SCStorageNameWrapper = styled.div`
 
 export const SCStorageTextWrapper = styled.div`
   margin-top: 10px;
-  width: 40vw;
 `;
 
 export const SCStorageOpWrapper = styled.div``;

@@ -36,9 +36,7 @@ const Storage = () => {
         <SCStorageTextWrapper>
           <SCStorageNameWrapper>
             <input type="text" id="name" name="name" placeholder="Enter File Name" value={name} onChange={handleNameChange}></input>
-            <SaveSVG
-              transform="scale(0.7) translate(0,-5)"
-              width="45"
+            <button
               onClick={() => {
                 if (name && content) {
                   const isExistingFile = files.some(f => f.name === name);
@@ -55,17 +53,18 @@ const Storage = () => {
                   setFiles(updatedFiles);
                 }
               }}
-            />
-            <CopySVG
-              ariaLabel="Copy Storage"
-              width="45"
-              transform={'scale(0.7) translate(0,-5)'}
+            >
+              Save
+            </button>
+            <button
               onClick={() => {
                 copyToClipboard(content);
               }}
-            />
-            <SCStorageDropdown onClick={() => setShowFileNames(!showFileNames)}>
-              Show File Names
+            >
+              Copy
+            </button>
+            {files.length > 0 && <div style={{ position: 'relative', border: '1px solid black' }} onClick={() => setShowFileNames(!showFileNames)}>
+              Select Stored File
               <SCStorageBtnWrapper isvisible={showFileNames}>
                 {files.map((item) => {
                   return (
@@ -81,10 +80,10 @@ const Storage = () => {
                   );
                 })}
               </SCStorageBtnWrapper>
-            </SCStorageDropdown>
+            </div>}
           </SCStorageNameWrapper>
           <textarea
-            style={{ width: '500px', height: '500px', border: '1px solid #aaaaaa', padding: '5px' }}
+            style={{ width: '800px', height: '750px', border: '1px solid #aaaaaa', padding: '5px' }}
             value={content}
             onChange={handleContentChange}
           ></textarea>

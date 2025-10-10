@@ -40,10 +40,6 @@ export const SettingsTimer = () => {
     setDescription(value);
   };
 
-  const handleCopy = () => {
-    copyToClipboard(JSON.stringify(timers));
-  }
-
   const addNewTimer = () => {
     setTimers(timers.concat({
       description,
@@ -58,6 +54,7 @@ export const SettingsTimer = () => {
 
   return (
     <div>
+      <label>Add Timers</label>
       <div style={{ display: 'flex', flexDirection: 'column', width: '200px' }}>
         <input type="text" id="description" name="description" value={description} onChange={handleDescriptionChange}></input>
         <input type="date" id="end-date" name="end_date" value={endDateValue} onChange={handleEndDateChange}></input>
@@ -73,7 +70,6 @@ export const SettingsTimer = () => {
           </div>
         )
       })}
-      <button style={{ position: 'absolute', bottom: '10px', cursor: 'pointer' }} onClick={handleCopy}>COPY</button>
     </div>
   );
 };

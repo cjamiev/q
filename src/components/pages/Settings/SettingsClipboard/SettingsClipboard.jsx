@@ -28,8 +28,8 @@ export const SettingsClipboard = () => {
 
   return (
     <div>
+      <label>Add Clipboard Items</label>
       <div style={{ display: 'flex', flexDirection: 'column', width: '200px' }}>
-        <label>Add Clipboard Items</label>
         <input type="text" id="description" name="description" placeholder='label' value={description} onChange={handleDescriptionChange}></input>
         <input type="text" id="copy-value" name="copy-value" placeholder='value' value={copyValue} onChange={handleCopyValueChange}></input>
         <button style={{ background: 'black', color: 'white', borderRadius: '20px', cursor: 'pointer' }} onClick={addNewCopyItem}>Add</button>

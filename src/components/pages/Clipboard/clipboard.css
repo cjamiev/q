@@ -1,11 +1,11 @@
-.settings-sections { 
+.clipboard-sections { 
   display: flex; 
   gap: 10px; 
   width: 100%; 
   flex: 1 1 auto;
 }
 
-.settings-btn {
+.clipboard-btn {
   position: absolute; 
   bottom: 10px; 
   left: 50%; 

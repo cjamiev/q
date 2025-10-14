@@ -1,11 +1,11 @@
-import Page from '../../../components/layout';
-import { SettingsClipboard } from './SettingsClipboard';
-import { SettingsTimer } from './SettingsTimer';
+import Page from '../../layout';
+import { Clips } from './Clips';
+import { Timer } from './Timer';
 import { copyToClipboard } from '../../../utils/copy';
 import * as ALL_STORAGE from '../../../constants/localstorage';
-import './settings.css';
+import './clipboard.css';
 
-const Settings = () => {
+const Clipboard = () => {
 
   const handleCopy = () => {
     const allItems = [];
@@ -20,13 +20,13 @@ const Settings = () => {
 
   return (
     <Page>
-      <div className='settings-sections'>
-        <SettingsClipboard />
-        <SettingsTimer />
+      <div className='clipboard-sections'>
+        <Clips />
+        <Timer />
       </div>
-      <button className='settings-btn' onClick={handleCopy}>COPY</button>
+      <button className='clipboard-btn' onClick={handleCopy}>COPY</button>
     </Page>
   );
 };
 
-export default Settings;
+export default Clipboard;

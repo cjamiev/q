@@ -1,1 +1,0 @@
-export { SettingsClipboard } from './SettingsClipboard';

@@ -1,7 +1,7 @@
 export const ROUTES = {
   HOME: { label: 'Home', url: '/home' },
-  STORAGE: { label: 'Storage', url: '/storage' },
-  PROJECT: { label: 'Project', url: '/project' },
+  STORAGE: { label: 'File', url: '/file' },
+  SNIPPET: { label: 'Snippet', url: '/snippet' },
   EXPERIMENT: { label: 'Experimient', url: '/experiment' },
-  SETTINGS: { label: 'Settings', url: '/settings' }
+  CLIPBOARD: { label: 'Clipboard', url: '/clipboard' }
 };

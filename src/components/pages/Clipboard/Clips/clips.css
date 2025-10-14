@@ -1,0 +1,4 @@
+.clips-new-item { display: flex; flex-direction: column; width: 200px; }
+.clips-add-btn { background: black; color: white; border-radius: 20px; cursor: pointer; }
+.clips-item { display: flex; flex-direction: column; width: 200px; }
+.clips-remove-btn { background: black; color: white; border-radius: 20px; cursor: pointer; }

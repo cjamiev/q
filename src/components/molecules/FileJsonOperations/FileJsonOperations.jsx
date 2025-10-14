@@ -12,6 +12,7 @@ export const FileJsonOperations = ({ content, onChange }) => {
   return (
     <div className='file-json-operation-wrapper'>
       <button
+        className='file-json-operation-btn'
         onClick={() => {
           dispatch(dismissAlert());
           const isValid = isJSONString(content);
@@ -26,7 +27,7 @@ export const FileJsonOperations = ({ content, onChange }) => {
         Validate
       </button>
       <button
-        label="Stringify"
+        className='file-json-operation-btn'
         onClick={() => {
           onChange(
             JSON.stringify(content)
@@ -42,6 +43,7 @@ export const FileJsonOperations = ({ content, onChange }) => {
         Stringify
       </button>
       <button
+        className='file-json-operation-btn'
         onClick={() => {
           const parsed = parseObject(content.replace(/\"/g, '\\"').replace(/\'/g, '"'));
           if (parsed) {
@@ -52,6 +54,7 @@ export const FileJsonOperations = ({ content, onChange }) => {
         Parse
       </button>
       <button
+        className='file-json-operation-btn'
         onClick={() => {
           const result = content
             .replace(/['|"]{/g, '{')

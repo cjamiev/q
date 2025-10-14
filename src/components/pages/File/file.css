@@ -1,14 +1,14 @@
-.storage-wrapper {
+.file-wrapper {
   display: flex;
   flex-wrap: wrap;
 }
 
-.storage-file-dropdown { 
+.file-file-dropdown { 
   position: relative; 
   border: 1px solid black; 
 }
 
-.storage-btn-wrapper {
+.file-btn-wrapper {
   visibility: hidden;
   position: absolute;
   display: flex;
@@ -17,29 +17,29 @@
   row-gap: 10px;
 }
 
-.storage-btn-wrapper__visible {
+.file-btn-wrapper__visible {
   visibility: visible;
 }
 
-.storage-btn {
+.file-btn {
   cursor: pointer;
 }
 
-.storage-file-btn {
+.file-file-btn {
   width: 250px;
   cursor: pointer;
 }
 
-.storage-name-wrapper {
+.file-name-wrapper {
   display: flex;
   position: relative;
 }
 
-.storage-text-wrapper {
+.file-text-wrapper {
   margin-top: 10px;
 }
 
-.storage-text-area { 
+.file-text-area { 
   width: 800px; 
   height: 750px; 
   border: 1px solid #aaaaaa; 

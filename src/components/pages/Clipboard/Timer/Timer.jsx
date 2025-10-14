@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useCountdown } from '../../../../hooks/useDisplayCountdown';
 import useLocalStorage from '../../../../hooks/useLocalStorage';
 import { LS_TIMERS_KEY } from '../../../../constants/localstorage';
-import './settings-timer.css';
+import './timer.css';
 
 const now = new Date();
 const nowValue = now.toISOString().slice(0, 10);
@@ -22,7 +22,7 @@ const getCountdownDate = (endDateValue, selectedTime) => {
   return new Date(time);
 }
 
-export const SettingsTimer = () => {
+export const Timer = () => {
   const [description, setDescription] = useState('');
   const [endDateValue, setEndDateValue] = useState(nowValue);
   const [selectedTime, setSelectedTime] = useState(now.getHours() + ':' + now.getMinutes());
@@ -55,11 +55,11 @@ export const SettingsTimer = () => {
   return (
     <div>
       <label>Add Timers</label>
-      <div className='settings-timer-new-item'>
+      <div className='timer-new-item'>
         <input type="text" id="description" name="description" value={description} onChange={handleDescriptionChange}></input>
         <input type="date" id="end-date" name="end_date" value={endDateValue} onChange={handleEndDateChange}></input>
         <input type="time" name="selected-time" value={selectedTime} onChange={handleTimeChange}></input>
-        <button className='settings-timer-add-btn' onClick={addNewTimer}>Add</button>
+        <button className='timer-add-btn' onClick={addNewTimer}>Add</button>
       </div>
 
       {timers.map(t => {

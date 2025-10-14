@@ -1,3 +1,5 @@
 .file-operations-wrapper { min-width: 150px; }
 .file-operations-string { margin-right: 5px; }
+.file-operations-string-label { cursor: pointer; }
 .file-operations-json { margin: 0 5px; }
+.file-operations-json-label { cursor: pointer; }

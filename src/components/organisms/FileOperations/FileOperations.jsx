@@ -20,6 +20,7 @@ export const FileOperations = ({ content, onChange }) => {
           }}
         />
         <label
+          className='file-operations-string-label'
           onClick={() => {
             setOperation('string');
           }}
@@ -37,6 +38,7 @@ export const FileOperations = ({ content, onChange }) => {
           }}
         />
         <label
+          className='file-operations-json-label'
           onClick={() => {
             setOperation('json');
           }}

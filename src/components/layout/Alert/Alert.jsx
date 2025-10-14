@@ -29,7 +29,7 @@ const Alert = () => {
       {queue.map((item) => {
         return (
           <div className='alert-wrapper' key={item.id}>
-            <div className={'alert-header ' + item.status === 'success' ? '' : 'alert-header__error'}>
+            <div className={`alert-header ${item.status === 'success' ? '' : 'alert-header__error'}`}>
               {item.status}
               <button
                 className='alert-header-btn'
@@ -40,7 +40,7 @@ const Alert = () => {
                 X
               </button>
             </div>
-            <div className={'alert-content-wrapper' + item.status === 'success' ? '' : 'alert-content-wrapper__error'}>
+            <div className={`alert-content-wrapper ${item.status === 'success' ? '' : 'alert-content-wrapper__error'}`}>
               <span className='alert-content'>{item.content}</span>
             </div>
           </div>

@@ -2,7 +2,6 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { createAlert, dismissAlert } from '../../../components/layout/Alert/alertActions';
 import { parseObject, isJSONString } from '../../../utils/type-check';
-import { SCFlexWrapper, SCFileBtnWrapper } from './styles';
 
 const TWO = 2;
 

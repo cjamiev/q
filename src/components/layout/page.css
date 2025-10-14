@@ -1,0 +1,15 @@
+.page-layout {
+  display: flex;
+  width: 100%;
+}
+
+.page-wrapper {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  min-height: 830px;
+}
+
+.page-content {
+  padding-left: 10px;
+}

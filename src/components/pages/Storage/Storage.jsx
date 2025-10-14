@@ -1,20 +1,10 @@
 import { useState } from 'react';
 import { FileOperations } from '../../../components/organisms/FileOperations';
 import Page from '../../../components/layout';
-import Button from '../../../components/atoms/Button';
 import { copyToClipboard } from '../../../utils/copy';
-import {
-  SCStorageDropdown,
-  SCStorageWrapper,
-  SCStorageBtnWrapper,
-  SCStorageNameWrapper,
-  SCStorageTextWrapper,
-  SCStorageOpWrapper
-} from './styles';
-import { SaveSVG } from '../../../components/atoms/Icons/SaveSVG';
-import { CopySVG } from '../../../components/atoms/Icons/CopySVG';
 import useLocalStorage from '../../../hooks/useLocalStorage';
 import { LS_FILES_KEY } from '../../../constants/localstorage';
+import './storage.css';
 
 const Storage = () => {
   const [showFileNames, setShowFileNames] = useState(false);
@@ -32,9 +22,9 @@ const Storage = () => {
 
   return (
     <Page>
-      <SCStorageWrapper>
-        <SCStorageTextWrapper>
-          <SCStorageNameWrapper>
+      <div className='storage-wrapper'>
+        <div className='storage-text-wrapper'>
+          <div className='storage-name-wrapper'>
             <input type="text" id="name" name="name" placeholder="Enter File Name" value={name} onChange={handleNameChange}></input>
             <button
               onClick={() => {
@@ -65,38 +55,39 @@ const Storage = () => {
             </button>
             {files.length > 0 && <div style={{ position: 'relative', border: '1px solid black' }} onClick={() => setShowFileNames(!showFileNames)}>
               Select Stored File
-              <SCStorageBtnWrapper isvisible={showFileNames}>
+              <div className={'storage-btn-wrapper ' + showFileNames ? '' : 'storage-btn-wrapper__visible'}>
                 {files.map((item) => {
                   return (
-                    <Button
-                      isprimary
+                    <button
+                      className='storage-btn'
                       key={item.name}
-                      label={item.name}
                       onClick={() => {
                         setName(item.name);
                         setContent(item.content);
                       }}
-                    />
+                    >
+                      {item.name}
+                    </button>
                   );
                 })}
-              </SCStorageBtnWrapper>
+              </div>
             </div>}
-          </SCStorageNameWrapper>
+          </div>
           <textarea
             style={{ width: '800px', height: '750px', border: '1px solid #aaaaaa', padding: '5px' }}
             value={content}
             onChange={handleContentChange}
           ></textarea>
-        </SCStorageTextWrapper>
-        <SCStorageOpWrapper>
+        </div>
+        <div>
           <FileOperations
             content={content}
             onChange={(updated) => {
               setContent(updated);
             }}
           />
-        </SCStorageOpWrapper>
-      </SCStorageWrapper>
+        </div>
+      </div>
     </Page>
   );
 };

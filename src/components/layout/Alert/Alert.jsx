@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { dismissAlert } from './alertActions';
-import { SCAlertWrapper, SCAlert, SCAlertHeader, SCAlertContent } from './styles';
+import './alert.css';
 
 const ZERO = 0;
 
@@ -25,27 +25,28 @@ const Alert = () => {
   }
 
   return (
-    <SCAlertWrapper>
+    <div className='alert-list-wrapper'>
       {queue.map((item) => {
         return (
-          <SCAlert key={item.id}>
-            <SCAlertHeader status={item.status}>
+          <div className='alert-wrapper' key={item.id}>
+            <div className={'alert-header ' + item.status === 'success' ? '' : 'alert-header__error'}>
               {item.status}
               <button
+                className='alert-header-btn'
                 onClick={() => {
                   dispatch(dismissAlert(item.id));
                 }}
               >
                 X
               </button>
-            </SCAlertHeader>
-            <SCAlertContent status={item.status}>
-              <span>{item.content}</span>
-            </SCAlertContent>
-          </SCAlert>
+            </div>
+            <div className={'alert-content-wrapper' + item.status === 'success' ? '' : 'alert-content-wrapper__error'}>
+              <span className='alert-content'>{item.content}</span>
+            </div>
+          </div>
         );
       })}
-    </SCAlertWrapper>
+    </div>
   );
 };
 

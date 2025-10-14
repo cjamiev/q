@@ -3,8 +3,6 @@ import logger from 'redux-logger';
 import { thunk } from 'redux-thunk';
 
 import alertReducer from '../components/layout/Alert/alertReducer';
-import projectReducer from '../components/pages/Project/projectReducer';
-import globalReducer from '../components/molecules/Global/globalReducer';
 
 const middlewares = [thunk];
 if (process.env.NODE_ENV === 'development') {
@@ -14,8 +12,6 @@ const appliedMiddlewares = applyMiddleware(...middlewares);
 
 const rootReducer = combineReducers({
   alert: alertReducer,
-  global: globalReducer,
-  project: projectReducer
 });
 
 const configureStore = (initialState) => {

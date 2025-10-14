@@ -1,0 +1,66 @@
+.project-snippet-wrapper {
+  display: flex;
+}
+
+.project-snippet-create-form {
+  width: 350px;
+  padding: 10px;
+  border-width: 2px;
+  border-style: groove;
+  border-color: threedface;
+  border-image: initial;
+}
+
+.project-snippet-create-form-btn {
+  margin-left: 12px;
+}
+
+.project-snippet-load-header {
+  display: flex;
+  margin-bottom: 10px;
+
+}
+
+.project-snippet-load-header-title {
+  margin: 12px 10px;
+  font-size: 24px;
+}
+
+.project-snippet-load-btn-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-flow: column wrap;
+  max-height: 500px;
+  row-gap: 5px;
+  margin-left: 10px;
+}
+
+.project-snippet-load-btn {
+  background-color: hsl(204, 89%, 18%);
+  border: 1px solid hsl(204, 100%, 10%);
+  color: #fff;
+  margin: 0px 10px;
+  border-radius: 0;
+  font-size: 16px;
+  height: 50px;
+  width: 220px;
+  cursor: pointer;
+}
+
+.project-snippet-load-btn:hover {
+  background-color: hsl(204, 100%, 35%);
+}
+
+.project-snippet-type {
+  font-size: 20px;
+  text-transform: capitalize;
+}
+
+.project-snippet-text-wrapper {
+  width: 800px;
+  margin: 20px;
+}
+
+.project-snippet-text-area {
+    height: 700px;
+}

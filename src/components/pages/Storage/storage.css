@@ -1,0 +1,31 @@
+.storage-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.storage-btn-wrapper {
+  visibility: hidden;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  margin-right: 10px;
+  row-gap: 10px;
+}
+
+.storage-btn-wrapper__visible {
+  visibility: visible;
+}
+
+.storage-btn {
+  width: 250px;
+}
+
+.storage-name-wrapper {
+  display: flex;
+  position: relative;
+  cursor: pointer;
+}
+
+.storage-text-wrapper {
+  margin-top: 10px;
+}

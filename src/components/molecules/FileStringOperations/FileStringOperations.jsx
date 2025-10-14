@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Button from '../../../components/atoms/Button';
 import {
   alphaAscendingSort,
   alphaDescendingSort,
@@ -7,7 +6,6 @@ import {
   numericDescendingSort,
 } from '../../../utils/sort';
 import { unique } from '../../../utils/arrayHelper';
-import { SCFileBtnWrapper } from './styles';
 
 export const FileStringOperations = ({ content, onChange }) => {
   const [selectedDelimiter, setSelectedDelimiter] = useState('\n');
@@ -30,7 +28,6 @@ export const FileStringOperations = ({ content, onChange }) => {
             Split
           </button>
           <button
-            Join
             onClick={() => {
               onChange(content.split('\n').join(selectedDelimiter));
             }}

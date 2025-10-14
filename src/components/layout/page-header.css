@@ -1,0 +1,11 @@
+.page-header {
+  position: relative;
+  height: 100px;
+  white-space: nowrap;
+}
+
+.page-header-title {
+  display: inline-block;
+  margin-top: 10px;
+  margin-left: 10px;
+}

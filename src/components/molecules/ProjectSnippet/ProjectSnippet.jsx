@@ -1,19 +1,8 @@
 import React, { useState } from 'react';
 import { copyToClipboard } from '../../../utils/copy';
-import Button from '../../../components/atoms/Button';
-import { CopySVG } from '../../../components/atoms/Icons/CopySVG';
-import { TrashSVG } from '../../../components/atoms/Icons';
 import useLocalStorage from '../../../hooks/useLocalStorage';
-import {
-  SCFlexWrapper,
-  SCCreateFormFieldSet,
-  SCLoadHeader,
-  SCLoadBtnWrapper,
-  SCSnippetType,
-  SCLoadButton,
-  SCSnippetTextWrapper
-} from './styles';
 import { LS_SNIPPETS_KEY } from '../../../constants/localstorage';
+import './project-snippet.css';
 
 const Snippet = () => {
   const [name, setName] = useState('');
@@ -36,66 +25,65 @@ const Snippet = () => {
   const fileButtons = snippets.sort((a, b) => b.type - a.type).map((snippet) => {
     return (
       <React.Fragment key={snippet.name}>
-        <SCSnippetType>{snippet.type}</SCSnippetType>
-        <SCLoadButton
-          label={snippet.name}
+        <span className='project-snippet-type'>{snippet.type}</span>
+        <button
+          className='project-snippet-load-btn'
           onClick={() => {
             setContent(snippet.content);
           }}
-        />
+        >
+          {snippet.name}
+        </button>
       </React.Fragment>
     );
   });
 
   return (
-    <SCFlexWrapper>
+    <div className='project-snippet-wrapper'>
       <div>
         <form>
-          <SCCreateFormFieldSet>
+          <fieldset className='project-snippet-create-form'>
             <legend> Create Snippet </legend>
             <input type="text" id="name" name="name" placeholder="Name" value={name} onChange={handleNameChange}></input>
             <input type="text" id="type" name="type" placeholder="Type" value={name} onChange={handleTypeChange}></input>
-            <Button
-              label="Submit"
-              isprimary
+            <button
+              className='project-snippet-create-form-btn'
               onClick={(e) => {
                 e.preventDefault();
                 if (name && content) {
                   setSnippets(snippets.concat([{ name, type, content }]))
                 }
               }}
-            />
-          </SCCreateFormFieldSet>
+            >
+              Submit
+            </button>
+          </fieldset>
         </form>
-        <SCLoadHeader>
-          <span>Load File</span>
-          <CopySVG
-            width="45"
+        <div className='project-snippet-load-header'>
+          <span className='project-snippet-load-header-title'>Load File</span>
+          <button
             onClick={() => {
               copyToClipboard(content);
             }}
-            transform="translate(0,4)"
-          />
-          <TrashSVG
-            transform="translate(0,4)"
-            width="45"
+          >Copy</button>
+          <button
             onClick={() => {
               setSnippets(snippets.filter(snippet => snippet.name !== name));
             }}
-          />
-        </SCLoadHeader>
-        <SCLoadBtnWrapper>{fileButtons}</SCLoadBtnWrapper>
+          >Delete</button>
+        </div>
+        <div className='project-snippet-load-btn-wrapper'>{fileButtons}</div>
       </div>
       <div>
-        <SCSnippetTextWrapper>
+        <div className='project-snippet-text-wrapper'>
           <textarea
             style={{ width: '500px', height: '500px', border: '1px solid #aaaaaa', padding: '5px' }}
             value={content}
             onChange={handleContentChange}
           ></textarea>
-        </SCSnippetTextWrapper>
+        </div>
       </div>
-    </SCFlexWrapper>
+    </div>
   );
 };
 

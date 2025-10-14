@@ -3,7 +3,6 @@ import { ROUTES } from '../../constants/routes';
 import PageHeader from './PageHeader';
 import { QuickAccess } from './QuickAccess';
 import Navigation from './Navigation';
-import { QuickTimer } from './QuickTimer';
 import './page.css';
 
 const NAV_ITEMS = Object.values(ROUTES);
@@ -21,7 +20,6 @@ const Page = ({ children }) => {
           <PageHeader
             title={currentPage.label}
           />
-          <QuickTimer />
           <QuickAccess />
           <div>{children}</div>
         </div>

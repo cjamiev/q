@@ -77,7 +77,7 @@ const Snippet = () => {
       <div>
         <div className='project-snippet-text-wrapper'>
           <textarea
-            style={{ width: '500px', height: '500px', border: '1px solid #aaaaaa', padding: '5px' }}
+            className='project-snippet-text-area'
             value={content}
             onChange={handleContentChange}
           ></textarea>

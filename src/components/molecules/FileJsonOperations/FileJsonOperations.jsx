@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { createAlert, dismissAlert } from '../../../components/layout/Alert/alertActions';
 import { parseObject, isJSONString } from '../../../utils/type-check';
+import './file-json-operations-wrapper.css';
 
 const TWO = 2;
 
@@ -9,7 +10,7 @@ export const FileJsonOperations = ({ content, onChange }) => {
   const dispatch = useDispatch();
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
+    <div className='file-json-operation-wrapper'>
       <button
         onClick={() => {
           dispatch(dismissAlert());

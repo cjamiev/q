@@ -1,0 +1,2 @@
+.settings-timer-new-item { display: flex; flex-direction: column; width: 200px }
+.settings-timer-add-btn { background: black; color: white; border-radius: 20px; cursor: pointer }

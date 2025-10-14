@@ -3,6 +3,7 @@ import { SettingsClipboard } from './SettingsClipboard';
 import { SettingsTimer } from './SettingsTimer';
 import { copyToClipboard } from '../../../utils/copy';
 import * as ALL_STORAGE from '../../../constants/localstorage';
+import './settings.css';
 
 const Settings = () => {
 
@@ -19,11 +20,11 @@ const Settings = () => {
 
   return (
     <Page>
-      <div style={{ display: 'flex', gap: '10px', width: '100%', flex: '1 1 auto' }}>
+      <div className='settings-sections'>
         <SettingsClipboard />
         <SettingsTimer />
       </div>
-      <button style={{ position: 'absolute', bottom: '10px', left: '50%', cursor: 'pointer' }} onClick={handleCopy}>COPY</button>
+      <button className='settings-btn' onClick={handleCopy}>COPY</button>
     </Page>
   );
 };

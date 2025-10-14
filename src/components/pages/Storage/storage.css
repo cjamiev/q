@@ -3,6 +3,11 @@
   flex-wrap: wrap;
 }
 
+.storage-file-dropdown { 
+  position: relative; 
+  border: 1px solid black; 
+}
+
 .storage-btn-wrapper {
   visibility: hidden;
   position: absolute;
@@ -17,15 +22,26 @@
 }
 
 .storage-btn {
+  cursor: pointer;
+}
+
+.storage-file-btn {
   width: 250px;
+  cursor: pointer;
 }
 
 .storage-name-wrapper {
   display: flex;
   position: relative;
-  cursor: pointer;
 }
 
 .storage-text-wrapper {
   margin-top: 10px;
+}
+
+.storage-text-area { 
+  width: 800px; 
+  height: 750px; 
+  border: 1px solid #aaaaaa; 
+  padding: 5px;
 }

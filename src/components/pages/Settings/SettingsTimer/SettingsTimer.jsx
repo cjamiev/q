@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { copyToClipboard } from '../../../../utils/copy';
 import { useCountdown } from '../../../../hooks/useDisplayCountdown';
 import useLocalStorage from '../../../../hooks/useLocalStorage';
 import { LS_TIMERS_KEY } from '../../../../constants/localstorage';
+import './settings-timer.css';
 
 const now = new Date();
 const nowValue = now.toISOString().slice(0, 10);
@@ -55,11 +55,11 @@ export const SettingsTimer = () => {
   return (
     <div>
       <label>Add Timers</label>
-      <div style={{ display: 'flex', flexDirection: 'column', width: '200px' }}>
+      <div className='settings-timer-new-item'>
         <input type="text" id="description" name="description" value={description} onChange={handleDescriptionChange}></input>
         <input type="date" id="end-date" name="end_date" value={endDateValue} onChange={handleEndDateChange}></input>
         <input type="time" name="selected-time" value={selectedTime} onChange={handleTimeChange}></input>
-        <button style={{ background: 'black', color: 'white', borderRadius: '20px', cursor: 'pointer' }} onClick={addNewTimer}>Add</button>
+        <button className='settings-timer-add-btn' onClick={addNewTimer}>Add</button>
       </div>
 
       {timers.map(t => {

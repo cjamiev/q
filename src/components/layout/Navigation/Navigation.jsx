@@ -31,9 +31,9 @@ const Navigation = React.memo(() => {
       {isActive ? <nav className='navigation'>
         {renderNavItems}
       </nav> : <svg height="50" width="50">
-        <line x1="10" y1="15" x2="40" y2="15" style={{ stroke: 'white', strokeWidth: 2 }} />
-        <line x1="10" y1="25" x2="40" y2="25" style={{ stroke: 'white', strokeWidth: 2 }} />
-        <line x1="10" y1="35" x2="40" y2="35" style={{ stroke: 'white', strokeWidth: 2 }} />
+        <line className='navigation-btn-bar' x1="10" y1="15" x2="40" y2="15" />
+        <line className='navigation-btn-bar' x1="10" y1="25" x2="40" y2="25" />
+        <line className='navigation-btn-bar' x1="10" y1="35" x2="40" y2="35" />
       </svg>}
     </div>
   );

@@ -1,0 +1,15 @@
+.home-wrapper { display: flex; position: relative; }
+.home-new-note { display: flex; flex-direction: column; width: 300px; margin-right: 30px; }
+.home-new-note-text-area { background: black; color: white; border-radius: 20px 20px 0 0; padding: 10px; }
+.home-new-note-add-btn { background: black; color: white; border-radius: 0 0 20px 20px; cursor: pointer; }
+.home-notes-wrapper { display: flex; gap: 20px }
+.home-note { display: flex; flex-direction: column; width : 300px; max-height: 80vh; position: relative; top: 0; left: 8%; }
+.home-note__expanded { position: absolute; width: 60vw; }
+.home-note-text-area { background: hsl(210, 12%, 16%); color: white; border-radius: 20px 20px 0 0; padding: 10px }
+.home-note-remove-btn { position: absolute; bottom: 1px; left: 0; background: white; color: black; border: none; border-radius: 0 0 0 20px; cursor: pointer; }
+.home-note-expand-btn { background: hsl(210, 12%, 16%); color: white; border-radius: 0 0 20px 20px; cursor: pointer; }
+.home-note-copy-btn { position: absolute; bottom: 0px; right: 0; cursor: pointer; border-radius: 0 0 20px 0; }
+.home-delete-modal { position: absolute; width: 400px; height: 300px; padding: 20px; z-index: 2; border: 1px solid black; background: black; left: 40%; }
+.home-delete-modal-title { font-size: 24px; color: white; text-align: center; width: 100%; }
+.home-delete-modal-btn-wrapper { position: absolute; bottom: 0; left: 10px; display: flex; gap: 10px; margin-bottom: 10px; place-content: center; width: 100%; justify-content: center; }
+.home-delete-modal-btn { font-size: 24px; }

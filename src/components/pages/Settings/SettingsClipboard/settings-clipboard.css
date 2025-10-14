@@ -1,0 +1,4 @@
+.settings-clipboard-new-item { display: flex; flex-direction: column; width: 200px; }
+.settings-clipboard-add-btn { background: black; color: white; border-radius: 20px; cursor: pointer; }
+.settings-clipboard-item { display: flex; flex-direction: column; width: 200px; }
+.settings-clipboard-remove-btn { background: black; color: white; border-radius: 20px; cursor: pointer; }

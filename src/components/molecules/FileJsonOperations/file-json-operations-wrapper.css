@@ -1,0 +1,4 @@
+.file-json-operation-wrapper { 
+  display: flex; 
+  flex-direction: column; 
+}

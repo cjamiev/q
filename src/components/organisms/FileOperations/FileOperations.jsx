@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { FileStringOperations } from '../../../components/molecules/FileStringOperations';
 import { FileJsonOperations } from '../../../components/molecules/FileJsonOperations';
+import './file-operations.css';
 
 export const FileOperations = ({ content, onChange }) => {
   const [operation, setOperation] = useState('string');
 
   return (
     <div className="container--center">
-      <div style={{ minWidth: '150px' }}>
+      <div className='file-operations-wrapper'>
         <input
-          style={{ marginRight: '5px' }}
+          className='file-operations-string'
           type="radio"
           name='string-op'
           value='string'
@@ -26,7 +27,7 @@ export const FileOperations = ({ content, onChange }) => {
           String
         </label>
         <input
-          style={{ margin: '0 5px' }}
+          className='file-operations-json'
           type="radio"
           name='string-op'
           value='json'

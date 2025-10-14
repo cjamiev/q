@@ -27,6 +27,7 @@ const Storage = () => {
           <div className='storage-name-wrapper'>
             <input type="text" id="name" name="name" placeholder="Enter File Name" value={name} onChange={handleNameChange}></input>
             <button
+              className='storage-btn'
               onClick={() => {
                 if (name && content) {
                   const isExistingFile = files.some(f => f.name === name);
@@ -47,19 +48,20 @@ const Storage = () => {
               Save
             </button>
             <button
+              className='storage-btn'
               onClick={() => {
                 copyToClipboard(content);
               }}
             >
               Copy
             </button>
-            {files.length > 0 && <div style={{ position: 'relative', border: '1px solid black' }} onClick={() => setShowFileNames(!showFileNames)}>
+            {files.length > 0 && <div className='storage-file-dropdown' onClick={() => setShowFileNames(!showFileNames)}>
               Select Stored File
               <div className={'storage-btn-wrapper ' + showFileNames ? '' : 'storage-btn-wrapper__visible'}>
                 {files.map((item) => {
                   return (
                     <button
-                      className='storage-btn'
+                      className='storage-file-btn'
                       key={item.name}
                       onClick={() => {
                         setName(item.name);
@@ -74,7 +76,7 @@ const Storage = () => {
             </div>}
           </div>
           <textarea
-            style={{ width: '800px', height: '750px', border: '1px solid #aaaaaa', padding: '5px' }}
+            className='storage-text-area'
             value={content}
             onChange={handleContentChange}
           ></textarea>

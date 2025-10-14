@@ -1,0 +1,5 @@
+.file-string-operations-delimiter { display: flex }
+.file-string-operations-delimiter-btn { background: white; cursor: pointer }
+.file-string-operations-delimiter-btn__active { background: red }
+.file-string-operation-group-wrapper { display: flex; gap: 10px; }
+.file-string-operation-group { display: flex; flex-direction: column; }

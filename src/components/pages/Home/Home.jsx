@@ -3,6 +3,7 @@ import useLocalStorage from '../../../hooks/useLocalStorage';
 import { copyToClipboard } from '../../../utils/copy';
 import { LS_NOTES_KEY } from '../../../constants/localstorage';
 import Page from '../../layout';
+import * as ALL_STORAGE from '../../../constants/localstorage';
 import './home.css';
 
 export const Home = () => {
@@ -59,6 +60,17 @@ export const Home = () => {
     }
   }
 
+  const handleBackup = () => {
+    const allItems = [];
+    for (const key of Object.keys(ALL_STORAGE)) {
+      allItems.push(ALL_STORAGE[key]);
+    }
+    const allValues = allItems.map((item) => {
+      return { key: item, value: localStorage.getItem(item) };
+    })
+    copyToClipboard(JSON.stringify(allValues));
+  }
+
   return (
     <Page>
       <div className='home-wrapper'>
@@ -102,6 +114,7 @@ export const Home = () => {
           </div>
         </div> : null}
       </div >
+      <button className='home-backup-btn' onClick={handleBackup}>Backup</button>
     </Page >
   );
 };

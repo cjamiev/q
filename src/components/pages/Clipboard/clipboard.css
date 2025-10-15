@@ -4,10 +4,3 @@
   width: 100%; 
   flex: 1 1 auto;
 }
-
-.clipboard-btn {
-  position: absolute; 
-  bottom: 10px; 
-  left: 50%; 
-  cursor: pointer;
-}

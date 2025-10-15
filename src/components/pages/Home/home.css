@@ -13,3 +13,9 @@
 .home-delete-modal-title { font-size: 24px; color: white; text-align: center; width: 100%; }
 .home-delete-modal-btn-wrapper { position: absolute; bottom: 0; left: 10px; display: flex; gap: 10px; margin-bottom: 10px; place-content: center; width: 100%; justify-content: center; }
 .home-delete-modal-btn { font-size: 24px; }
+.home-backup-btn {
+  position: absolute; 
+  bottom: 10px; 
+  left: 50%; 
+  cursor: pointer;
+}

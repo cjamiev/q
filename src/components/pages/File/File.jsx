@@ -11,6 +11,7 @@ const File = () => {
   const [name, setName] = useState('');
   const [content, setContent] = useState('');
   const [files, setFiles] = useLocalStorage(LS_FILES_KEY, [], true);
+  const [operation, setOperation] = useState('string');
 
   const handleNameChange = ({ target: { value } }) => {
     setName(value);
@@ -19,6 +20,10 @@ const File = () => {
   const handleContentChange = ({ target: { value } }) => {
     setContent(value);
   };
+
+  const handleOperationChange = (op) => {
+    setOperation(op);
+  }
 
   return (
     <Page>
@@ -87,6 +92,8 @@ const File = () => {
             onChange={(updated) => {
               setContent(updated);
             }}
+            operation={operation}
+            onChangeOperation={handleOperationChange}
           />
         </div>
       </div>

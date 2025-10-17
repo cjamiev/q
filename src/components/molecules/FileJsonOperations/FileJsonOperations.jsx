@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { createAlert, dismissAlert } from '../../../components/layout/Alert/alertActions';
 import { parseObject, isJSONString } from '../../../utils/type-check';
-import './file-json-operations-wrapper.css';
+import './file-json-operations.css';
 
 const TWO = 2;
 

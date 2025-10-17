@@ -5,4 +5,5 @@
 
 .file-json-operation-btn {
   cursor: pointer;
+  width: 120px;
 }

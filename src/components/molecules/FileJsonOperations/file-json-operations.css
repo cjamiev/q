@@ -1,9 +1,0 @@
-.file-json-operation-wrapper { 
-  display: flex; 
-  flex-direction: column; 
-}
-
-.file-json-operation-btn {
-  cursor: pointer;
-  width: 120px;
-}

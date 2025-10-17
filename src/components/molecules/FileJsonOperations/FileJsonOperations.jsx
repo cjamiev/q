@@ -1,8 +1,6 @@
-import React from 'react';
 import { useDispatch } from 'react-redux';
 import { createAlert, dismissAlert } from '../../../components/layout/Alert/alertActions';
 import { parseObject, isJSONString } from '../../../utils/type-check';
-import './file-json-operations.css';
 
 const TWO = 2;
 
@@ -10,9 +8,9 @@ export const FileJsonOperations = ({ content, onChange }) => {
   const dispatch = useDispatch();
 
   return (
-    <div className='file-json-operation-wrapper'>
+    <div className='file-operation-wrapper'>
       <button
-        className='file-json-operation-btn'
+        className='file-operation-btn'
         onClick={() => {
           dispatch(dismissAlert());
           const isValid = isJSONString(content);
@@ -27,7 +25,7 @@ export const FileJsonOperations = ({ content, onChange }) => {
         Validate
       </button>
       <button
-        className='file-json-operation-btn'
+        className='file-operation-btn'
         onClick={() => {
           onChange(
             JSON.stringify(content)
@@ -43,7 +41,7 @@ export const FileJsonOperations = ({ content, onChange }) => {
         Stringify
       </button>
       <button
-        className='file-json-operation-btn'
+        className='file-operation-btn'
         onClick={() => {
           const parsed = parseObject(content.replace(/\"/g, '\\"').replace(/\'/g, '"'));
           if (parsed) {
@@ -54,7 +52,7 @@ export const FileJsonOperations = ({ content, onChange }) => {
         Parse
       </button>
       <button
-        className='file-json-operation-btn'
+        className='file-operation-btn'
         onClick={() => {
           const result = content
             .replace(/['|"]{/g, '{')

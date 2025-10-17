@@ -1,9 +1,0 @@
-.file-base64-operation-wrapper { 
-  display: flex; 
-  flex-direction: column; 
-}
-
-.file-base64-operation-btn {
-  cursor: pointer;
-  width: 120px;
-}

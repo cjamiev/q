@@ -1,3 +1,26 @@
 .file-operations-wrapper { min-width: 250px; }
 .file-operations-input { margin-right: 5px; }
 .file-operations-label { cursor: pointer; margin-right: 5px; }
+
+.file-operation-wrapper { 
+  display: flex; 
+  flex-direction: column; 
+}
+
+.file-operation-btn {
+  cursor: pointer;
+  width: 120px;
+}
+
+.file-operations-delimiter { display: flex }
+.file-operations-delimiter-btn { background: white; cursor: pointer }
+.file-operations-delimiter-btn__active { background: red }
+.file-operation-group-wrapper { display: flex; gap: 10px; }
+.file-operation-group { display: flex; flex-direction: column; }
+
+.file-text-area-output {
+    width: 500px; 
+  height: 400px; 
+  border: 1px solid #aaaaaa; 
+  padding: 5px;
+}

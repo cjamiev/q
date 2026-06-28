@@ -15,10 +15,10 @@
   border-radius: 0 0 0 5px;
 }
 
-.navigation-container__active {
+.navigation-container:hover {
   padding: 5px;
-  width: fit-content;
-  height: fit-content;
+  width: 180px;
+  height: 160px;
   cursor: unset;
   clip-path: none;
 }

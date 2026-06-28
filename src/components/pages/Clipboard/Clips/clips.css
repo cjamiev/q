@@ -9,7 +9,7 @@
 .clips-item { 
   display: flex; 
   flex-direction: column; 
-  width: 200px; 
+  width: 250px; 
   height: 100px;
   border: 1px dashed black;
   margin-top: 5px;
@@ -49,8 +49,35 @@
 .clips-remove-btn { 
   background: red; 
   color: white; 
+  border: lightcoral 1px solid;
   cursor: pointer; 
   position: absolute;
   bottom: 10px;
   right: 10px;
+}
+
+.clips-moveup-btn, .clips-movedown-btn {
+  width: 50px;
+  height: 20px;
+  position: absolute;
+  bottom: 10px;
+  cursor: pointer; 
+  background: blue;
+  color: white;
+  border: lightblue 1px solid;
+}
+
+.clips-moveup-btn {
+  left: 62px;
+}
+.clips-movedown-btn {
+  left: 118px;
+}
+
+.clips-success-msg {
+  background-color: green;
+  color: white;
+  margin-bottom: 5px;
+  padding: 5px;
+  width: fit-content;
 }

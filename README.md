@@ -6,13 +6,10 @@ Used to help with building other projects, as well improving efficiency for arbi
 
 ## Features
 
-- Home: To do list and global timers will alerts that fire on any page.
-- File: Storage for important files. Also perform string ops, regex, and json ops.
-- Project: Npm and Snippets.
-  Updating package.json and running package scripts.
-  Stores saved snippets.
-- Quick Access Footer: list of commands to execute, as well as copy/paste values
-- Settings: Sets what appears in Commands, and Copy/Paste
+- Home (Clipboard) page to configure timer and copy/paste values
+- File: Perform string ops, regex, and json ops.
+- Quick Access Footer: copy/paste values and timer
+- Experiment: page to test html, css, react
 
 ## Notes
 

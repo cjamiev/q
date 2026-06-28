@@ -7,13 +7,13 @@ import './timer.css';
 const now = new Date();
 const nowValue = now.toISOString().slice(0, 10);
 
-const Countdown = ({ description, endDate }) => {
+export const Countdown = ({ description, endDate }) => {
   const timeLeft = useCountdown({ endDate });
 
   return <div>{description + ': ' + timeLeft}</div>;
 }
 
-const getCountdownDate = (endDateValue, selectedTime) => {
+export const getCountdownDate = (endDateValue, selectedTime) => {
   const selecteDate = new Date(endDateValue);
   const [hours, minutes] = selectedTime.split(':');
   selecteDate.setUTCHours(hours, minutes, 0, 0)

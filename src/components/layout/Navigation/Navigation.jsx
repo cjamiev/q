@@ -27,7 +27,7 @@ const Navigation = React.memo(() => {
   });
 
   return (
-    <div className={`navigation-container ${isActive ? 'navigation-container__active' : ''}`} onMouseEnter={() => setIsActive(true)} onMouseLeave={() => setIsActive(false)}>
+    <div className='navigation-container' onMouseEnter={() => setIsActive(true)} onMouseLeave={() => setIsActive(false)}>
       {isActive ? <nav className='navigation'>
         {renderNavItems}
       </nav> : <svg height="50" width="50">

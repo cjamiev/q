@@ -54,7 +54,7 @@ export const Timer = () => {
 
   return (
     <div>
-      <label>Add Timers</label>
+      <h2>Timers</h2>
       <div className='timer-new-item'>
         <input type="text" id="description" name="description" value={description} onChange={handleDescriptionChange}></input>
         <input type="date" id="end-date" name="end_date" value={endDateValue} onChange={handleEndDateChange}></input>
@@ -64,9 +64,9 @@ export const Timer = () => {
 
       {timers.map(t => {
         return (
-          <div key={t.description}>
+          <div key={t.description} className='timer-item'>
             <Countdown description={t.description} endDate={getCountdownDate(t.targetDate, t.time)} />
-            <button onClick={() => removeTimer(t.description)}>Remove</button>
+            <button className='timer-remove-btn' onClick={() => removeTimer(t.description)}>Remove</button>
           </div>
         )
       })}

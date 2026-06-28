@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import useLocalStorage from '../../../../hooks/useLocalStorage';
 import { LS_CLIPBOARD_KEY } from '../../../../constants/localstorage';
+import { copyToClipboard } from '../../../../utils/copy';
 import './clips.css';
 
 
@@ -29,7 +30,7 @@ export const Clips = () => {
 
   return (
     <div>
-      <label>Add Clipboard Items</label>
+      <h2>Clipboard</h2>
       <div className='clips-new-item'>
         <input type="text" id="description" name="description" placeholder='label' value={description} onChange={handleDescriptionChange}></input>
         <input type="text" id="copy-value" name="copy-value" placeholder='value' value={copyValue} onChange={handleCopyValueChange}></input>
@@ -38,8 +39,9 @@ export const Clips = () => {
       <div>
         {clipboard.map(c => {
           return (<div key={c.label} className='clips-item'>
-            <span>Label: {c.label} </span>
-            <div className='clips-item-value'>Value: {c.value}</div>
+            <span className='clips-item_label'>{c.label} </span>
+            <span className='clips-item_value'>{c.value}</span>
+            <button className='clips-copy-btn' onClick={() => copyToClipboard(c.value)}>Copy</button>
             <button className='clips-remove-btn' onClick={() => deleteCopyItem(c.label)}>Remove</button>
           </div>)
         })}

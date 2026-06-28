@@ -1,2 +1,20 @@
-.timer-new-item { display: flex; flex-direction: column; width: 200px }
+.timer-new-item { 
+  display: flex; 
+  flex-direction: column; 
+  width: 200px;
+  gap: 5px;
+}
 .timer-add-btn { background: black; color: white; border-radius: 20px; cursor: pointer }
+
+.timer-item {
+  border: 1px dashed black;
+  margin-top: 5px;
+  padding: 5px;
+  position: relative;
+}
+
+.timer-remove-btn { 
+  background: red; 
+  color: white; 
+  cursor: pointer; 
+}

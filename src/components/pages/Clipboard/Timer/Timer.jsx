@@ -56,8 +56,8 @@ export const Timer = () => {
     <div>
       <h2>Timers</h2>
       <div className='timer-new-item'>
-        <input type="text" id="description" name="description" value={description} onChange={handleDescriptionChange}></input>
-        <input type="date" id="end-date" name="end_date" value={endDateValue} onChange={handleEndDateChange}></input>
+        <input type="text" id="timer-label" name="timer-label" value={description} onChange={handleDescriptionChange}></input>
+        <input type="date" id="end-date" name="end-date" value={endDateValue} onChange={handleEndDateChange}></input>
         <input type="time" name="selected-time" value={selectedTime} onChange={handleTimeChange}></input>
         <button className='timer-add-btn' onClick={addNewTimer}>Add</button>
       </div>

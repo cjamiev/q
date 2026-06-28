@@ -83,10 +83,10 @@ export const Clips = () => {
       <h2>Clipboard</h2>
       {showCopySuccess && <div className='clips-success-msg'>Successfully Copied!</div>}
       <div className='clips-new-item'>
-        <input type="text" id="description" name="description" placeholder='label' value={description} onChange={handleDescriptionChange}></input>
+        <input type="text" id="copy-label" name="copy-label" placeholder='label' value={description} onChange={handleDescriptionChange}></input>
         <input type="text" id="copy-value" name="copy-value" placeholder='value' value={copyValue} onChange={handleCopyValueChange}></input>
         <button className='clips-add-btn' onClick={addNewCopyItem}>Add</button>
-        <label><input type="checkbox" checked={showEdit} onClick={toggleEdit} /> Edit Mode</label>
+        <label><input type="checkbox" checked={showEdit} onChange={toggleEdit} /> Edit Mode</label>
       </div>
       <div>
         {clipboard.sort((a, b) => a.id - b.id).map(c => {

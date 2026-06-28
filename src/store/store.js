@@ -1,11 +1,12 @@
 import { applyMiddleware, createStore, compose, combineReducers } from 'redux';
-import logger from 'redux-logger';
+import { createLogger } from 'redux-logger';
 import { thunk } from 'redux-thunk';
 
 import alertReducer from '../components/layout/Alert/alertReducer';
 
 const middlewares = [thunk];
 if (process.env.NODE_ENV === 'development') {
+  const logger = createLogger();
   middlewares.push(logger);
 }
 const appliedMiddlewares = applyMiddleware(...middlewares);

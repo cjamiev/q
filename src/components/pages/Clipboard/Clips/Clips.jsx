@@ -39,7 +39,7 @@ export const Clips = () => {
         {clipboard.map(c => {
           return (<div key={c.label} className='clips-item'>
             <span>Label: {c.label} </span>
-            <span>Value: {c.value}</span>
+            <div className='clips-item-value'>Value: {c.value}</div>
             <button className='clips-remove-btn' onClick={() => deleteCopyItem(c.label)}>Remove</button>
           </div>)
         })}

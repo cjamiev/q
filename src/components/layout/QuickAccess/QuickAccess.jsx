@@ -4,6 +4,7 @@ import { LS_TIMERS_KEY, LS_CLIPBOARD_KEY } from '../../../constants/localstorage
 import useOnClickOutside from '../../../hooks/useOnClickOutside';
 import { useCountdown } from '../../../hooks/useDisplayCountdown';
 import { getFormattedDate } from '../../../utils/clock';
+import { copyToClipboard } from '../../../utils/copy';
 import './quick-access.css';
 
 const SINGLE_DIGIT = 9;

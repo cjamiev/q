@@ -1,0 +1,50 @@
+.links-new-item { 
+  display: flex; 
+  flex-direction: column; 
+  width: 200px; 
+  gap: 5px;
+}
+.links-add-btn { background: black; color: white; border-radius: 20px; cursor: pointer; }
+
+.links-group-wrapper { 
+  display: flex; 
+  flex-direction: column; 
+  width: 250px; 
+  height: 100px;
+  border: 1px dashed black;
+  margin-top: 5px;
+  padding: 5px;
+  position: relative;
+}
+
+.links-item__container{
+  display: flex;
+  margin-bottom: 4px;
+}
+
+.links-item_href {
+  flex: 1;
+  color: green;
+  text-decoration: none;
+}
+
+.links-item_href:hover {
+  color: darkgreen;
+  text-decoration: underline;
+}
+
+.links-item_remove-btn { 
+  background: red; 
+  color: white; 
+  border: lightcoral 1px solid;
+  cursor: pointer; 
+}
+
+.links-item_moveup-btn, .links-item_movedown-btn {
+  width: 50px;
+  height: 20px;
+  cursor: pointer; 
+  background: blue;
+  color: white;
+  border: lightblue 1px solid;
+}

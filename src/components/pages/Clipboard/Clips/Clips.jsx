@@ -45,7 +45,7 @@ export const Clips = () => {
   }
 
   const deleteCopyItem = (d) => {
-    const updatedClips = clipboard.filter(c => c.label !== d).sort((a, b) => a.position - b.position).map((item, index) => {
+    const updatedClips = clipboard.filter(c => c.label !== d).map((item, index) => {
       return {
         ...item,
         position: index

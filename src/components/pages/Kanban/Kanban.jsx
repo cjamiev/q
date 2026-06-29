@@ -10,8 +10,8 @@ import './kanban.css';
 const Kanban = () => {
   const [selected, setSelected] = useState('');
 
-  const handleEdit = (title) => {
-    setSelected(title);
+  const handleEdit = (id) => {
+    setSelected(id);
   };
 
   return (

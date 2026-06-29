@@ -82,6 +82,7 @@
 .kanban-work-modes {
   position: absolute;
   top: -30px;
+  min-width: 200px;
 }
 
 .kanban-work-card {

@@ -42,14 +42,14 @@ export const WorkDisplay = ({ handleEdit }) => {
     {visibleItems.map(w => {
       return (<div key={w.title} className='kanban-work-card'>
         <h3>{w.title}</h3>
-        <div className='kanban-work-description'>{w.description}</div>
+        <pre className='kanban-work-description'>{w.description}</pre>
         <div className='kanban-work-links'>
           {w.links.map(l => {
             return (<a key={l.url} href={l.url} target="_blank">{l.label || l.url}</a>)
           })}
         </div>
         <div className='kanban-work-status' data-status={w.status}>{statusMap[w.status]}</div>
-        {showEdit && <button className='kanban-work-edit-btn' onClick={() => { handleEdit(w.title) }}>Edit</button>}
+        {showEdit && <button className='kanban-work-edit-btn' onClick={() => { handleEdit(w.id) }}>Edit</button>}
         <button className='kanban-work-copy-btn' onClick={() => { handleCopy(w) }}>Copy</button>
       </div>)
     })}

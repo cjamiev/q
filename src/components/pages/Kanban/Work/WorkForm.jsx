@@ -11,15 +11,19 @@ export const WorkForm = ({ selected, handleEdit }) => {
   const [status, setStatus] = useState('not-started');
   const [links, setLinks] = useState([]);
   const [show, setShow] = useState(false);
+  const [id, setId] = useState(0);
 
   useEffect(() => {
-    const matched = work.find(w => w.title === selected);
+    const matched = work.find(w => w.id === selected);
     if (matched) {
       setTitle(matched.title);
       setDescription(matched.description);
       setStatus(matched.status);
       setLinks(matched.links);
+      setId(matched.id);
       setShow(true);
+    } else {
+      setId(work.length + 1);
     }
   }, [selected])
 
@@ -59,13 +63,14 @@ export const WorkForm = ({ selected, handleEdit }) => {
       title,
       description,
       status,
-      links
+      links,
+      id
     };
 
-    const matched = work.find(w => w.title === title);
+    const matched = work.find(w => w.id === id);
     if (matched) {
       const updated = work.map(w => {
-        if (w.title === title) {
+        if (w.id === id) {
           return newWorkItem;
         }
         else {

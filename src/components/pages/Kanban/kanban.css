@@ -67,10 +67,21 @@
   width: fit-content
 }
 
+.kanban-form_btn-wrapper {
+  display: flex;
+  gap: 50px;
+}
+
 .kanban-work-wrapper {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  position: relative;
+}
+
+.kanban-work-modes {
+  position: absolute;
+  top: -30px;
 }
 
 .kanban-work-card {

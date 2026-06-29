@@ -97,6 +97,16 @@ const WorkForm = ({ selected, handleEdit }) => {
     handleEdit('');
   }
 
+  const handleClear = () => {
+    setTitle('');
+    setDescription('');
+    setStatus('not-started');
+    setUrl('');
+    setUrlLabel('');
+    setLinks([]);
+    handleEdit('');
+  }
+
   const toggleSidebar = () => {
     setShow(!show);
   }
@@ -145,7 +155,10 @@ const WorkForm = ({ selected, handleEdit }) => {
           })}
         </div>}
       </div>
-      <button onClick={handleSave}>Save</button>
+      <div className='kanban-form_btn-wrapper'>
+        <button onClick={handleSave}>Save</button>
+        <button onClick={handleClear}>Clear</button>
+      </div>
     </div>
   );
 };
@@ -167,8 +180,10 @@ const WorkDisplay = ({ handleEdit }) => {
 
 
   return (<div className='kanban-work-wrapper'>
-    <label><input type="checkbox" checked={showEdit} onChange={toggleEdit} /> Edit Mode</label>
-    <label><input type="checkbox" checked={showDone} onChange={toggleDone} /> Show Done</label>
+    <div className='kanban-work-modes'>
+      <label><input type="checkbox" checked={showEdit} onChange={toggleEdit} /> Edit Mode </label>
+      <label><input type="checkbox" checked={showDone} onChange={toggleDone} /> Show Done </label>
+    </div>
     {visibleItems.map(w => {
       return (<div key={w.title} className='kanban-work-card'>
         <h3>{w.title}</h3>

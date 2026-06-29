@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Page from '../../layout';
 import useLocalStorage from '../../../hooks/useLocalStorage';
 import { LS_WORK_KEY } from '../../../constants/localstorage';
@@ -13,7 +13,7 @@ const statusMap = {
   "done": "Done"
 };
 
-const WorkForm = () => {
+const WorkForm = ({ selected, handleEdit }) => {
   const [work, setWork] = useLocalStorage(LS_WORK_KEY, [], true);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -21,6 +21,18 @@ const WorkForm = () => {
   const [urlLabel, setUrlLabel] = useState('');
   const [status, setStatus] = useState('not-started');
   const [links, setLinks] = useState([]);
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    const matched = work.find(w => w.title === selected);
+    if (matched) {
+      setTitle(matched.title);
+      setDescription(matched.description);
+      setStatus(matched.status);
+      setLinks(matched.links);
+      setShow(true);
+    }
+  }, [selected])
 
   const handleTitleChange = ({ target: { value } }) => {
     setTitle(value);
@@ -61,7 +73,20 @@ const WorkForm = () => {
       links
     };
 
-    setWork(work.concat(newWorkItem));
+    const matched = work.find(w => w.title === title);
+    if (matched) {
+      const updated = work.map(w => {
+        if (w.title === title) {
+          return newWorkItem;
+        }
+        else {
+          return w;
+        }
+      });
+      setWork(updated);
+    } else {
+      setWork(work.concat(newWorkItem));
+    }
 
     setTitle('');
     setDescription('');
@@ -69,10 +94,23 @@ const WorkForm = () => {
     setUrl('');
     setUrlLabel('');
     setLinks([]);
+    handleEdit('');
+  }
+
+  const toggleSidebar = () => {
+    setShow(!show);
+  }
+
+  if (!show) {
+    return (<div className='kanban-form-wrapper_collapsed'>
+      <button className='kanban-form-show-btn kanban-form-show-btn_collapsed' onClick={toggleSidebar}>O</button>
+    </div>);
   }
 
   return (
     <div className='kanban-form-wrapper'>
+      <button className='kanban-form-show-btn' onClick={toggleSidebar}>X</button>
+      <h2>Add Work Item</h2>
       <input className="kanban-form_title" type="text" id="copy-label" name="copy-label" placeholder='title' value={title} onChange={handleTitleChange}></input>
       <textarea
         className='kanban-form_description'
@@ -112,11 +150,26 @@ const WorkForm = () => {
   );
 };
 
-const WorkDisplay = () => {
+const WorkDisplay = ({ handleEdit }) => {
   const [work, setWork] = useLocalStorage(LS_WORK_KEY, [], true);
+  const [showEdit, setShowEdit] = useState(false);
+  const [showDone, setShowDone] = useState(false);
+
+  const visibleItems = showDone ? work : work.filter(w => w.status !== 'done');
+
+  const toggleEdit = () => {
+    setShowEdit(!showEdit);
+  }
+
+  const toggleDone = () => {
+    setShowDone(!showDone);
+  }
+
 
   return (<div className='kanban-work-wrapper'>
-    {work.map(w => {
+    <label><input type="checkbox" checked={showEdit} onChange={toggleEdit} /> Edit Mode</label>
+    <label><input type="checkbox" checked={showDone} onChange={toggleDone} /> Show Done</label>
+    {visibleItems.map(w => {
       return (<div key={w.title} className='kanban-work-card'>
         <h3>{w.title}</h3>
         <div className='kanban-work-description'>{w.description}</div>
@@ -126,16 +179,26 @@ const WorkDisplay = () => {
           })}
         </div>
         <div className='kanban-work-status' data-status={w.status}>{statusMap[w.status]}</div>
+        {showEdit && <button className='kanban-work-edit-btn' onClick={() => { handleEdit(w.title) }}>Edit</button>}
       </div>)
     })}
   </div>)
 };
 
 const Kanban = () => {
+  const [selected, setSelected] = useState('');
+
+  const handleEdit = (title) => {
+    console.log(title)
+    setSelected(title);
+  };
+
   return (
     <Page>
-      <WorkForm />
-      <WorkDisplay />
+      <div className='kanban-wrapper'>
+        <WorkForm selected={selected} handleEdit={handleEdit} />
+        <WorkDisplay handleEdit={handleEdit} />
+      </div>
     </Page>
   );
 };

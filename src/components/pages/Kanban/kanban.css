@@ -1,5 +1,5 @@
-.e-wrapper {
-  background-color: white;
+.kanban-wrapper {
+  margin: 10px;
 }
 
 .kanban-form-wrapper {
@@ -8,14 +8,43 @@
   width: 600px;
   gap: 10px;
   place-items: center;
+  position: absolute;
+  z-index: 2;
+  background-color: white;
+  right: 0;
+  top: 0;
+  height: 100%;
+}
+
+.kanban-form-wrapper_collapsed {
+  width: 50px;
+  height: 100%;
+  position: absolute;
+  z-index: 2;
+  background-color: white;
+  right: 0;
+  top: 0;
+  display: flex;
+  place-items: center;
+}
+
+.kanban-form-show-btn {
+  width: 50px;
+  background-color: black;
+  color: white;
+  place-self: flex-start;
+}
+
+.kanban-form-show-btn_collapsed {
+  place-self: center;
 }
 
 .kanban-form_title {
-  width: 65%;
+  width: 80%;
 }
 
 .kanban-form_description {
-  width: 65%;
+  width: 80%;
   height: 200px;
 }
 
@@ -42,8 +71,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 10px;
-  margin-left: 10px;
 }
 
 .kanban-work-card {
@@ -88,4 +115,10 @@
 
 .kanban-work-status[data-status='done'] {
   color: red;
+}
+
+.kanban-work-edit-btn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
 }

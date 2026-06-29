@@ -8,17 +8,30 @@ import { copyToClipboard } from '../../../utils/copy';
 import './kanban.css';
 
 const Kanban = () => {
+  const [work, setWork] = useLocalStorage(LS_WORK_KEY, [], true);
   const [selected, setSelected] = useState('');
 
   const handleEdit = (id) => {
     setSelected(id);
   };
 
+  const handleWorkUpdate = (updatedWork) => {
+    setWork(updatedWork);
+  };
+
   return (
     <Page>
       <div className='kanban-wrapper'>
-        <WorkForm selected={selected} handleEdit={handleEdit} />
-        <WorkDisplay handleEdit={handleEdit} />
+        <WorkForm
+          work={work}
+          onHandleWorkChange={handleWorkUpdate}
+          selected={selected}
+          handleEdit={handleEdit}
+        />
+        <WorkDisplay
+          work={work}
+          handleEdit={handleEdit}
+        />
       </div>
     </Page>
   );

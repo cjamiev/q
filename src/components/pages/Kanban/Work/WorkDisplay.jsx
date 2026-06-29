@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import useLocalStorage from '../../../../hooks/useLocalStorage';
-import { LS_WORK_KEY } from '../../../../constants/localstorage';
 import { copyToClipboard } from '../../../../utils/copy';
 
 const statusMap = {
@@ -12,8 +10,7 @@ const statusMap = {
   "done": "Done"
 };
 
-export const WorkDisplay = ({ handleEdit }) => {
-  const [work, setWork] = useLocalStorage(LS_WORK_KEY, [], true);
+export const WorkDisplay = ({ work, handleEdit }) => {
   const [showEdit, setShowEdit] = useState(false);
   const [showDone, setShowDone] = useState(false);
 

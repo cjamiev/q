@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react';
-import useLocalStorage from '../../../../hooks/useLocalStorage';
-import { LS_WORK_KEY } from '../../../../constants/localstorage';
 
-export const WorkForm = ({ selected, handleEdit }) => {
-  const [work, setWork] = useLocalStorage(LS_WORK_KEY, [], true);
+export const WorkForm = ({ work, onHandleWorkChange, selected, handleEdit }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [url, setUrl] = useState('');
@@ -77,9 +74,9 @@ export const WorkForm = ({ selected, handleEdit }) => {
           return w;
         }
       });
-      setWork(updated);
+      onHandleWorkChange(updated);
     } else {
-      setWork(work.concat(newWorkItem));
+      onHandleWorkChange(work.concat(newWorkItem));
     }
 
     setTitle('');
@@ -89,6 +86,7 @@ export const WorkForm = ({ selected, handleEdit }) => {
     setUrlLabel('');
     setLinks([]);
     handleEdit('');
+    setShow(false);
   }
 
   const handleClear = () => {

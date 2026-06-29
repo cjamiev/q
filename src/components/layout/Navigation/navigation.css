@@ -18,7 +18,7 @@
 .navigation-container:hover {
   padding: 5px;
   width: 180px;
-  height: 160px;
+  height: 210px;
   cursor: unset;
   clip-path: none;
 }

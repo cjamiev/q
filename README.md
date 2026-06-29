@@ -6,9 +6,10 @@ Used to help with building other projects, as well improving efficiency for arbi
 
 ## Features
 
-- Home (Clipboard) page to configure timer and copy/paste values
+- Home (Clipboard) page to configure timer, copy/paste values, and links
+- Kanban (Work) list out current work in progress items
 - File: Perform string ops, regex, and json ops.
-- Quick Access Footer: copy/paste values and timer
+- Quick Access: timer for end of day
 - Experiment: page to test html, css, react
 
 ## Notes

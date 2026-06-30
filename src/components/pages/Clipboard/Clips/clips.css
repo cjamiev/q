@@ -31,6 +31,14 @@
 .clips-item_value {
   position: relative;
   overflow: hidden;
+  height: 35px;
+}
+
+.clips-item_value:hover {
+  overflow: visible;
+  z-index: 2;
+  background-color: white;
+  height: unset;
 }
 
 .clips-copy-btn { 

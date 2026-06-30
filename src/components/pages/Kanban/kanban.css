@@ -86,11 +86,15 @@
   flex-wrap: wrap;
   gap: 10px;
   position: relative;
+  overflow: auto;
+  max-height: 1000px;
+  padding-top: 30px;
+  padding-bottom: 200px
 }
 
 .kanban-work-modes {
   position: absolute;
-  top: -30px;
+  top: 10px;
   min-width: 200px;
 }
 

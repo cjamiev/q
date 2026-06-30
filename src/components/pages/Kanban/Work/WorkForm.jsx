@@ -69,8 +69,9 @@ export const WorkForm = ({ work, onHandleWorkChange, selected, handleEdit }) => 
       links,
       id
     };
-
+    const currentSize = work.length;
     const matched = work.find(w => w.id === id);
+
     if (matched) {
       const updated = work.map(w => {
         if (w.id === id) {
@@ -92,6 +93,7 @@ export const WorkForm = ({ work, onHandleWorkChange, selected, handleEdit }) => 
     setUrlLabel('');
     setLinks([]);
     handleEdit('');
+    setId(matched ? currentSize + 1 : currentSize + 2);
     setShow(false);
   }
 

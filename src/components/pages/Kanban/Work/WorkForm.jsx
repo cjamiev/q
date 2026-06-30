@@ -6,6 +6,7 @@ export const WorkForm = ({ work, onHandleWorkChange, selected, handleEdit }) => 
   const [url, setUrl] = useState('');
   const [urlLabel, setUrlLabel] = useState('');
   const [status, setStatus] = useState('not-started');
+  const [isFavorite, setIsFavorite] = useState(false);
   const [links, setLinks] = useState([]);
   const [show, setShow] = useState(false);
   const [id, setId] = useState(0);
@@ -18,6 +19,7 @@ export const WorkForm = ({ work, onHandleWorkChange, selected, handleEdit }) => 
       setStatus(matched.status);
       setLinks(matched.links);
       setId(matched.id);
+      setIsFavorite(matched.isFavorite);
       setShow(true);
     } else {
       setId(work.length + 1);
@@ -33,7 +35,6 @@ export const WorkForm = ({ work, onHandleWorkChange, selected, handleEdit }) => 
   };
 
   const handleUrlChange = ({ target: { value } }) => {
-
     setUrl(value);
   };
 
@@ -55,11 +56,16 @@ export const WorkForm = ({ work, onHandleWorkChange, selected, handleEdit }) => 
     setStatus(event.target.value);
   };
 
+  const toggleFavorite = () => {
+    setIsFavorite(!isFavorite);
+  }
+
   const handleSave = () => {
     const newWorkItem = {
       title,
       description,
       status,
+      isFavorite,
       links,
       id
     };
@@ -96,6 +102,7 @@ export const WorkForm = ({ work, onHandleWorkChange, selected, handleEdit }) => 
     setUrl('');
     setUrlLabel('');
     setLinks([]);
+    setId(work.length + 1);
     handleEdit('');
   }
 
@@ -136,20 +143,21 @@ export const WorkForm = ({ work, onHandleWorkChange, selected, handleEdit }) => 
         <div className='kanban-form__url-add'>
           <input type="text" id="url" name="url" placeholder='url' value={url} onChange={handleUrlChange}></input>
           <input type="text" id="label" name="label" placeholder='label' value={urlLabel} onChange={handleUrlLabelChange}></input>
-          <button onClick={handleAddLinksChange}>Add</button>
+          <button className='kanban-form-btn' onClick={handleAddLinksChange}>Add</button>
         </div>
         {links.length > 0 && <div className='kanban_url-list'>
           {links.map(l => {
             return (<div key={l.url}>
               <a href={l.url} target="_blank">{l.label || l.url}</a>
-              <button onClick={() => handleRemoveLinkChange(l.url)}>Remove</button>
+              <button className='kanban-form-btn' onClick={() => handleRemoveLinkChange(l.url)}>Remove</button>
             </div>)
           })}
         </div>}
       </div>
+      <label><input type="checkbox" checked={isFavorite} onChange={toggleFavorite} /> Is Favorite? </label>
       <div className='kanban-form_btn-wrapper'>
-        <button onClick={handleSave}>Save</button>
-        <button onClick={handleClear}>Clear</button>
+        <button className='kanban-form-btn' onClick={handleSave}>Save</button>
+        <button className='kanban-form-btn' onClick={handleClear}>Clear</button>
       </div>
     </div>
   );

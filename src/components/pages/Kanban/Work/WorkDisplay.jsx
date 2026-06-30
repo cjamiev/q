@@ -12,16 +12,16 @@ const statusMap = {
 
 export const WorkDisplay = ({ work, handleEdit }) => {
   const [showEdit, setShowEdit] = useState(false);
-  const [showDone, setShowDone] = useState(false);
+  const [showFavorites, setShowFavorites] = useState(false);
 
-  const visibleItems = showDone ? work : work.filter(w => w.status !== 'done');
+  const visibleItems = showFavorites ? work.filter(w => w.isFavorite) : work;
 
   const toggleEdit = () => {
     setShowEdit(!showEdit);
   }
 
-  const toggleDone = () => {
-    setShowDone(!showDone);
+  const toggleFavorites = () => {
+    setShowFavorites(!showFavorites);
   }
 
   const handleCopy = (item) => {
@@ -34,7 +34,7 @@ export const WorkDisplay = ({ work, handleEdit }) => {
   return (<div className='kanban-work-wrapper'>
     <div className='kanban-work-modes'>
       <label><input type="checkbox" checked={showEdit} onChange={toggleEdit} /> Edit Mode </label>
-      <label><input type="checkbox" checked={showDone} onChange={toggleDone} /> Show Done </label>
+      <label><input type="checkbox" checked={showFavorites} onChange={toggleFavorites} /> Show Favorites Only </label>
     </div>
     {visibleItems.map(w => {
       return (<div key={w.title} className='kanban-work-card'>
@@ -46,6 +46,7 @@ export const WorkDisplay = ({ work, handleEdit }) => {
           })}
         </div>
         <div className='kanban-work-status' data-status={w.status}>{statusMap[w.status]}</div>
+        <div className='kanban-work-is-favorite'>{w.isFavorite ? 'Favorite' : ''}</div>
         {showEdit && <button className='kanban-work-edit-btn' onClick={() => { handleEdit(w.id) }}>Edit</button>}
         <button className='kanban-work-copy-btn' onClick={() => { handleCopy(w) }}>Copy</button>
       </div>)

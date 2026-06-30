@@ -64,12 +64,21 @@
 }
 
 .kanban_url-list {
-  width: fit-content
+  width: fit-content;
+}
+
+.kanban_url-list a {
+  margin-right: 6px;
 }
 
 .kanban-form_btn-wrapper {
   display: flex;
   gap: 50px;
+}
+
+.kanban-form-btn {
+  background-color: black;
+  color: white;
 }
 
 .kanban-work-wrapper {
@@ -89,8 +98,8 @@
   position: relative;
   padding: 10px;
   border: 1px solid #ddd;
-  width: 300px;
-  height: 400px;
+  width: 500px;
+  height: 600px;
   transition: box-shadow 400ms;
 }
 
@@ -100,7 +109,7 @@
 
 .kanban-work-description {
   margin: 5px 0;
-  height: 250px;
+  height: 480px;
 }
 
 .kanban-work-links {
@@ -115,6 +124,15 @@
   font-weight: 600;
   font-size: 20px;
   color: gold;
+}
+
+.kanban-work-is-favorite {
+  position: absolute;
+  bottom: 10px;
+  left: calc(50% - 10px);
+  font-weight: 600;
+  font-size: 20px;
+  color: orange;
 }
 
 .kanban-work-status[data-status='not-started'] {
@@ -133,10 +151,14 @@
   position: absolute;
   bottom: 40px;
   right: 10px;
+  background-color: black;
+  color: white;
 }
 
 .kanban-work-copy-btn {
   position: absolute;
   bottom: 10px;
   right: 10px;
+  background-color: black;
+  color: white;
 }

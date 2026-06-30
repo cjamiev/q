@@ -1,21 +1,27 @@
 .clipboard-sections { 
   display: flex; 
-  gap: 150px; 
+  flex-direction: column;
+  gap: 10px; 
   width: 100%;
 }
 
-.clipboard-sections > div {
-  background-color: white;
-  padding: 10px;
-  transition: box-shadow 500ms;
-}
-.clipboard-sections > div:hover {
-  box-shadow: 0px 4px 10px 2px rgba(0, 0, 0, 0.2);
+.clipboard-backup-btn {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  cursor: pointer;
 }
 
-.clipboard-backup-btn {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    cursor: pointer;
+.clipboard-tabs {
+  display: flex;
+  gap: 10px;
 }
+
+.clipboard-tabs li {
+  cursor: pointer;
+}
+
+.clipboard-tabs li:hover {
+  text-decoration: underline;
+}
+

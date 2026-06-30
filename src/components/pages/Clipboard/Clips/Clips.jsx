@@ -76,15 +76,15 @@ export const Clips = () => {
         <button className='clips-add-btn' onClick={addNewCopyItem}>Add</button>
         <label><input type="checkbox" checked={showEdit} onChange={toggleEdit} /> Edit Mode</label>
       </div>
-      <div>
+      <div className='clips-item-wrapper'>
         {clipboard.sort((a, b) => a.position - b.position).map((c, index) => {
           return (<div key={c.label} className='clips-item'>
-            <span className='clips-item_label'>{c.label} </span>
-            <span className='clips-item_value'>{c.value}</span>
+            <span className='clips-item_label'>{c.label} {c.position}</span>
+            {showEdit && <span className='clips-item_value'>{c.value}</span>}
             <button className='clips-copy-btn' onClick={() => handleCopyValue(c.value)}>Copy</button>
             {showEdit ? <div>
-              <button className='clips-moveup-btn' disabled={c.position === 1} onClick={() => swapPositions(c.position, clipboard[index - 1].position)}>Up</button>
-              <button className='clips-movedown-btn' disabled={c.position === clipboard.length} onClick={() => swapPositions(c.position, clipboard[index + 1].position)}>Down</button>
+              <button className='clips-moveup-btn' disabled={c.position === 0} onClick={() => swapPositions(c.position, clipboard[index - 1].position)}>Up</button>
+              <button className='clips-movedown-btn' disabled={c.position === clipboard.length - 1} onClick={() => swapPositions(c.position, clipboard[index + 1].position)}>Down</button>
               <button className='clips-remove-btn' onClick={() => deleteCopyItem(c.label)}>Remove</button>
             </div> : null}
           </div>)

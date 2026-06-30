@@ -6,6 +6,13 @@
 }
 .clips-add-btn { background: black; color: white; border-radius: 20px; cursor: pointer; }
 
+.clips-item-wrapper {
+  overflow: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
 .clips-item { 
   display: flex; 
   flex-direction: column; 
@@ -22,20 +29,7 @@
 
 .clips-item_value {
   position: relative;
-}
-.clips-item_value::after { 
-  content: 'HIDDEN';
-  position: absolute;
-  top: 0; 
-  left: 0;
-  z-index: 2;
-  background-color: white;
-  color: black;
-  width: 100%;
-  height: 100%;
-}
-.clips-item_value:hover::after {
-  content: none;
+  overflow: hidden;
 }
 
 .clips-copy-btn { 

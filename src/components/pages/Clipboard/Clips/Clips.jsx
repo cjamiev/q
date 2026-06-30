@@ -92,7 +92,7 @@ export const Clips = () => {
       <div className='clips-item-wrapper'>
         {clipboard.sort((a, b) => a.position - b.position).map((c, index) => {
           return (<div key={c.label} className='clips-item'>
-            <span className='clips-item_label'>{c.label} {c.position}</span>
+            <span className='clips-item_label'>{c.label}</span>
             {showEdit && <span className='clips-item_value'>{c.value}</span>}
             {showEdit ? <label className='clips-is-favorite'><input type="checkbox" checked={c.isFavorite} onChange={() => handleFavorite(c.label)} /> Is Favorite? </label> : <button className='clips-copy-btn' onClick={() => handleCopyValue(c.value)}>Copy</button>}
             {showEdit ? <div>

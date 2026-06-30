@@ -50,6 +50,11 @@
     color: black;
 }
 
+.quick-access-copy-btn:active {
+  background-color: green;
+  color: white;
+}
+
 .quick-access-week {
   position: relative;
   left: 15px;

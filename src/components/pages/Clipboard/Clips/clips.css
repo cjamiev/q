@@ -16,13 +16,14 @@
 .clips-item { 
   display: flex; 
   flex-direction: column; 
-  width: 250px; 
+  width: 290px; 
   height: 100px;
   border: 1px dashed black;
   margin-top: 5px;
   padding: 5px;
   position: relative;
 }
+
 .clips-item_label {
   font-size: 24px;
 }
@@ -36,6 +37,11 @@
   background: black; 
   color: white; 
   cursor: pointer; 
+  position: absolute;
+  bottom: 10px;
+}
+
+.clips-is-favorite {
   position: absolute;
   bottom: 10px;
 }
@@ -62,10 +68,10 @@
 }
 
 .clips-moveup-btn {
-  left: 62px;
+  left: 102px;
 }
 .clips-movedown-btn {
-  left: 118px;
+  left: 158px;
 }
 
 .clips-success-msg {

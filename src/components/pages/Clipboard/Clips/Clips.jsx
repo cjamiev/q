@@ -21,9 +21,22 @@ export const Clips = () => {
   };
 
   const addNewCopyItem = () => {
-    setClipboard(clipboard.concat({ label: description, value: copyValue, position: clipboard.length }));
+    setClipboard(clipboard.concat({ label: description, value: copyValue, isFavorite: false, position: clipboard.length }));
     setDescription('');
     setCopyValue('');
+  }
+
+  const handleFavorite = (id) => {
+    setClipboard(clipboard.map(c => {
+      if (c.label === id) {
+        return {
+          ...c,
+          isFavorite: !c.isFavorite
+        }
+      } else {
+        return c;
+      }
+    }));
   }
 
   const swapPositions = (positionA, positionB) => {
@@ -81,7 +94,7 @@ export const Clips = () => {
           return (<div key={c.label} className='clips-item'>
             <span className='clips-item_label'>{c.label} {c.position}</span>
             {showEdit && <span className='clips-item_value'>{c.value}</span>}
-            <button className='clips-copy-btn' onClick={() => handleCopyValue(c.value)}>Copy</button>
+            {showEdit ? <label className='clips-is-favorite'><input type="checkbox" checked={c.isFavorite} onChange={() => handleFavorite(c.label)} /> Is Favorite? </label> : <button className='clips-copy-btn' onClick={() => handleCopyValue(c.value)}>Copy</button>}
             {showEdit ? <div>
               <button className='clips-moveup-btn' disabled={c.position === 0} onClick={() => swapPositions(c.position, clipboard[index - 1].position)}>Up</button>
               <button className='clips-movedown-btn' disabled={c.position === clipboard.length - 1} onClick={() => swapPositions(c.position, clipboard[index + 1].position)}>Down</button>
